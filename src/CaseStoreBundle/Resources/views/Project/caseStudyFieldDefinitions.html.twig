@@ -1,0 +1,43 @@
+{#
+# @license 3-clause BSD
+# @link https://github.com/CaseStore/CaseStore-Core
+#}
+
+{% extends 'CaseStoreBundle::base.html.twig' %}
+
+{% block main %}
+
+
+    <ol class="breadcrumb">
+        <li><a href="{{ path('case_store_project', { 'projectId':project.publicId }) }}">Project {{  project.title }}</a></li>
+        <li class="active">Case Study Field Definitions</li>
+    </ol>
+
+    <table class="table table-striped">
+        <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Type</th>
+            <th>Sort</th>
+            <th>Actions</th>
+        </tr>
+        {%  for caseStudyFieldDefinition in caseStudyFieldDefinitions %}
+            <tr>
+                <td>{{  caseStudyFieldDefinition.publicId }}</td>
+                <td>{{  caseStudyFieldDefinition.title }}</td>
+                <td>
+                    {%  if caseStudyFieldDefinition.isTypeString %}
+                        String
+                    {%  elseif caseStudyFieldDefinition.isTypeText %}
+                        Text
+                    {%  elseif caseStudyFieldDefinition.isTypeSelect %}
+                        Select
+                    {%  endif %}
+                </td>
+                <td>{{  caseStudyFieldDefinition.sort }}</td>
+                <td><a href="{{ path('case_store_case_study_field_definition', { 'projectId':project.publicId,'caseStudyFieldDefinitionId':caseStudyFieldDefinition.publicId }) }}">View</a></td>
+            </tr>
+        {%  endfor %}
+    </table>
+
+{%  endblock %}

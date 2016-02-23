@@ -1,0 +1,79 @@
+case_store_homepage:
+    path:     /
+    defaults: { _controller: CaseStoreBundle:Default:index }
+
+
+case_store_newproject:
+    path:     /newproject
+    defaults: { _controller: CaseStoreBundle:ProjectNew:index }
+
+
+case_store_project:
+    path:     /project/{projectId}
+    defaults: { _controller: CaseStoreBundle:Project:index }
+
+
+case_store_project_case_study_field_definitions:
+    path:     /project/{projectId}/casestudyfielddefinitions
+    defaults: { _controller: CaseStoreBundle:Project:caseStudyFieldDefinitions }
+
+case_store_project_case_studies:
+    path:     /project/{projectId}/casestudies
+    defaults: { _controller: CaseStoreBundle:Project:caseStudies }
+
+
+case_store_new_case_study:
+    path:     /project/{projectId}/newcasestudy
+    defaults: { _controller: CaseStoreBundle:CaseStudyNew:index }
+
+
+case_store_case_study:
+    path:     /project/{projectId}/casestudy/{caseStudyId}
+    defaults: { _controller: CaseStoreBundle:CaseStudy:index }
+
+
+
+
+case_store_case_study_document_download:
+    path:     /project/{projectId}/casestudy/{caseStudyId}/document/{documentId}
+    defaults: { _controller: CaseStoreBundle:CaseStudy:documentDownload }
+
+
+case_store_case_study_edit_users:
+    path:     /project/{projectId}/casestudy/{caseStudyId}/edit/users
+    defaults: { _controller: CaseStoreBundle:CaseStudyEdit:editUsers }
+
+case_store_case_study_edit_locations:
+    path:     /project/{projectId}/casestudy/{caseStudyId}/edit/locations
+    defaults: { _controller: CaseStoreBundle:CaseStudyEdit:editLocations }
+
+case_store_case_study_edit_field:
+    path:     /project/{projectId}/casestudy/{caseStudyId}/edit/field/{fieldDefinitionId}
+    defaults: { _controller: CaseStoreBundle:CaseStudyEdit:editField }
+
+case_store_case_study_new_comment:
+    path:     /project/{projectId}/casestudy/{caseStudyId}/newcomment
+    defaults: { _controller: CaseStoreBundle:CaseStudy:newComment }
+
+case_store_case_study_new_document:
+    path:     /project/{projectId}/casestudy/{caseStudyId}/newdocument
+    defaults: { _controller: CaseStoreBundle:CaseStudyEdit:newDocument }
+
+
+case_store_new_case_study_field_definition:
+    path:     /project/{projectId}/newcasestudyfielddefinition
+    defaults: { _controller: CaseStoreBundle:CaseStudyFieldDefinitionNew:index }
+
+
+case_store_case_study_field_definition:
+    path:     /project/{projectId}/casestudyfielddefinition/{caseStudyFieldDefinitionId}
+    defaults: { _controller: CaseStoreBundle:CaseStudyFieldDefinition:index }
+
+case_store_case_study_field_definition_new_option:
+    path:     /project/{projectId}/casestudyfielddefinition/{caseStudyFieldDefinitionId}/newoption
+    defaults: { _controller: CaseStoreBundle:CaseStudyFieldDefinition:newOption }
+
+case_store_you:
+    pattern:  /you
+    defaults: { _controller: CaseStoreBundle:Default:you }
+    methods:  [GET]

@@ -1,0 +1,39 @@
+{#
+# @license 3-clause BSD
+# @link https://github.com/CaseStore/CaseStore-Core
+#}
+
+{% extends 'CaseStoreBundle::base.html.twig' %}
+
+{% block main %}
+
+    <ol class="breadcrumb">
+        <li><a href="{{ path('case_store_project', { 'projectId':project.publicId }) }}">Project {{  project.title }}</a></li>
+        <li><a href="{{  path('case_store_case_study', { 'projectId':project.publicId, 'caseStudyId':caseStudy.publicId }) }}">Case Study</a></li>
+        <li class="active">Edit Users</li>
+    </ol>
+
+    <ul>
+        {%  for user in allUsers %}
+            <li>
+                {{  user.username }}
+                {%  if user in currentUsers %}
+                    <form action="#" method="post">
+                        <input type="hidden" name="action" value="remove">
+                        <input type="hidden" name="userName" value="{{ user.username }}">
+                        <input type="submit" value="Remove">
+                    </form>
+                {%  else %}
+
+                    <form action="#" method="post">
+                        <input type="hidden" name="action" value="add">
+                        <input type="hidden" name="userName" value="{{ user.username }}">
+                        <input type="submit" value="Add">
+                    </form>
+                {%  endif %}
+            </li>
+        {%  endfor %}
+    </ul>
+
+
+{%  endblock %}

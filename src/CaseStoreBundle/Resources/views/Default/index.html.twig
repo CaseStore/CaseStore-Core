@@ -1,0 +1,18 @@
+{#
+# @license 3-clause BSD
+# @link https://github.com/CaseStore/CaseStore-Core
+#}
+
+{% extends 'CaseStoreBundle::base.html.twig' %}
+
+{% block main %}
+
+    <p>Welcome!</p>
+
+    <ul>
+        {%  for project in projects %}
+            <li><a href="{{ path('case_store_project', { 'projectId':project.publicId }) }}">{{  project.title }}</a></li>
+        {%  endfor %}
+    </ul>
+
+{% endblock %}

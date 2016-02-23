@@ -1,0 +1,25 @@
+services:
+#    case_store.example:
+#        class: CaseStoreBundle\Example
+#        arguments: ["@service_id", "plain_value", %parameter%]
+
+
+    app.project_voter:
+        class: CaseStoreBundle\Security\ProjectVoter
+        tags:
+            - { name: security.voter }
+        # small performance boost
+        public: false
+
+    app.case_study_voter:
+        class: CaseStoreBundle\Security\CaseStudyVoter
+        tags:
+            - { name: security.voter }
+        # small performance boost
+        public: false
+
+    pre_persist.listener:
+        class: CaseStoreBundle\EventListener\PrePersistEventListener
+        tags:
+            - { name: doctrine.event_listener, event: prePersist }
+

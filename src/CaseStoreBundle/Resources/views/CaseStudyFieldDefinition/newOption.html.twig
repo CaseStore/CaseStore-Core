@@ -1,0 +1,34 @@
+{% extends 'CaseStoreBundle::base.html.twig' %}
+
+{% block main %}
+
+    <ol class="breadcrumb">
+        <li><a href="{{ path('case_store_project', { 'projectId':project.publicId }) }}">Project {{  project.title }}</a></li>
+        <li><a href="{{  path('case_store_project_case_study_field_definitions', { 'projectId':project.publicId }) }}">Case Study Field Definitions</a></li>
+        <li>Case Study Field Definition TODO{#
+# @license 3-clause BSD
+# @link https://github.com/CaseStore/CaseStore-Core
+#}
+
+        </li>
+        <li class="active">New Option</li>
+    </ol>
+
+
+
+    <section class="">
+
+        <form class="styled" action="" method="post" {{ form_enctype(form) }}>
+            {{ form_errors(form) }}
+
+            {{ form_rest(form) }}
+
+            <input type="submit" value="Create New Option" />
+    
+        </form>
+
+    </section>
+
+
+
+{%  endblock %}

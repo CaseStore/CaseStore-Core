@@ -1,0 +1,53 @@
+{% extends 'CaseStoreBundle::base.html.twig' %}
+
+{% block main %}
+
+    <ol class="breadcrumb">
+        <li><a href="{{ path('case_store_project', { 'projectId':project.publicId }) }}">Project {{  project.title }}</a></li>
+        <li><a href="{{  path('case_store_project_case_study_field_definitions', { 'projectId':project.publicId }) }}">Case Study Field Definitions</a></li>
+        <li class="active">Case Study Field Definition</li>
+    </ol>
+
+
+    <div>
+        ID: {{  caseStudyFieldDefinition.publicId }}
+    </div>
+
+
+    <div>
+        Title: {{  caseStudyFieldDefinition.title }}
+    </div>
+
+    <div>
+        Sort: {{  caseStudyFieldDefinition.sort }}
+    </div>
+
+
+
+    {%  if caseStudyFieldDefinition.isTypeSelect %}{#
+# @license 3-clause BSD
+# @link https://github.com/CaseStore/CaseStore-Core
+#}
+
+
+        <table class="table table-striped">
+            <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Sort</th>
+            </tr>
+            {%  for option in options %}
+                <tr>
+                    <td>{{  option.publicId }}</td>
+                    <td>{{  option.title }}</td>
+                    <td>{{  option.sort }}</td>
+                </tr>
+            {%  endfor %}
+        </table>
+
+        <ul class="list-group">
+            <li class="list-group-item"><a href="{{  path('case_store_case_study_field_definition_new_option', { 'projectId':project.publicId, 'caseStudyFieldDefinitionId':caseStudyFieldDefinition.publicId  }) }}" class="btn btn-warning">New Option</a></li>
+        </ul>
+    {% endif %}
+
+{%  endblock %}
