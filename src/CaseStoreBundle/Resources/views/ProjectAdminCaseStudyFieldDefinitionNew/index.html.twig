@@ -12,6 +12,7 @@
 
     <ol class="breadcrumb">
         <li><a href="{{ path('case_store_project', { 'projectId':project.publicId }) }}">Project {{  project.title }}</a></li>
+        <li><a href="{{ path('case_store_project_admin', { 'projectId':project.publicId }) }}">Project Admin</a></li>
         <li class="active">New Case Study Field Definition</li>
     </ol>
 
@@ -34,3 +35,4 @@
 
 
 {%  endblock %}
+

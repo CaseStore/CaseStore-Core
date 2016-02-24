@@ -64,21 +64,6 @@ class ProjectController extends Controller
         ));
     }
 
-    public function caseStudyFieldDefinitionsAction($projectId)
-    {
-        // build
-        $this->build($projectId);
-        //data
-
-        $doctrine = $this->getDoctrine()->getManager();
-        $caseStudyFieldDefinitions = $doctrine->getRepository('CaseStoreBundle:CaseStudyFieldDefinition')->getForProject($this->project);
-
-        return $this->render('CaseStoreBundle:Project:caseStudyFieldDefinitions.html.twig', array(
-            'project'=>$this->project,
-            'caseStudyFieldDefinitions'=>$caseStudyFieldDefinitions,
-        ));
-    }
-
 
     public function caseStudiesAction($projectId)
     {

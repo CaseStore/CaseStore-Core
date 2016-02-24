@@ -16,7 +16,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  *  @license 3-clause BSD
  *  @link https://github.com/CaseStore/CaseStore-Core
  */
-class CaseStudyFieldDefinitionController extends Controller
+class ProjectAdminCaseStudyFieldDefinitionController extends Controller
 {
 
     /** @var  Project */
@@ -33,7 +33,7 @@ class CaseStudyFieldDefinitionController extends Controller
         if (!$this->project) {
             throw new  NotFoundHttpException('Not found');
         }
-        $this->denyAccessUnlessGranted(ProjectVoter::VIEW, $this->project);
+        $this->denyAccessUnlessGranted(ProjectVoter::ADMIN, $this->project);
         // load
         $repository = $doctrine->getRepository('CaseStoreBundle:CaseStudyFieldDefinition');
         $this->caseStudyFieldDefinition = $repository->findOneBy(array('project'=>$this->project, 'publicId'=>$caseStudyFieldDefinitionId));
@@ -52,7 +52,7 @@ class CaseStudyFieldDefinitionController extends Controller
         $options = $this->caseStudyFieldDefinition->isTypeSelect() ?
             $doctrine->getRepository('CaseStoreBundle:CaseStudyFieldDefinitionOption')->findBy(array('fieldDefinition'=>$this->caseStudyFieldDefinition)) :
             array();
-        return $this->render('CaseStoreBundle:CaseStudyFieldDefinition:index.html.twig', array(
+        return $this->render('CaseStoreBundle:ProjectAdminCaseStudyFieldDefinition:index.html.twig', array(
             'project'=>$this->project,
             'caseStudyFieldDefinition'=>$this->caseStudyFieldDefinition,
             'options'=>$options,
@@ -88,14 +88,14 @@ class CaseStudyFieldDefinitionController extends Controller
             if ($form->isValid()) {
                 $doctrine->persist($caseStudyFieldDefinitionOption);
                 $doctrine->flush();
-                return $this->redirect($this->generateUrl('case_store_case_study_field_definition', array(
+                return $this->redirect($this->generateUrl('case_store_project_admin_case_study_field_definition', array(
                     'projectId' => $this->project->getPublicId(),
                     'caseStudyFieldDefinitionId' => $this->caseStudyFieldDefinition->getPublicId(),
                     )));
             }
         }
 
-        return $this->render('CaseStoreBundle:CaseStudyFieldDefinition:newOption.html.twig', array(
+        return $this->render('CaseStoreBundle:ProjectAdminCaseStudyFieldDefinition:newOption.html.twig', array(
             'project'=>$this->project,
             'caseStudyFieldDefinition'=>$this->caseStudyFieldDefinition,
             'form' => $form->createView(),

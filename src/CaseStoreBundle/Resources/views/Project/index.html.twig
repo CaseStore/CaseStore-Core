@@ -30,14 +30,9 @@
                 <li class="list-group-item"><a href="{{  path('case_store_project_case_study_select_field', { 'projectId':project.publicId,'fieldId':fieldDefinition.publicId }) }}" class="btn btn-default">Field {{  fieldDefinition.title }}</a></li>
             {% endif %}
         {%  endfor %}
-
-        <li class="list-group-item"><a href="{{  path('case_store_project_case_study_field_definitions', { 'projectId':project.publicId }) }}" class="btn btn-default">Case Study Field Definitions</a></li>
         <li class="list-group-item"><a href="{{  path('case_store_project_map', { 'projectId':project.publicId }) }}" class="btn btn-default">Map</a></li>
         {% if newCaseStudyAllowed %}
             <li class="list-group-item"><a href="{{  path('case_store_new_case_study', { 'projectId':project.publicId }) }}" class="btn btn-warning">New Case Study</a></li>
-        {%  endif %}
-        {%  if newFieldDefinitionAllowed %}
-            <li class="list-group-item"><a href="{{  path('case_store_new_case_study_field_definition', { 'projectId':project.publicId }) }}" class="btn btn-warning">New Case Study Field Definition</a></li>
         {%  endif %}
         <li class="list-group-item"><a href="{{  path('case_store_project_admin', { 'projectId':project.publicId }) }}" class="btn btn-default">Project Admin</a></li>
 

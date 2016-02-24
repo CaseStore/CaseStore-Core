@@ -15,7 +15,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  *  @license 3-clause BSD
  *  @link https://github.com/CaseStore/CaseStore-Core
  */
-class CaseStudyFieldDefinitionNewController extends ProjectController
+class ProjectAdminCaseStudyFieldDefinitionNewController extends ProjectAdminController
 {
 
 
@@ -42,14 +42,14 @@ class CaseStudyFieldDefinitionNewController extends ProjectController
             if ($form->isValid()) {
                 $doctrine->persist($caseStudyFieldDefinition);
                 $doctrine->flush();
-                return $this->redirect($this->generateUrl('case_store_case_study_field_definition', array(
+                return $this->redirect($this->generateUrl('case_store_project_admin_case_study_field_definition', array(
                     'projectId'=>$this->project->getPublicId(),
                     'caseStudyFieldDefinitionId'=>$caseStudyFieldDefinition->getPublicId(),
                     )));
             }
         }
 
-        return $this->render('CaseStoreBundle:CaseStudyFieldDefinitionNew:index.html.twig', array(
+        return $this->render('CaseStoreBundle:ProjectAdminCaseStudyFieldDefinitionNew:index.html.twig', array(
             'project' => $this->project,
             'form' => $form->createView(),
         ));

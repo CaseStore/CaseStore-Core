@@ -18,9 +18,9 @@ case_store_project_admin:
     defaults: { _controller: CaseStoreBundle:ProjectAdmin:index }
 
 
-case_store_project_case_study_field_definitions:
-    path:     /project/{projectId}/casestudyfielddefinitions
-    defaults: { _controller: CaseStoreBundle:Project:caseStudyFieldDefinitions }
+case_store_project_admin_case_study_field_definitions:
+    path:     /project/{projectId}/admin/casestudyfielddefinitions
+    defaults: { _controller: CaseStoreBundle:ProjectAdmin:caseStudyFieldDefinitions }
 
 case_store_project_map:
     path:     /project/{projectId}/map
@@ -78,18 +78,18 @@ case_store_case_study_new_document:
     defaults: { _controller: CaseStoreBundle:CaseStudyEdit:newDocument }
 
 
-case_store_new_case_study_field_definition:
-    path:     /project/{projectId}/newcasestudyfielddefinition
-    defaults: { _controller: CaseStoreBundle:CaseStudyFieldDefinitionNew:index }
+case_store_project_admin_new_case_study_field_definition:
+    path:     /project/{projectId}/admin/newcasestudyfielddefinition
+    defaults: { _controller: CaseStoreBundle:ProjectAdminCaseStudyFieldDefinitionNew:index }
 
 
-case_store_case_study_field_definition:
-    path:     /project/{projectId}/casestudyfielddefinition/{caseStudyFieldDefinitionId}
-    defaults: { _controller: CaseStoreBundle:CaseStudyFieldDefinition:index }
+case_store_project_admin_case_study_field_definition:
+    path:     /project/{projectId}/admin/casestudyfielddefinition/{caseStudyFieldDefinitionId}
+    defaults: { _controller: CaseStoreBundle:ProjectAdminCaseStudyFieldDefinition:index }
 
-case_store_case_study_field_definition_new_option:
-    path:     /project/{projectId}/casestudyfielddefinition/{caseStudyFieldDefinitionId}/newoption
-    defaults: { _controller: CaseStoreBundle:CaseStudyFieldDefinition:newOption }
+case_store_project_admin_case_study_field_definition_new_option:
+    path:     /project/{projectId}/admin/casestudyfielddefinition/{caseStudyFieldDefinitionId}/newoption
+    defaults: { _controller: CaseStoreBundle:ProjectAdminCaseStudyFieldDefinition:newOption }
 
 case_store_you:
     pattern:  /you
