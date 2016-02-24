@@ -17,8 +17,7 @@ class CaseStudyRepository extends EntityRepository
 
 
 
-        // TODO sort by field order
-        $caseStudyFieldDefinitions = $this->getEntityManager()->getRepository('CaseStoreBundle:CaseStudyFieldDefinition')->findBy(array('project'=>$caseStudy->getProject()));
+        $caseStudyFieldDefinitions = $this->getEntityManager()->getRepository('CaseStoreBundle:CaseStudyFieldDefinition')->getForProject($caseStudy->getProject());
 
         $titleFound = false;
         $descriptionFound = false;

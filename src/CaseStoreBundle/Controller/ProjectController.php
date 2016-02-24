@@ -49,7 +49,7 @@ class ProjectController extends Controller
         //data
 
         $doctrine = $this->getDoctrine()->getManager();
-        $caseStudyFieldDefinitions = $doctrine->getRepository('CaseStoreBundle:CaseStudyFieldDefinition')->findBy(array('project'=>$this->project));
+        $caseStudyFieldDefinitions = $doctrine->getRepository('CaseStoreBundle:CaseStudyFieldDefinition')->getForProject($this->project);
 
         return $this->render('CaseStoreBundle:Project:caseStudyFieldDefinitions.html.twig', array(
             'project'=>$this->project,
