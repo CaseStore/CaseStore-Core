@@ -39,6 +39,10 @@ case_store_project_case_study_select_field:
     path:     /project/{projectId}/casestudyselectfield/{fieldId}
     defaults: { _controller: CaseStoreBundle:ProjectCaseStudyField:selectField }
 
+case_store_project_case_study_select_field_option:
+    path:     /project/{projectId}/casestudyselectfield/{fieldId}/option/{optionId}
+    defaults: { _controller: CaseStoreBundle:ProjectCaseStudyField:selectFieldOption }
+
 
 case_store_new_case_study:
     path:     /project/{projectId}/newcasestudy

@@ -62,6 +62,18 @@ class CaseStudyRepository extends EntityRepository
             ->getResult();
     }
 
+    public function findBySelectOption(CaseStudyFieldDefinitionOption $caseStudyFieldDefinitionOption) {
+
+        return  $this->getEntityManager()
+            ->createQuery(
+                ' SELECT cs FROM CaseStoreBundle:CaseStudy cs '.
+                ' JOIN  cs.fieldValueSelect fvs '.
+                ' WHERE fvs.option = :option AND fvs.removedAt IS NULL '
+            )
+            ->setParameter('option', $caseStudyFieldDefinitionOption)
+            ->getResult();
+
+    }
 
 }
 

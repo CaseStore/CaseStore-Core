@@ -65,6 +65,12 @@ class CaseStudy
      */
     private $hasUsers;
 
+
+    /**
+     * @ORM\OneToMany(targetEntity="CaseStoreBundle\Entity\CaseStudyFieldValueSelect", mappedBy="caseStudy")
+     */
+    private $fieldValueSelect;
+
     /**
      * @return int
      */
@@ -188,6 +194,24 @@ class CaseStudy
     {
         $this->hasUsers = $hasUsers;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getFieldValueSelect()
+    {
+        return $this->fieldValueSelect;
+    }
+
+    /**
+     * @param mixed $fieldValueSelect
+     */
+    public function setFieldValueSelect($fieldValueSelect)
+    {
+        $this->fieldValueSelect = $fieldValueSelect;
+    }
+
+
 
     /**
      * @ORM\PrePersist()

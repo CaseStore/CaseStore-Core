@@ -53,6 +53,34 @@ class ProjectCaseStudyFieldController extends ProjectController
 
     }
 
+    public function selectFieldOptionAction($projectId, $fieldId, $optionId)
+    {
+        $this->buildForField($projectId, $fieldId);
+        if (!$this->caseStudyFieldDefinition->isTypeSelect()) {
+            throw new  NotFoundHttpException('Not found');
+        }
 
+        $doctrine = $this->getDoctrine()->getManager();
+        $option = $doctrine->getRepository('CaseStoreBundle:CaseStudyFieldDefinitionOption')->findOneBy(
+            array('fieldDefinition'=>$this->caseStudyFieldDefinition, 'publicId'=>$optionId)
+        );
+        if (!$option) {
+            throw new  NotFoundHttpException('Not found');
+        }
+
+        // data
+
+        $caseStudies = $doctrine->getRepository('CaseStoreBundle:CaseStudy')->findBySelectOption($option);
+
+
+        return $this->render('CaseStoreBundle:ProjectCaseStudyField:selectFieldOption.html.twig', array(
+            'project'=>$this->project,
+            'caseStudyFieldDefinition'=>$this->caseStudyFieldDefinition,
+            'option'=>$option,
+            'caseStudies'=>$caseStudies,
+        ));
+
+
+    }
 
 }
