@@ -30,7 +30,7 @@ class CaseStudyNewController extends ProjectController
         $casestudy = new CaseStudy();
         $casestudy->setProject($this->project);
 
-        $form = $this->createForm(new CaseStudyNewType(), $casestudy);
+        $form = $this->createForm(new CaseStudyNewType());
         $request = $this->getRequest();
         if ($request->getMethod() == 'POST') {
             $form->handleRequest($request);

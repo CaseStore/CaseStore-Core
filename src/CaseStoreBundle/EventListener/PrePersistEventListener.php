@@ -5,6 +5,7 @@ namespace CaseStoreBundle\EventListener;
 
 
 use CaseStoreBundle\CaseStoreBundle;
+use CaseStoreBundle\Entity\CaseStudy;
 use CaseStoreBundle\Entity\CaseStudyComment;
 use CaseStoreBundle\Entity\CaseStudyDocument;
 use CaseStoreBundle\Entity\CaseStudyLocation;
@@ -26,7 +27,20 @@ class PrePersistEventListener  {
     function PrePersist(LifecycleEventArgs $args) {
         $entity = $args->getEntity();
 
-        if ($entity instanceof CaseStudyDocument) {
+        if ($entity instanceof CaseStudy) {
+            if (!$entity->getPublicId()) {
+                $manager = $args->getEntityManager()->getRepository('CaseStoreBundle\Entity\CaseStudy');
+                $idLen = self::MIN_LENGTH;
+                $id = CaseStoreBundle::createKey(1, $idLen);
+                while ($manager->doesPublicIdExist($id, $entity->getProject())) {
+                    if ($idLen < self::MAX_LENGTH) {
+                        $idLen = $idLen + self::LENGTH_STEP;
+                    }
+                    $id = CaseStoreBundle::createKey(1, $idLen);
+                }
+                $entity->setPublicId($id);
+            }
+        } else if ($entity instanceof CaseStudyDocument) {
             if (!$entity->getPublicId()) {
                 $manager = $args->getEntityManager()->getRepository('CaseStoreBundle\Entity\CaseStudyDocument');
                 $idLen = self::MIN_LENGTH;

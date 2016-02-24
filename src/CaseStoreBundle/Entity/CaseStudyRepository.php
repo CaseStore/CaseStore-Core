@@ -13,6 +13,26 @@ use Doctrine\ORM\Mapping as ORM;
 class CaseStudyRepository extends EntityRepository
 {
 
+
+
+    public function doesPublicIdExist($id, Project $project)
+    {
+        if ($project->getId()) {
+            $s =  $this->getEntityManager()
+                ->createQuery(
+                    ' SELECT cs FROM CaseStoreBundle:CaseStudy cs'.
+                    ' WHERE cs.project = :project AND cs.publicId = :public_id'
+                )
+                ->setParameter('project', $project)
+                ->setParameter('public_id', $id)
+                ->getResult();
+            return (boolean)$s;
+        } else {
+            return false;
+        }
+    }
+
+
     public function updateCaches (CaseStudy $caseStudy) {
 
 

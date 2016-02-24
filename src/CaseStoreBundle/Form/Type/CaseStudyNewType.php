@@ -18,11 +18,7 @@ class CaseStudyNewType extends AbstractType {
     public function buildForm(FormBuilderInterface $builder, array $options) {
 
 
-        // TODO enforce slug like!
-        $builder->add('publicId', 'text', array(
-            'required' => true,
-            'label'=>'Key'
-        ));
+
 
     }
 
@@ -32,7 +28,6 @@ class CaseStudyNewType extends AbstractType {
 
     public function getDefaultOptions(array $options) {
         return array(
-            'data_class' => 'CaseStoreBundle\Entity\CaseStudy',
         );
     }
 }
