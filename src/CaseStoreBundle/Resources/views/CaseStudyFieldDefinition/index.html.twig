@@ -46,7 +46,9 @@
         </table>
 
         <ul class="list-group">
-            <li class="list-group-item"><a href="{{  path('case_store_case_study_field_definition_new_option', { 'projectId':project.publicId, 'caseStudyFieldDefinitionId':caseStudyFieldDefinition.publicId  }) }}" class="btn btn-warning">New Option</a></li>
+            {%  if newOptionAllowed %}
+                <li class="list-group-item"><a href="{{  path('case_store_case_study_field_definition_new_option', { 'projectId':project.publicId, 'caseStudyFieldDefinitionId':caseStudyFieldDefinition.publicId  }) }}" class="btn btn-warning">New Option</a></li>
+            {%  endif %}
         </ul>
     {% endif %}
 

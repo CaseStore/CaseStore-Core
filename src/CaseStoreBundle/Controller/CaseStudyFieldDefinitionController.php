@@ -56,6 +56,7 @@ class CaseStudyFieldDefinitionController extends Controller
             'project'=>$this->project,
             'caseStudyFieldDefinition'=>$this->caseStudyFieldDefinition,
             'options'=>$options,
+            'newOptionAllowed'=>($this->caseStudyFieldDefinition->isTypeSelect() && (boolean)$this->getUser()),
         ));
     }
 
@@ -63,7 +64,12 @@ class CaseStudyFieldDefinitionController extends Controller
     {
         // build
         $this->build($projectId, $caseStudyFieldDefinitionId);
+
         if (!$this->caseStudyFieldDefinition->isTypeSelect()) {
+            throw new  NotFoundHttpException('Not found');
+        }
+
+        if (!$this->getUser()) {
             throw new  NotFoundHttpException('Not found');
         }
 
