@@ -10,3 +10,20 @@
     text-align: center;
 }
 
+.caseStudyDataLabel {
+    font-weight: bold;
+    font-size: 120%;
+}
+
+
+ul.caseStudyCommentList {
+
+}
+
+ul.caseStudyCommentList li.caseStudyComment {
+    list-style-type: none;
+}
+
+ul.caseStudyCommentList li.caseStudyComment .caseStudyCommentDetails {
+    font-style: italic;
+}
