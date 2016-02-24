@@ -1,0 +1,29 @@
+{#
+# @license 3-clause BSD
+# @link https://github.com/CaseStore/CaseStore-Core
+#}
+
+{% extends 'CaseStoreBundle::base.html.twig' %}
+
+{% block main %}
+
+
+    <ol class="breadcrumb">
+        <li><a href="{{ path('case_store_project', { 'projectId':project.publicId }) }}">Project {{  project.title }}</a></li>
+        <li class="active">Project Admin</li>
+    </ol>
+
+
+    <h1>Project Admin </h1>
+
+
+
+
+
+
+    <ul class="list-group">
+
+    </ul>
+
+{%  endblock %}
+

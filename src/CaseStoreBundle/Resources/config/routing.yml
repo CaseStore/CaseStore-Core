@@ -13,6 +13,11 @@ case_store_project:
     defaults: { _controller: CaseStoreBundle:Project:index }
 
 
+case_store_project_admin:
+    path:     /project/{projectId}/admin
+    defaults: { _controller: CaseStoreBundle:ProjectAdmin:index }
+
+
 case_store_project_case_study_field_definitions:
     path:     /project/{projectId}/casestudyfielddefinitions
     defaults: { _controller: CaseStoreBundle:Project:caseStudyFieldDefinitions }
