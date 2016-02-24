@@ -9,6 +9,7 @@ use CaseStoreBundle\Form\Type\CaseStudyFieldDefinitionNewType;
 use CaseStoreBundle\Form\Type\CaseStudyNewType;
 use CaseStoreBundle\Form\Type\ProjectNewType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  *  @license 3-clause BSD
@@ -22,6 +23,10 @@ class CaseStudyFieldDefinitionNewController extends ProjectController
     public function indexAction($projectId)
     {
         $this->build($projectId);
+
+        if (!$this->getUser()) {
+            throw new  NotFoundHttpException('Not found');
+        }
 
         $doctrine = $this->getDoctrine()->getManager();
 

@@ -37,6 +37,8 @@ class ProjectController extends Controller
         //data
         return $this->render('CaseStoreBundle:Project:index.html.twig', array(
             'project'=>$this->project,
+            'newCaseStudyAllowed'=>((boolean)$this->getUser()),
+            'newFieldDefinitionAllowed'=>((boolean)$this->getUser()),
         ));
     }
 
