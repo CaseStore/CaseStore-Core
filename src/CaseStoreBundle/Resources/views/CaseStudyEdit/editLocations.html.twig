@@ -24,6 +24,14 @@
         </form>
     </div>
 
+    <div id="RemoveWrapper" style="display:none;">
+        <form action="#" method="post">
+            <input type="hidden" name="action" value="remove">
+            <input type="hidden" name="id" value="">
+            <input type="submit" value="Remove this location">
+        </form>
+    </div>
+
 {%  endblock %}
 
 {% block javascript %}
@@ -32,7 +40,7 @@
         var mapData = [];
         var addMarker;
         {%  for location in locations %}
-        mapData.push({ lat: {{  location.lat}}, lng: {{  location.lng }} });
+        mapData.push({ lat: {{  location.lat}}, lng: {{  location.lng }}, id: '{{  location.publicId }}' });
         {%  endfor %}
         $( document ).ready(function() {
             mapObject = L.map('Map').setView([57.04199, -3.55957], 6);
@@ -44,7 +52,10 @@
             L.tileLayer(mapquestUrl, {maxZoom: 18, attribution: mapquestAttrib, subdomains: subDomains}).addTo(mapObject);
 
             for (idx in mapData) {
-                L.marker([ mapData[idx].lat, mapData[idx].lng]).addTo(mapObject);
+                var marker = L.marker([ mapData[idx].lat, mapData[idx].lng]);
+                marker.addTo(mapObject);
+                marker.ourId = mapData[idx].id;
+                marker.on('click', onClickExistingMarker);
             }
 
             mapObject.on('click', function(e) {
@@ -57,9 +68,24 @@
                 $('#AddNewWrapper form input[name="lat"]').val(e.latlng.lat);
                 $('#AddNewWrapper form input[name="lng"]').val(e.latlng.lng);
                 $('#AddNewWrapper').show();
+
+                $('#RemoveWrapper').hide();
             });
 
         });
+
+
+        function onClickExistingMarker(e) {
+            $('#RemoveWrapper form input[name="id"]').val(e.target.ourId);
+            $('#RemoveWrapper').show();
+
+            if (addMarker != null) {
+                $('#AddNewWrapper').hide();
+                mapObject.removeLayer(addMarker);
+                addMarker = null;
+            }
+        }
+
     </script>
 {% endblock %}
 

@@ -128,12 +128,24 @@ class CaseStudyEditController extends CaseStudyController
                         'caseStudyId'=>$this->caseStudy->getPublicId(),
                     )));
                 }
+            } else if ($request->request->get('action') == 'remove') {
+                $location = $doctrine->getRepository('CaseStoreBundle:CaseStudyLocation')->findOneBy(array('caseStudy'=>$this->caseStudy,'publicId'=>$request->request->get('id')));
+                if ($location && !$location->isRemoved()) {
+                    $location->setRemovedAt(new \DateTime());
+                    $location->setRemovedBy($this->getUser());
+                    $doctrine->persist($location);
+                    $doctrine->flush($location);
+                    return $this->redirect($this->generateUrl('case_store_case_study', array(
+                        'projectId'=>$this->project->getPublicId(),
+                        'caseStudyId'=>$this->caseStudy->getPublicId(),
+                    )));
+                }
+
             }
 
         }
 
-        // TODO include removed_at is null
-        $locations =  $doctrine->getRepository('CaseStoreBundle:CaseStudyLocation')->findBy(array('caseStudy'=>$this->caseStudy));
+        $locations =  $doctrine->getRepository('CaseStoreBundle:CaseStudyLocation')->findBy(array('caseStudy'=>$this->caseStudy,'removedAt'=>null));
 
 
         return $this->render('CaseStoreBundle:CaseStudyEdit:editLocations.html.twig', array(

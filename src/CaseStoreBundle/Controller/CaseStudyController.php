@@ -63,8 +63,7 @@ class CaseStudyController extends Controller
         $users =  $doctrine->getRepository('CaseStoreBundle:User')->findByCaseStudy($this->caseStudy);
         $comments =  $doctrine->getRepository('CaseStoreBundle:CaseStudyComment')->findBy(array('caseStudy'=>$this->caseStudy));
         $documents =  $doctrine->getRepository('CaseStoreBundle:CaseStudyDocument')->findBy(array('caseStudy'=>$this->caseStudy));
-        // TODO include removed_at is null
-        $locations =  $doctrine->getRepository('CaseStoreBundle:CaseStudyLocation')->findBy(array('caseStudy'=>$this->caseStudy));
+        $locations =  $doctrine->getRepository('CaseStoreBundle:CaseStudyLocation')->findBy(array('caseStudy'=>$this->caseStudy,'removedAt'=>null));
         $caseStudyFieldDefinitions = $doctrine->getRepository('CaseStoreBundle:CaseStudyFieldDefinition')->getForProject($this->project);
 
 

@@ -190,6 +190,10 @@ class CaseStudyLocation
         return $this->removedAt;
     }
 
+    public function isRemoved() {
+        return (boolean)$this->removedAt;
+    }
+
     /**
      * @param mixed $removedAt
      */
