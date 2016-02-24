@@ -30,6 +30,7 @@
     <script>
         var mapObject;
         var mapData = [];
+        var addMarker;
         {%  for location in locations %}
         mapData.push({ lat: {{  location.lat}}, lng: {{  location.lng }} });
         {%  endfor %}
@@ -47,6 +48,12 @@
             }
 
             mapObject.on('click', function(e) {
+                if (addMarker == null) {
+                    addMarker = L.marker([ e.latlng.lat, e.latlng.lng]);
+                    addMarker.addTo(mapObject);
+                } else {
+                    addMarker.setLatLng([ e.latlng.lat, e.latlng.lng]);
+                }
                 $('#AddNewWrapper form input[name="lat"]').val(e.latlng.lat);
                 $('#AddNewWrapper form input[name="lng"]').val(e.latlng.lng);
                 $('#AddNewWrapper').show();
