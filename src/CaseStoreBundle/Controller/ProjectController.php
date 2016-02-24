@@ -33,7 +33,7 @@ class ProjectController extends Controller
     public function indexAction($projectId)
     {
         // build
-        $return = $this->build($projectId);
+        $this->build($projectId);
         //data
         return $this->render('CaseStoreBundle:Project:index.html.twig', array(
             'project'=>$this->project,
@@ -42,10 +42,27 @@ class ProjectController extends Controller
         ));
     }
 
+
+    public function mapAction($projectId)
+    {
+        // build
+        $this->build($projectId);
+        //data
+
+        $doctrine = $this->getDoctrine()->getManager();
+
+        $locations =  $doctrine->getRepository('CaseStoreBundle:CaseStudyLocation')->getInProject($this->project);
+
+        return $this->render('CaseStoreBundle:Project:map.html.twig', array(
+            'project'=>$this->project,
+            'locations'=>$locations,
+        ));
+    }
+
     public function caseStudyFieldDefinitionsAction($projectId)
     {
         // build
-        $return = $this->build($projectId);
+        $this->build($projectId);
         //data
 
         $doctrine = $this->getDoctrine()->getManager();
@@ -61,7 +78,7 @@ class ProjectController extends Controller
     public function caseStudiesAction($projectId)
     {
         // build
-        $return = $this->build($projectId);
+        $this->build($projectId);
         //data
 
         $doctrine = $this->getDoctrine()->getManager();

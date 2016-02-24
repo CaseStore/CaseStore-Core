@@ -30,4 +30,17 @@ class CaseStudyLocationRepository extends EntityRepository
         }
     }
 
+
+    public function getInProject(Project $project) {
+        return  $this->getEntityManager()
+            ->createQuery(
+                ' SELECT l FROM CaseStoreBundle:CaseStudyLocation l '.
+                ' JOIN l.caseStudy cs '.
+                ' WHERE cs.project = :project AND l.removedAt IS NULL '
+            )
+            ->setParameter('project', $project)
+            ->getResult();
+    }
+
 }
+
