@@ -1,0 +1,26 @@
+{#
+# @license 3-clause BSD
+# @link https://github.com/CaseStore/CaseStore-Core
+#}
+
+{% extends 'CaseStoreBundle::base.html.twig' %}
+
+{% block main %}
+
+
+    <ol class="breadcrumb">
+        <li><a href="{{ path('case_store_project', { 'projectId':project.publicId }) }}">Project {{  project.title }}</a></li>
+        <li class="active">Field {{ caseStudyFieldDefinition.title }}</li>
+    </ol>
+
+    <ul>
+        {%  for option in options %}
+            <li>
+                <div>{{  option.title }}</div>
+            </li>
+        {%  endfor %}
+    </ul>
+
+
+{%  endblock %}
+

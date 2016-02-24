@@ -35,10 +35,15 @@ class ProjectController extends Controller
         // build
         $this->build($projectId);
         //data
+
+        $doctrine = $this->getDoctrine()->getManager();
+        $caseStudyFieldDefinitions = $doctrine->getRepository('CaseStoreBundle:CaseStudyFieldDefinition')->getForProject($this->project);
+
         return $this->render('CaseStoreBundle:Project:index.html.twig', array(
             'project'=>$this->project,
             'newCaseStudyAllowed'=>((boolean)$this->getUser()),
             'newFieldDefinitionAllowed'=>((boolean)$this->getUser()),
+            'fieldDefinitions'=>$caseStudyFieldDefinitions,
         ));
     }
 
