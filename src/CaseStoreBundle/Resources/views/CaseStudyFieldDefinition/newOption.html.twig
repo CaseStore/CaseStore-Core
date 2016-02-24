@@ -1,3 +1,8 @@
+{#
+# @license 3-clause BSD
+# @link https://github.com/CaseStore/CaseStore-Core
+#}
+
 {% extends 'CaseStoreBundle::base.html.twig' %}
 
 {% block main %}
@@ -5,12 +10,7 @@
     <ol class="breadcrumb">
         <li><a href="{{ path('case_store_project', { 'projectId':project.publicId }) }}">Project {{  project.title }}</a></li>
         <li><a href="{{  path('case_store_project_case_study_field_definitions', { 'projectId':project.publicId }) }}">Case Study Field Definitions</a></li>
-        <li>Case Study Field Definition TODO{#
-# @license 3-clause BSD
-# @link https://github.com/CaseStore/CaseStore-Core
-#}
-
-        </li>
+        <li>Case Study Field Definition TODO</li>
         <li class="active">New Option</li>
     </ol>
 
