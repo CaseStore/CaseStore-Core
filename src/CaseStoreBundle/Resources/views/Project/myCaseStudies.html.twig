@@ -1,0 +1,34 @@
+{#
+# @license 3-clause BSD
+# @link https://github.com/CaseStore/CaseStore-Core
+#}
+
+{% extends 'CaseStoreBundle::base.html.twig' %}
+
+{% block main %}
+
+
+    <ol class="breadcrumb">
+        <li><a href="{{ path('case_store_project', { 'projectId':project.publicId }) }}">Project {{  project.title }}</a></li>
+        <li class="active">My Case Studies</li>
+    </ol>
+
+    {%  if  caseStudies %}
+        <ul>
+            {%  for caseStudy in caseStudies %}
+                <li>
+                    <div>
+                        <a href="{{ path('case_store_case_study', { 'projectId':project.publicId,'caseStudyId':caseStudy.publicId }) }}">{{  caseStudy.titleOrPlaceHolder }}</a>
+                    </div>
+                    <div>
+                        {{  caseStudy.description | nl2br }}
+                    </div>
+                </li>
+            {%  endfor %}
+        </ul>
+    {% else %}
+        <p>You have no Case Studies in Project {{  project.title }}</p>
+    {% endif %}
+
+{%  endblock %}
+

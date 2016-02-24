@@ -49,4 +49,19 @@ class CaseStudyRepository extends EntityRepository
 
     }
 
+    public function getForUserInProject(User $user, Project $project) {
+
+        return  $this->getEntityManager()
+            ->createQuery(
+                ' SELECT cs FROM CaseStoreBundle:CaseStudy cs '.
+                ' JOIN cs.hasUsers cshu '.
+                ' WHERE cs.project = :project AND cshu.user = :user AND cshu.removedAt IS NULL '
+            )
+            ->setParameter('project', $project)
+            ->setParameter('user', $user)
+            ->getResult();
+    }
+
+
 }
+

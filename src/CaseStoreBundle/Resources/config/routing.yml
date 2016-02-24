@@ -21,6 +21,9 @@ case_store_project_map:
     path:     /project/{projectId}/map
     defaults: { _controller: CaseStoreBundle:Project:map }
 
+case_store_project_my_case_studies:
+    path:     /project/{projectId}/mycasestudies
+    defaults: { _controller: CaseStoreBundle:Project:myCaseStudies }
 
 case_store_project_case_studies:
     path:     /project/{projectId}/casestudies

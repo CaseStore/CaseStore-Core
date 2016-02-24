@@ -21,6 +21,9 @@
 
 
     <ul class="list-group">
+        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+            <li class="list-group-item"><a href="{{  path('case_store_project_my_case_studies', { 'projectId':project.publicId }) }}" class="btn btn-default">My Case Studies</a></li>
+        {%  endif %}
         <li class="list-group-item"><a href="{{  path('case_store_project_case_studies', { 'projectId':project.publicId }) }}" class="btn btn-default">Case Studies</a></li>
         <li class="list-group-item"><a href="{{  path('case_store_project_case_study_field_definitions', { 'projectId':project.publicId }) }}" class="btn btn-default">Case Study Field Definitions</a></li>
         <li class="list-group-item"><a href="{{  path('case_store_project_map', { 'projectId':project.publicId }) }}" class="btn btn-default">Map</a></li>

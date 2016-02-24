@@ -90,6 +90,23 @@ class ProjectController extends Controller
         ));
     }
 
+    public function myCaseStudiesAction($projectId)
+    {
+        // build
+        $this->build($projectId);
 
+        if (!$this->getUser()) {
+            throw new  NotFoundHttpException('Not found');
+        }
+
+        //data
+        $doctrine = $this->getDoctrine()->getManager();
+        $caseStudies = $doctrine->getRepository('CaseStoreBundle:CaseStudy')->getForUserInProject($this->getUser(), $this->project);
+
+        return $this->render('CaseStoreBundle:Project:myCaseStudies.html.twig', array(
+            'project'=>$this->project,
+            'caseStudies'=>$caseStudies,
+        ));
+    }
 
 }

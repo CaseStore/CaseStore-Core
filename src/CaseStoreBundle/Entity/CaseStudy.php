@@ -61,6 +61,11 @@ class CaseStudy
     private $createdAt;
 
     /**
+     * @ORM\OneToMany(targetEntity="CaseStoreBundle\Entity\CaseStudyHasUser", mappedBy="caseStudy")
+     */
+    private $hasUsers;
+
+    /**
      * @return int
      */
     public function getId()
@@ -166,6 +171,22 @@ class CaseStudy
     public function setCreatedAt($createdAt)
     {
         $this->createdAt = $createdAt;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getHasUsers()
+    {
+        return $this->hasUsers;
+    }
+
+    /**
+     * @param mixed $hasUsers
+     */
+    public function setHasUsers($hasUsers)
+    {
+        $this->hasUsers = $hasUsers;
     }
 
     /**
