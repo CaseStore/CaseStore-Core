@@ -56,7 +56,9 @@
     </ul>
 
     <ul class="list-group">
-        <li class="list-group-item"><a href="{{  path('case_store_case_study_new_comment', { 'projectId':project.publicId, 'caseStudyId':caseStudy.publicId }) }}" class="btn btn-warning">New Comment</a></li>
+        {%  if newCommentAllowed %}
+            <li class="list-group-item"><a href="{{  path('case_store_case_study_new_comment', { 'projectId':project.publicId, 'caseStudyId':caseStudy.publicId }) }}" class="btn btn-warning">New Comment</a></li>
+        {%  endif %}
         {%  if editAccessAllowed %}
             {%  for fieldDefinition in fieldDefinitions %}
                 <li class="list-group-item"><a href="{{ path('case_store_case_study_edit_field', { 'projectId':project.publicId, 'caseStudyId':caseStudy.publicId, 'fieldDefinitionId':fieldDefinition.publicId }) }}" class="btn btn-warning">Edit {{ fieldDefinition.title  }}</a></li>

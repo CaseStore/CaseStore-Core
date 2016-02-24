@@ -96,6 +96,7 @@ class CaseStudyController extends Controller
             'project' => $this->project,
             'caseStudy' => $this->caseStudy,
             'editAccessAllowed'=>$this->editAccessAllowed,
+            'newCommentAllowed'=>((boolean)$this->getUser()),
             'users' => $users,
             'comments' => $comments,
             'documents' => $documents,
@@ -110,6 +111,10 @@ class CaseStudyController extends Controller
     public function newCommentAction($projectId, $caseStudyId)
     {
         $this->build($projectId, $caseStudyId);
+
+        if (!$this->getUser()) {
+            throw new  NotFoundHttpException('Not found');
+        }
 
         $doctrine = $this->getDoctrine()->getManager();
 
