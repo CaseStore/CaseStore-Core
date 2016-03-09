@@ -42,6 +42,18 @@
         {%  for location in locations %}
         mapData.push({ lat: {{  location.lat}}, lng: {{  location.lng }}, id: '{{  location.publicId }}' });
         {%  endfor %}
+
+        var addIcon = L.icon({
+            iconUrl: '{% image '@CaseStoreBundle/Resources/public/images/marker-add-icon.png' %}{{ asset_url }}{% endimage %}',
+            shadowUrl: '{% image '@CaseStoreBundle/Resources/public/images/marker-add-shadow.png' %}{{ asset_url }}{% endimage %}',
+
+            iconSize:     [25, 41], // size of the icon
+            shadowSize:   [41, 41], // size of the shadow
+            iconAnchor:   [12, 0], // point of the icon which will correspond to marker's location
+            shadowAnchor: [10, 0],  // the same for the shadow
+            popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+        });
+
         $( document ).ready(function() {
             mapObject = L.map('Map').setView([57.04199, -3.55957], 6);
 
@@ -60,7 +72,7 @@
 
             mapObject.on('click', function(e) {
                 if (addMarker == null) {
-                    addMarker = L.marker([ e.latlng.lat, e.latlng.lng]);
+                    addMarker = L.marker([ e.latlng.lat, e.latlng.lng], {icon: addIcon});
                     addMarker.addTo(mapObject);
                 } else {
                     addMarker.setLatLng([ e.latlng.lat, e.latlng.lng]);

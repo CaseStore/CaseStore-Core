@@ -113,6 +113,20 @@ assetic:
             inputs:
                 - '@CaseStoreBundle/Resources/public/css/main.css'
             filters: [cssrewrite]
+        # The below 3 image_* rules don't seem to work? But we want them to .....
+        image_marker_add_icon:
+            inputs:
+                - '@CaseStoreBundle/Resources/public/images/marker-add-icon.png'
+            output: "images/marker-add-icon.png"
+        image_marker_add_icon:
+            inputs:
+                - '@CaseStoreBundle/Resources/public/images/marker-add-icon-2x.png'
+            output: "images/marker-add-icon-2x.png"
+        image_marker_add_icon:
+            inputs:
+                - '@CaseStoreBundle/Resources/public/images/marker-add-shadow.png'
+            output: "images/marker-add-shadow.png"
+
 
 fos_user:
     db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
