@@ -33,13 +33,13 @@ class ProjectAdminCaseStudyFieldDefinitionNewController extends ProjectAdminCont
         $caseStudyFieldDefinition = new CaseStudyFieldDefinition();
         $caseStudyFieldDefinition->setProject($this->project);
         $caseStudyFieldDefinition->setAddedBy($this->getUser());
-        $caseStudyFieldDefinition->setSort(0);
 
         $form = $this->createForm(new CaseStudyFieldDefinitionNewType(), $caseStudyFieldDefinition);
         $request = $this->getRequest();
         if ($request->getMethod() == 'POST') {
             $form->handleRequest($request);
             if ($form->isValid()) {
+                $caseStudyFieldDefinition->setSort($doctrine->getRepository('CaseStoreBundle:CaseStudyFieldDefinition')->getNextSortOrderForNewFieldOnProject($this->project));
                 $doctrine->persist($caseStudyFieldDefinition);
                 $doctrine->flush();
                 return $this->redirect($this->generateUrl('case_store_project_admin_case_study_field_definition', array(

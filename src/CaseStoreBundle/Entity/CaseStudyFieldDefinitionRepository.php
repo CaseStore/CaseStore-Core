@@ -17,6 +17,18 @@ class CaseStudyFieldDefinitionRepository extends EntityRepository
         return $this->findBy(array('project'=>$project),array('sort'=>'ASC'));
     }
 
+
+    public function getNextSortOrderForNewFieldOnProject(Project $project) {
+        $s =  $this->getEntityManager()
+            ->createQuery(
+                ' SELECT MAX(csfd.sort) AS sort FROM CaseStoreBundle:CaseStudyFieldDefinition csfd'.
+                ' WHERE csfd.project = :project '.
+                ' GROUP BY csfd.project'
+            )
+            ->setParameter('project', $project)
+            ->getResult();
+        return $s ? $s[0]['sort'] + 10 : 10;
+    }
 }
 
 
