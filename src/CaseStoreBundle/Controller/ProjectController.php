@@ -44,6 +44,7 @@ class ProjectController extends Controller
             'newCaseStudyAllowed'=>((boolean)$this->getUser()),
             'newFieldDefinitionAllowed'=>((boolean)$this->getUser()),
             'fieldDefinitions'=>$caseStudyFieldDefinitions,
+            'isAdminAccessAllowed'=>$this->isGranted(ProjectVoter::ADMIN, $this->project),
         ));
     }
 

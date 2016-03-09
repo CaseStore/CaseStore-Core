@@ -34,8 +34,9 @@
         {% if newCaseStudyAllowed %}
             <li class="list-group-item"><a href="{{  path('case_store_new_case_study', { 'projectId':project.publicId }) }}" class="btn btn-warning">New Case Study</a></li>
         {%  endif %}
-        <li class="list-group-item"><a href="{{  path('case_store_project_admin', { 'projectId':project.publicId }) }}" class="btn btn-default">Project Admin</a></li>
-
+        {%  if isAdminAccessAllowed %}
+            <li class="list-group-item"><a href="{{  path('case_store_project_admin', { 'projectId':project.publicId }) }}" class="btn btn-default">Project Admin</a></li>
+        {%  endif %}
     </ul>
 
 {%  endblock %}
