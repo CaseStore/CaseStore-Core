@@ -13,13 +13,17 @@
         <li class="active">Field {{ caseStudyFieldDefinition.title }}</li>
     </ol>
 
-    <ul>
-        {%  for option in options %}
-            <li>
-                <div><a href="{{  path('case_store_project_case_study_select_field_option', { 'projectId':project.publicId,'fieldId':caseStudyFieldDefinition.publicId,'optionId':option.publicId }) }}">{{  option.title }}</a></div>
-            </li>
-        {%  endfor %}
-    </ul>
+    {%  if options %}
+        <ul>
+            {%  for option in options %}
+                <li>
+                    <div><a href="{{  path('case_store_project_case_study_select_field_option', { 'projectId':project.publicId,'fieldId':caseStudyFieldDefinition.publicId,'optionId':option.publicId }) }}">{{  option.title }}</a></div>
+                </li>
+            {%  endfor %}
+        </ul>
+    {%  else %}
+        <p>This Select field has no options you can select.</p>
+    {%  endif %}
 
 
 {%  endblock %}
