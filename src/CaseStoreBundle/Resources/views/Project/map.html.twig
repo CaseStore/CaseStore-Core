@@ -28,7 +28,7 @@
             var mapObject;
             var mapData = [];
             {%  for location in locations %}
-            mapData.push({ lat: {{  location.lat}}, lng: {{  location.lng }}  });
+            mapData.push({ lat: {{  location.lat}}, lng: {{  location.lng }}, url: '{{  path('case_store_case_study', { 'projectId':project.publicId, 'caseStudyId':location.caseStudy.publicId }) }}'  });
             {%  endfor %}
 
             $( document ).ready(function() {
@@ -41,7 +41,7 @@
                 L.tileLayer(mapquestUrl, {maxZoom: 18, attribution: mapquestAttrib, subdomains: subDomains}).addTo(mapObject);
 
                 for (idx in mapData) {
-                    L.marker([ mapData[idx].lat, mapData[idx].lng]).addTo(mapObject);
+                    L.marker([ mapData[idx].lat, mapData[idx].lng]).addTo(mapObject).bindPopup('<a href="'+mapData[idx].url+'">View</a>');
                 }
 
             });
