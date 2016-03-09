@@ -27,7 +27,7 @@ class ProjectCaseStudyFieldController extends ProjectController
         $doctrine = $this->getDoctrine()->getManager();
         // load
         $repository = $doctrine->getRepository('CaseStoreBundle:CaseStudyFieldDefinition');
-        $this->caseStudyFieldDefinition = $repository->findOneByPublicId($fieldId);
+        $this->caseStudyFieldDefinition = $repository->findOneBy(array('project'=>$this->project, 'publicId'=>$fieldId));
         if (!$this->caseStudyFieldDefinition) {
             throw new  NotFoundHttpException('Not found');
         }
