@@ -36,7 +36,22 @@ class ProjectVoter extends Voter
 
     protected function voteOnAttribute($attribute, $subject, TokenInterface $token)
     {
-        return true;
+        if ($attribute == self::ADMIN) {
+            // Admin - only project owner can admin
+            $user = $token->getUser();
+            return $user && $user == $subject->getOwner();
+
+        } else if($attribute == self::EDIT) {
+            // Write - any logged in user can edit project at the moment.
+            return (boolean)$token->getUser();
+
+        } else {
+            // Read - anyone can read any project at the moment, including anon.
+            return true;
+
+        }
+
+
     }
 
 }
