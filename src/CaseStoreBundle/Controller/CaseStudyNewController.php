@@ -72,6 +72,11 @@ class CaseStudyNewController extends ProjectController
 
 
                 $doctrine->flush();
+
+                // Update Caches now!
+                $doctrine->getRepository('CaseStoreBundle:CaseStudy')->updateCaches($casestudy);
+
+
                 return $this->redirect($this->generateUrl('case_store_case_study', array(
                     'projectId'=>$this->project->getPublicId(),
                     'caseStudyId'=>$casestudy->getPublicId(),
