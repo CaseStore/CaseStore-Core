@@ -5,6 +5,7 @@ namespace CaseStoreBundle\Controller;
 use CaseStoreBundle\Entity\CaseStudy;
 use CaseStoreBundle\Entity\CaseStudyComment;
 use CaseStoreBundle\Entity\CaseStudyDocument;
+use CaseStoreBundle\Entity\CaseStudyFieldValueInteger;
 use CaseStoreBundle\Entity\CaseStudyFieldValueSelect;
 use CaseStoreBundle\Entity\CaseStudyFieldValueString;
 use CaseStoreBundle\Entity\CaseStudyFieldValueText;
@@ -13,6 +14,7 @@ use CaseStoreBundle\Entity\CaseStudyLocation;
 use CaseStoreBundle\Entity\Project;
 use CaseStoreBundle\Form\Type\CaseStudyCommentNewType;
 use CaseStoreBundle\Form\Type\CaseStudyDocumentNewType;
+use CaseStoreBundle\Form\Type\CaseStudyFieldValueIntegerEditType;
 use CaseStoreBundle\Form\Type\CaseStudyFieldValueSelectEditType;
 use CaseStoreBundle\Form\Type\CaseStudyFieldValueStringEditType;
 use CaseStoreBundle\Form\Type\CaseStudyFieldValueTextEditType;
@@ -201,6 +203,27 @@ class CaseStudyEditController extends CaseStudyController
                 getRepository('CaseStoreBundle:CaseStudyFieldValueText')->
                 getLatestValueFor($fieldDefinition, $this->caseStudy);
             $form = $this->createForm(new CaseStudyFieldValueTextEditType($fieldDefinition, $oldValue), $value);
+            if ($request->getMethod() == 'POST') {
+                $form->handleRequest($request);
+                if ($form->isValid()) {
+                    $doctrine->persist($value);
+                    $doctrine->flush();
+                    $doctrine->getRepository('CaseStoreBundle:CaseStudy')->updateCaches($this->caseStudy);
+                    return $this->redirect($this->generateUrl('case_store_case_study', array(
+                        'projectId'=>$this->project->getPublicId(),
+                        'caseStudyId'=>$this->caseStudy->getPublicId(),
+                    )));
+                }
+            }
+        } else if ($fieldDefinition->isTypeInteger()) {
+            $value = new CaseStudyFieldValueInteger();
+            $value->setFieldDefinition($fieldDefinition);
+            $value->setCaseStudy($this->caseStudy);
+            $value->setAddedBy($this->getUser());
+            $oldValue = $doctrine->
+                getRepository('CaseStoreBundle:CaseStudyFieldValueInteger')->
+                getLatestValueFor($fieldDefinition, $this->caseStudy);
+            $form = $this->createForm(new CaseStudyFieldValueIntegerEditType($fieldDefinition, $oldValue), $value);
             if ($request->getMethod() == 'POST') {
                 $form->handleRequest($request);
                 if ($form->isValid()) {

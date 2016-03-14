@@ -85,6 +85,11 @@ class CaseStudyController extends Controller
                     $doctrine->
                     getRepository('CaseStoreBundle:CaseStudyFieldValueSelect')->
                     getLatestValuesFor($caseStudyFieldDefinition, $this->caseStudy);
+            } else if ($caseStudyFieldDefinition->isTypeInteger()) {
+                $fieldValues[$caseStudyFieldDefinition->getPublicId()] =
+                    $doctrine->
+                    getRepository('CaseStoreBundle:CaseStudyFieldValueInteger')->
+                    getLatestValueFor($caseStudyFieldDefinition, $this->caseStudy);
             }
 
         }

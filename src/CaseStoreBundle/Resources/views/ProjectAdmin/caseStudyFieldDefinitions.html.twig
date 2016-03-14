@@ -33,6 +33,8 @@
                         Text
                     {%  elseif caseStudyFieldDefinition.isTypeSelect %}
                         Select
+                    {%  elseif caseStudyFieldDefinition.isTypeInteger %}
+                        Integer
                     {%  endif %}
                 </td>
                 <td>{{  caseStudyFieldDefinition.sort }}</td>

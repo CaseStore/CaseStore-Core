@@ -19,6 +19,8 @@
         {%  if fieldValues[fieldDefinition.publicId] is defined and fieldValues[fieldDefinition.publicId] %}
             {% if fieldDefinition.isTypeString %}
                 <div>{{ fieldValues[fieldDefinition.publicId].value  }}</div>
+            {% elseif fieldDefinition.isTypeInteger %}
+                <div>{{ fieldValues[fieldDefinition.publicId].value  }}</div>
             {% elseif fieldDefinition.isTypeText %}
                 <div>{{ fieldValues[fieldDefinition.publicId].value  | nl2br }}</div>
             {% elseif fieldDefinition.isTypeSelect %}

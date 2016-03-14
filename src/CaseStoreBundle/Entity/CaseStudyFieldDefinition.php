@@ -216,6 +216,10 @@ class CaseStudyFieldDefinition
         return strtolower($this->type) == 'select';
     }
 
+    public function isTypeInteger() {
+        return strtolower($this->type) == 'integer';
+    }
+
 
 
     /**

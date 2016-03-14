@@ -35,6 +35,7 @@ class CaseStudyFieldDefinitionNewType extends AbstractType {
                 'String' => 'STRING',
                 'Text' => 'TEXT',
                 'Select' => 'SELECT',
+                'Integer' => 'INTEGER',
             ),
             'required' => true,
         ));
