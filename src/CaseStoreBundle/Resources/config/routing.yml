@@ -42,6 +42,10 @@ case_store_new_case_study:
     path:     /project/{projectId}/newcasestudy
     defaults: { _controller: CaseStoreBundle:CaseStudyNew:index }
 
+case_store_new_output:
+    path:     /project/{projectId}/newoutput
+    defaults: { _controller: CaseStoreBundle:OutputNew:newOutput }
+
 ################################################### Project Admin
 
 case_store_project_admin:
@@ -99,6 +103,12 @@ case_store_case_study_edit_field:
 case_store_case_study_new_document:
     path:     /project/{projectId}/casestudy/{caseStudyId}/newdocument
     defaults: { _controller: CaseStoreBundle:CaseStudyEdit:newDocument }
+
+################################################### Output
+
+case_store_output:
+    path:     /project/{projectId}/output/{outputId}
+    defaults: { _controller: CaseStoreBundle:Output:index }
 
 ################################################### User Account
 

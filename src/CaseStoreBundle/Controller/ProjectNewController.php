@@ -3,6 +3,7 @@
 namespace CaseStoreBundle\Controller;
 
 use CaseStoreBundle\Entity\CaseStudyFieldDefinition;
+use CaseStoreBundle\Entity\OutputFieldDefinition;
 use CaseStoreBundle\Entity\Project;
 use CaseStoreBundle\Form\Type\ProjectNewType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -38,6 +39,24 @@ class ProjectNewController extends Controller
                 $doctrine->persist($fieldDefTitle);
 
                 $fieldDefDescription = new CaseStudyFieldDefinition();
+                $fieldDefDescription->setProject($project);
+                $fieldDefDescription->setAddedBy($this->getUser());
+                $fieldDefDescription->setSort(1);
+                $fieldDefDescription->setType('text');
+                $fieldDefDescription->setTitle('Description');
+                $fieldDefDescription->setPublicId('description');
+                $doctrine->persist($fieldDefDescription);
+
+                $fieldDefTitle = new OutputFieldDefinition();
+                $fieldDefTitle->setProject($project);
+                $fieldDefTitle->setAddedBy($this->getUser());
+                $fieldDefTitle->setSort(0);
+                $fieldDefTitle->setType('string');
+                $fieldDefTitle->setTitle('Title');
+                $fieldDefTitle->setPublicId('title');
+                $doctrine->persist($fieldDefTitle);
+
+                $fieldDefDescription = new OutputFieldDefinition();
                 $fieldDefDescription->setProject($project);
                 $fieldDefDescription->setAddedBy($this->getUser());
                 $fieldDefDescription->setSort(1);
