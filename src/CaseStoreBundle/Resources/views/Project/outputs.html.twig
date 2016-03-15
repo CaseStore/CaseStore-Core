@@ -1,0 +1,30 @@
+{#
+# @license 3-clause BSD
+# @link https://github.com/CaseStore/CaseStore-Core
+#}
+
+{% extends 'CaseStoreBundle::base.html.twig' %}
+
+{% block main %}
+
+
+    <ol class="breadcrumb">
+        <li><a href="{{ path('case_store_project', { 'projectId':project.publicId }) }}">Project {{  project.title }}</a></li>
+        <li class="active">Outputs</li>
+    </ol>
+
+    <ul>
+        {%  for output in outputs %}
+            <li>
+                <div>
+                    <a href="{{ path('case_store_output', { 'projectId':project.publicId,'outputId':output.publicId }) }}">{{  output.titleOrPlaceHolder }}</a>
+                </div>
+                <div>
+                    {{  output.description | nl2br }}
+                </div>
+            </li>
+        {%  endfor %}
+    </ul>
+
+{%  endblock %}
+

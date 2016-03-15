@@ -31,6 +31,7 @@
             {% endif %}
         {%  endfor %}
         <li class="list-group-item"><a href="{{  path('case_store_project_map', { 'projectId':project.publicId }) }}" class="btn btn-default">Map</a></li>
+        <li class="list-group-item"><a href="{{  path('case_store_project_outputs', { 'projectId':project.publicId }) }}" class="btn btn-default">Outputs</a></li>
         {% if newCaseStudyAllowed %}
             <li class="list-group-item"><a href="{{  path('case_store_new_case_study', { 'projectId':project.publicId }) }}" class="btn btn-warning">New Case Study</a></li>
         {%  endif %}

@@ -100,4 +100,20 @@ class ProjectController extends Controller
         ));
     }
 
+
+    public function outputsAction($projectId)
+    {
+        // build
+        $this->build($projectId);
+        //data
+
+        $doctrine = $this->getDoctrine()->getManager();
+        $outputs = $doctrine->getRepository('CaseStoreBundle:Output')->findBy(array('project'=>$this->project));
+
+        return $this->render('CaseStoreBundle:Project:outputs.html.twig', array(
+            'project'=>$this->project,
+            'outputs'=>$outputs,
+        ));
+    }
+
 }
