@@ -18,6 +18,13 @@ services:
         # small performance boost
         public: false
 
+    app.output_voter:
+        class: CaseStoreBundle\Security\OutputVoter
+        tags:
+            - { name: security.voter }
+        # small performance boost
+        public: false
+
     pre_persist.listener:
         class: CaseStoreBundle\EventListener\PrePersistEventListener
         tags:

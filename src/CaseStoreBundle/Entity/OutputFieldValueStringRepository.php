@@ -13,17 +13,17 @@ use Doctrine\ORM\Mapping as ORM;
 class OutputFieldValueStringRepository extends EntityRepository
 {
 
-    public function getLatestValueFor(OutputFieldDefinition $outputFieldDefinition, CaseStudy $caseStudy) {
+    public function getLatestValueFor(OutputFieldDefinition $outputFieldDefinition, Output $output) {
 
         return $this->getEntityManager()
             ->createQuery(
                 ' SELECT fv FROM CaseStoreBundle:OutputFieldValueString fv'.
-                ' WHERE    fv.caseStudy = :caseStudy AND fv.fieldDefinition = :fieldDefinition '.
+                ' WHERE    fv.output = :output AND fv.fieldDefinition = :fieldDefinition '.
                 ' ORDER BY fv.addedAt DESC '.
                 ' '
             )
             ->setMaxResults(1)
-            ->setParameter('caseStudy', $caseStudy)
+            ->setParameter('output', $output)
             ->setParameter('fieldDefinition', $outputFieldDefinition)
             ->getOneOrNullResult();
 
