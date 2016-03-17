@@ -64,6 +64,7 @@ class CaseStudyController extends Controller
         $comments =  $doctrine->getRepository('CaseStoreBundle:CaseStudyComment')->findBy(array('caseStudy'=>$this->caseStudy));
         $documents =  $doctrine->getRepository('CaseStoreBundle:CaseStudyDocument')->findBy(array('caseStudy'=>$this->caseStudy));
         $locations =  $doctrine->getRepository('CaseStoreBundle:CaseStudyLocation')->findBy(array('caseStudy'=>$this->caseStudy,'removedAt'=>null));
+        $outputs =  $doctrine->getRepository('CaseStoreBundle:Output')->findByCaseStudy($this->caseStudy);
         $caseStudyFieldDefinitions = $doctrine->getRepository('CaseStoreBundle:CaseStudyFieldDefinition')->getForProject($this->project);
 
 
@@ -105,6 +106,7 @@ class CaseStudyController extends Controller
             'locations' => $locations,
             'fieldDefinitions'=>$caseStudyFieldDefinitions,
             'fieldValues' => $fieldValues,
+            'outputs' => $outputs,
         ));
     }
 

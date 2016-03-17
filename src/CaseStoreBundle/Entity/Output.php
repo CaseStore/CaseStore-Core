@@ -62,6 +62,12 @@ class Output
 
 
     /**
+     * @ORM\OneToMany(targetEntity="CaseStoreBundle\Entity\CaseStudyHasOutput", mappedBy="output")
+     */
+    private $hasCaseStudies;
+
+
+    /**
      * @return int
      */
     public function getId()

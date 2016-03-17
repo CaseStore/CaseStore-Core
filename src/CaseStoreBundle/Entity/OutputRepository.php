@@ -30,5 +30,16 @@ class OutputRepository extends EntityRepository
         }
     }
 
+    public function findByCaseStudy(CaseStudy $caseStudy) {
+        return $this->getEntityManager()
+            ->createQuery(
+                ' SELECT o FROM CaseStoreBundle:Output o'.
+                '  JOIN  o.hasCaseStudies csho '.
+                ' WHERE csho.caseStudy = :caseStudy AND csho.removedAt IS NULL'
+            )
+            ->setParameter('caseStudy', $caseStudy)
+            ->getResult();
+    }
+
 }
 

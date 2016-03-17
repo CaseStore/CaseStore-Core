@@ -31,7 +31,7 @@ class CaseStudyHasOutput
     private $caseStudy;
 
     /**
-     * @ORM\ManyToOne(targetEntity="CaseStoreBundle\Entity\Output")
+     * @ORM\ManyToOne(targetEntity="CaseStoreBundle\Entity\Output", inversedBy="hasCaseStudies")
      * @ORM\JoinColumn(name="output_id", referencedColumnName="id", nullable=false)
      */
     private $output;
