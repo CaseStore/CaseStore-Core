@@ -77,7 +77,7 @@ class OutputNewController extends ProjectController
                 $doctrine->flush();
 
                 // Update Caches now!
-                // TODO $doctrine->getRepository('CaseStoreBundle:Output')->updateCaches($output);
+                $doctrine->getRepository('CaseStoreBundle:Output')->updateCaches($output);
 
 
                 return $this->redirect($this->generateUrl('case_store_output', array(

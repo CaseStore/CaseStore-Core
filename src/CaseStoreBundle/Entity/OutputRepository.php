@@ -30,6 +30,42 @@ class OutputRepository extends EntityRepository
         }
     }
 
+
+    public function updateCaches (Output $output) {
+
+        $outputFieldDefinitions = $this->getEntityManager()->getRepository('CaseStoreBundle:OutputFieldDefinition')->getForProject($output->getProject());
+
+        $titleFound = false;
+        $descriptionFound = false;
+
+        foreach($outputFieldDefinitions as $outputFieldDefinition) {
+            if (!$titleFound && $outputFieldDefinition->isTypeString()) {
+
+                $titleFound = true;
+
+                $value = $this->getEntityManager()->
+                    getRepository('CaseStoreBundle:OutputFieldValueString')->
+                    getLatestValueFor($outputFieldDefinition, $output);
+                $output->setTitle($value ? $value->getValue() : null);
+
+            } else if (!$descriptionFound && $outputFieldDefinition->isTypeText()) {
+
+                $descriptionFound = true;
+
+                $value = $this->getEntityManager()->
+                    getRepository('CaseStoreBundle:OutputFieldValueText')->
+                    getLatestValueFor($outputFieldDefinition, $output);
+                $output->setDescription($value ? $value->getValue() : null);
+
+            }
+        }
+
+        $this->getEntityManager()->persist($output);
+        $this->getEntityManager()->flush($output);
+
+    }
+
+
     public function findByCaseStudy(CaseStudy $caseStudy) {
         return $this->getEntityManager()
             ->createQuery(

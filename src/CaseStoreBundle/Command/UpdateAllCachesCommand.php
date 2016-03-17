@@ -23,7 +23,7 @@ class UpdateAllCachesCommand extends ContainerAwareCommand
         ;
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $commandOutput)
     {
 
         $doctrine = $this->getContainer()->get('doctrine');
@@ -34,6 +34,14 @@ class UpdateAllCachesCommand extends ContainerAwareCommand
             $caseStudyRepository->updateCaches($caseStudy);
         }
 
-        $output->writeln('Done');
+
+        $outputRepository = $doctrine->getRepository('CaseStoreBundle:Output');
+
+        foreach($outputRepository->findAll() as $output) {
+            $outputRepository->updateCaches($output);
+        }
+
+        $commandOutput->writeln('Done');
     }
 }
+
