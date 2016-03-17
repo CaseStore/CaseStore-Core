@@ -42,4 +42,12 @@
         </ul>
     {%  endif %}
 
+    <ul class="list-group">
+        {%  if editAccessAllowed %}
+            {%  for fieldDefinition in fieldDefinitions %}
+                <li class="list-group-item"><a href="{{ path('case_store_output_edit_field', { 'projectId':project.publicId, 'outputId':output.publicId, 'fieldDefinitionId':fieldDefinition.publicId }) }}" class="btn btn-warning">Edit {{ fieldDefinition.title  }}</a></li>
+            {%  endfor %}
+        {%  endif %}
+    </ul>
+
 {%  endblock %}

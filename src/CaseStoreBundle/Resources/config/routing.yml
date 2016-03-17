@@ -116,6 +116,13 @@ case_store_output:
     path:     /project/{projectId}/output/{outputId}
     defaults: { _controller: CaseStoreBundle:Output:index }
 
+################################################### Output
+
+case_store_output_edit_field:
+    path:     /project/{projectId}/output/{outputId}/edit/field/{fieldDefinitionId}
+    defaults: { _controller: CaseStoreBundle:OutputEdit:editField }
+
+
 ################################################### User Account
 
 case_store_you:
