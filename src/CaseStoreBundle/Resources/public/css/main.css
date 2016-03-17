@@ -10,7 +10,7 @@
     text-align: center;
 }
 
-.caseStudyDataLabel {
+.caseStudyDataLabel, .outputDataLabel {
     font-weight: bold;
     font-size: 120%;
 }

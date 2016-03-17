@@ -15,7 +15,7 @@
     <h1>Output</h1>
 
     {%  for fieldDefinition in fieldDefinitions %}
-        <div class="caseStudyDataLabel">{{  fieldDefinition.title }}</div>
+        <div class="outputDataLabel">{{  fieldDefinition.title }}</div>
         {%  if fieldValues[fieldDefinition.publicId] is defined and fieldValues[fieldDefinition.publicId] %}
             {% if fieldDefinition.isTypeString %}
                 <div>{{ fieldValues[fieldDefinition.publicId].value  }}</div>
@@ -27,7 +27,7 @@
     {%  endfor %}
 
     {%  if documents %}
-        <div class="caseStudyDataLabel">Documents</div>
+        <div class="outputDataLabel">Documents</div>
         <ul>
             {%  for document in documents %}
                 <li>
@@ -39,8 +39,8 @@
     {%  endif %}
 
     {%  if caseStudies %}
-        <div class="caseStudyDataLabel">CaseStudies involved</div>
-        <ul class="caseStudyOutputList">
+        <div class="outputDataLabel">CaseStudies involved</div>
+        <ul>
             {%  for caseStudy in caseStudies %}
                 <li>
                     <div>
