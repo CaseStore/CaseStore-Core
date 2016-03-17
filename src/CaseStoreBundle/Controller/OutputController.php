@@ -63,6 +63,7 @@ class OutputController extends Controller
         $doctrine = $this->getDoctrine()->getManager();
         $outputFieldDefinitions = $doctrine->getRepository('CaseStoreBundle:OutputFieldDefinition')->getForProject($this->project);
         $caseStudies =  $doctrine->getRepository('CaseStoreBundle:CaseStudy')->findByOutput($this->output);
+        $documents =  $doctrine->getRepository('CaseStoreBundle:OutputDocument')->findBy(array('output'=>$this->output));
 
 
         $fieldValues = array();
@@ -89,7 +90,26 @@ class OutputController extends Controller
             'fieldDefinitions'=>$outputFieldDefinitions,
             'fieldValues' => $fieldValues,
             'caseStudies' => $caseStudies,
+            'documents' => $documents,
         ));
+    }
+
+    public function documentDownloadAction($projectId, $outputId, $documentId) {
+        $this->build($projectId, $outputId);
+
+        $doctrine = $this->getDoctrine()->getManager();
+
+        $document = $doctrine->getRepository('CaseStoreBundle:OutputDocument')
+            ->findOneBy( array('publicId'=>$documentId, 'output'=>$this->output));
+        if (!$document) {
+            throw new  NotFoundHttpException('Not found');
+        }
+
+
+        $response = new Response(file_get_contents($document->getAbsolutePath()), 200, array('Content-Type' => $document->getMime() ));
+        return $response;
+
+
     }
 
 }

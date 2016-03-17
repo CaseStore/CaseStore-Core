@@ -116,11 +116,19 @@ case_store_output:
     path:     /project/{projectId}/output/{outputId}
     defaults: { _controller: CaseStoreBundle:Output:index }
 
+case_store_output_document_download:
+    path:     /project/{projectId}/output/{outputId}/document/{documentId}
+    defaults: { _controller: CaseStoreBundle:Output:documentDownload }
+
 ################################################### Output
 
 case_store_output_edit_field:
     path:     /project/{projectId}/output/{outputId}/edit/field/{fieldDefinitionId}
     defaults: { _controller: CaseStoreBundle:OutputEdit:editField }
+
+case_store_output_new_document:
+    path:     /project/{projectId}/output/{outputId}/newdocument
+    defaults: { _controller: CaseStoreBundle:OutputEdit:newDocument }
 
 
 ################################################### User Account

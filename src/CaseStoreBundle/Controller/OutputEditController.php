@@ -3,8 +3,10 @@
 namespace CaseStoreBundle\Controller;
 
 
+use CaseStoreBundle\Entity\OutputDocument;
 use CaseStoreBundle\Entity\OutputFieldValueString;
 use CaseStoreBundle\Entity\OutputFieldValueText;
+use CaseStoreBundle\Form\Type\OutputDocumentNewType;
 use CaseStoreBundle\Form\Type\OutputFieldValueStringEditType;
 use CaseStoreBundle\Form\Type\OutputFieldValueTextEditType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -88,5 +90,38 @@ class OutputEditController extends OutputController
 
     }
 
+
+    public function newDocumentAction($projectId, $outputId)
+    {
+        $this->build($projectId, $outputId);
+
+        $doctrine = $this->getDoctrine()->getManager();
+
+        $outputDocument = new OutputDocument();
+        $outputDocument->setOutput($this->output);
+        $outputDocument->setAddedBy($this->getUser());
+
+        $form = $this->createForm(new OutputDocumentNewType(), $outputDocument);
+        $request = $this->getRequest();
+        if ($request->getMethod() == 'POST') {
+            $form->handleRequest($request);
+            if ($form->isValid()) {
+                $outputDocument->upload();
+                $doctrine->persist($outputDocument);
+                $doctrine->flush();
+                return $this->redirect($this->generateUrl('case_store_output', array(
+                    'projectId'=>$this->project->getPublicId(),
+                    'outputId'=>$this->output->getPublicId(),
+                )));
+            }
+        }
+
+        return $this->render('CaseStoreBundle:OutputEdit:newDocument.html.twig', array(
+            'project' => $this->project,
+            'output' => $this->output,
+            'form' => $form->createView(),
+        ));
+
+    }
 
 }

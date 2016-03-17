@@ -26,6 +26,18 @@
         <div></div>
     {%  endfor %}
 
+    {%  if documents %}
+        <div class="caseStudyDataLabel">Documents</div>
+        <ul>
+            {%  for document in documents %}
+                <li>
+                    <div>{{  document.title }}</div>
+                    <div><a href="{{ path('case_store_output_document_download', { 'projectId':project.publicId, 'outputId':output.publicId,'documentId':document.publicId  }) }}">Download {{ document.originalFileName }}</a></div>
+                </li>
+            {%  endfor %}
+        </ul>
+    {%  endif %}
+
     {%  if caseStudies %}
         <div class="caseStudyDataLabel">CaseStudies involved</div>
         <ul class="caseStudyOutputList">
@@ -47,6 +59,7 @@
             {%  for fieldDefinition in fieldDefinitions %}
                 <li class="list-group-item"><a href="{{ path('case_store_output_edit_field', { 'projectId':project.publicId, 'outputId':output.publicId, 'fieldDefinitionId':fieldDefinition.publicId }) }}" class="btn btn-warning">Edit {{ fieldDefinition.title  }}</a></li>
             {%  endfor %}
+            <li class="list-group-item"><a href="{{  path('case_store_output_new_document', { 'projectId':project.publicId, 'outputId':output.publicId }) }}" class="btn btn-warning">New Document</a></li>
         {%  endif %}
     </ul>
 

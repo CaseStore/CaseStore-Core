@@ -10,6 +10,7 @@ use CaseStoreBundle\Entity\CaseStudyComment;
 use CaseStoreBundle\Entity\CaseStudyDocument;
 use CaseStoreBundle\Entity\CaseStudyLocation;
 use CaseStoreBundle\Entity\Output;
+use CaseStoreBundle\Entity\OutputDocument;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 
 
@@ -86,6 +87,19 @@ class PrePersistEventListener  {
                 $idLen = self::MIN_LENGTH;
                 $id =  CaseStoreBundle::createKey(1,$idLen);
                 while($manager->doesPublicIdExist($id, $entity->getCaseStudy())) {
+                    if ($idLen < self::MAX_LENGTH) {
+                        $idLen = $idLen + self::LENGTH_STEP;
+                    }
+                    $id =  CaseStoreBundle::createKey(1,$idLen);
+                }
+                $entity->setPublicId($id);
+            }
+        } else if ($entity instanceof OutputDocument) {
+            if (!$entity->getPublicId()) {
+                $manager = $args->getEntityManager()->getRepository('CaseStoreBundle\Entity\OutputDocument');
+                $idLen = self::MIN_LENGTH;
+                $id =  CaseStoreBundle::createKey(1,$idLen);
+                while($manager->doesPublicIdExist($id, $entity->getOutput())) {
                     if ($idLen < self::MAX_LENGTH) {
                         $idLen = $idLen + self::LENGTH_STEP;
                     }
