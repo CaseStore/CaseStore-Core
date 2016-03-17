@@ -72,6 +72,12 @@ class CaseStudy
     private $fieldValueSelect;
 
     /**
+     * @ORM\OneToMany(targetEntity="CaseStoreBundle\Entity\CaseStudyHasOutput", mappedBy="caseStudy")
+     */
+    private $hasOutputs;
+
+
+    /**
      * @return int
      */
     public function getId()

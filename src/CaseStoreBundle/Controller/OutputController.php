@@ -62,6 +62,7 @@ class OutputController extends Controller
 
         $doctrine = $this->getDoctrine()->getManager();
         $outputFieldDefinitions = $doctrine->getRepository('CaseStoreBundle:OutputFieldDefinition')->getForProject($this->project);
+        $caseStudies =  $doctrine->getRepository('CaseStoreBundle:CaseStudy')->findByOutput($this->output);
 
 
         $fieldValues = array();
@@ -87,6 +88,7 @@ class OutputController extends Controller
             'editAccessAllowed'=>$this->editAccessAllowed,
             'fieldDefinitions'=>$outputFieldDefinitions,
             'fieldValues' => $fieldValues,
+            'caseStudies' => $caseStudies,
         ));
     }
 

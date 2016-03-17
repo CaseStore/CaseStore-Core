@@ -26,5 +26,20 @@
         <div></div>
     {%  endfor %}
 
+    {%  if caseStudies %}
+        <div class="caseStudyDataLabel">CaseStudies involved</div>
+        <ul class="caseStudyOutputList">
+            {%  for caseStudy in caseStudies %}
+                <li>
+                    <div>
+                        <a href="{{ path('case_store_case_study', { 'projectId':project.publicId,'caseStudyId':caseStudy.publicId }) }}">{{  caseStudy.titleOrPlaceHolder }}</a>
+                    </div>
+                    <div>
+                        {{  caseStudy.description | nl2br }}
+                    </div>
+                </li>
+            {%  endfor %}
+        </ul>
+    {%  endif %}
 
 {%  endblock %}
