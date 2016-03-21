@@ -76,6 +76,20 @@ case_store_project_admin_case_study_field_definition_new_option:
     path:     /project/{projectId}/admin/casestudyfielddefinition/{caseStudyFieldDefinitionId}/newoption
     defaults: { _controller: CaseStoreBundle:ProjectAdminCaseStudyFieldDefinition:newOption }
 
+
+case_store_project_admin_output_field_definitions:
+    path:     /project/{projectId}/admin/outputfielddefinitions
+    defaults: { _controller: CaseStoreBundle:ProjectAdmin:outputFieldDefinitions }
+
+case_store_project_admin_new_output_field_definition:
+    path:     /project/{projectId}/admin/newoutputfielddefinition
+    defaults: { _controller: CaseStoreBundle:ProjectAdminOutputFieldDefinitionNew:index }
+
+
+case_store_project_admin_output_field_definition:
+    path:     /project/{projectId}/admin/outputfielddefinition/{outputFieldDefinitionId}
+    defaults: { _controller: CaseStoreBundle:ProjectAdminOutputFieldDefinition:index }
+
 ################################################### Case Study
 
 case_store_case_study:

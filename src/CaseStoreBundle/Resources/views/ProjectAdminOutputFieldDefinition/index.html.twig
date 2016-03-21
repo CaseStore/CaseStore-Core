@@ -1,0 +1,34 @@
+{#
+# @license 3-clause BSD
+# @link https://github.com/CaseStore/CaseStore-Core
+#}
+
+
+{% extends 'CaseStoreBundle::base.html.twig' %}
+
+{% block main %}
+
+    <ol class="breadcrumb">
+        <li><a href="{{ path('case_store_project', { 'projectId':project.publicId }) }}">Project {{  project.title }}</a></li>
+        <li><a href="{{ path('case_store_project_admin', { 'projectId':project.publicId }) }}">Project Admin</a></li>
+        <li><a href="{{  path('case_store_project_admin_output_field_definitions', { 'projectId':project.publicId }) }}">Output Field Definitions</a></li>
+        <li class="active">Output Field Definition</li>
+    </ol>
+
+
+    <div>
+        ID: {{  outputFieldDefinition.publicId }}
+    </div>
+
+
+    <div>
+        Title: {{  outputFieldDefinition.title }}
+    </div>
+
+    <div>
+        Sort: {{  outputFieldDefinition.sort }}
+    </div>
+
+
+
+{%  endblock %}

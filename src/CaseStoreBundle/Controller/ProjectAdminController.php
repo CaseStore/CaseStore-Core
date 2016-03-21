@@ -59,5 +59,21 @@ class ProjectAdminController extends Controller
     }
 
 
+    public function outputFieldDefinitionsAction($projectId)
+    {
+        // build
+        $this->build($projectId);
+        //data
+
+        $doctrine = $this->getDoctrine()->getManager();
+        $outputFieldDefinitions = $doctrine->getRepository('CaseStoreBundle:OutputFieldDefinition')->getForProject($this->project);
+
+        return $this->render('CaseStoreBundle:ProjectAdmin:outputFieldDefinitions.html.twig', array(
+            'project'=>$this->project,
+            'outputFieldDefinitions'=>$outputFieldDefinitions,
+        ));
+    }
+
+
 }
 

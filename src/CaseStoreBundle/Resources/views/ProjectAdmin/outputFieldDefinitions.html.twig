@@ -1,0 +1,43 @@
+{#
+# @license 3-clause BSD
+# @link https://github.com/CaseStore/CaseStore-Core
+#}
+
+{% extends 'CaseStoreBundle::base.html.twig' %}
+
+{% block main %}
+
+
+    <ol class="breadcrumb">
+        <li><a href="{{ path('case_store_project', { 'projectId':project.publicId }) }}">Project {{  project.title }}</a></li>
+        <li><a href="{{ path('case_store_project_admin', { 'projectId':project.publicId }) }}">Project Admin</a></li>
+        <li class="active">Output Field Definitions</li>
+    </ol>
+
+    <table class="table table-striped">
+        <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Type</th>
+            <th>Sort</th>
+            <th>Actions</th>
+        </tr>
+        {%  for outputFieldDefinition in outputFieldDefinitions %}
+            <tr>
+                <td>{{  outputFieldDefinition.publicId }}</td>
+                <td>{{  outputFieldDefinition.title }}</td>
+                <td>
+                    {%  if outputFieldDefinition.isTypeString %}
+                        String
+                    {%  elseif outputFieldDefinition.isTypeText %}
+                        Text
+                    {%  endif %}
+                </td>
+                <td>{{  outputFieldDefinition.sort }}</td>
+                <td><a href="{{ path('case_store_project_admin_output_field_definition', { 'projectId':project.publicId,'outputFieldDefinitionId':outputFieldDefinition.publicId }) }}" class="btn btn-default">View</a></td>
+            </tr>
+        {%  endfor %}
+    </table>
+
+{%  endblock %}
+

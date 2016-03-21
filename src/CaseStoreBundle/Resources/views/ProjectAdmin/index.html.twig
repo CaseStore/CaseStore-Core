@@ -23,7 +23,9 @@
 
     <ul class="list-group">
         <li class="list-group-item"><a href="{{  path('case_store_project_admin_case_study_field_definitions', { 'projectId':project.publicId }) }}" class="btn btn-default">Case Study Field Definitions</a></li>
+        <li class="list-group-item"><a href="{{  path('case_store_project_admin_output_field_definitions', { 'projectId':project.publicId }) }}" class="btn btn-default">Output Field Definitions</a></li>
         <li class="list-group-item"><a href="{{  path('case_store_project_admin_new_case_study_field_definition', { 'projectId':project.publicId }) }}" class="btn btn-warning">New Case Study Field Definition</a></li>
+        <li class="list-group-item"><a href="{{  path('case_store_project_admin_new_output_field_definition', { 'projectId':project.publicId }) }}" class="btn btn-warning">New Output Field Definition</a></li>
     </ul>
 
 {%  endblock %}
