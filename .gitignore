@@ -12,3 +12,4 @@
 /web/bundles/
 /documents/*
 /outputdocuments/*
+.DS_Store
