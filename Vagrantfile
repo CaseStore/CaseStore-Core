@@ -2,7 +2,7 @@
 # vi: set ft=ruby :
 
 Vagrant.configure(2) do |config|
-  config.vm.box = "boxcutter/debian81"
+  config.vm.box = "boxcutter/debian82"
 
   config.vm.network "forwarded_port", guest: 80, host: 8080
 
@@ -13,7 +13,7 @@ Vagrant.configure(2) do |config|
      vb.gui = false
 
     # Customize the amount of memory on the VM:
-    vb.memory = "1024"
+    vb.memory = "512"
   end
 
 
