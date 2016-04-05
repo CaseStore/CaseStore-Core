@@ -100,6 +100,7 @@ class CaseStudyController extends Controller
             'caseStudy' => $this->caseStudy,
             'editAccessAllowed'=>$this->editAccessAllowed,
             'newCommentAllowed'=>((boolean)$this->getUser()),
+            'newOutputAllowed'=>((boolean)$this->getUser()),
             'users' => $users,
             'comments' => $comments,
             'documents' => $documents,
