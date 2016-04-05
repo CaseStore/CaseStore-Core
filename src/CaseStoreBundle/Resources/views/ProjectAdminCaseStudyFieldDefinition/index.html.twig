@@ -29,6 +29,9 @@
         Sort: {{  caseStudyFieldDefinition.sort }}
     </div>
 
+    <div>
+        Access: {%  if caseStudyFieldDefinition.isCaseStudyUsersOnly %}Case Study Users only{% else %}All{%  endif %}
+    </div>
 
 
     {%  if caseStudyFieldDefinition.isTypeSelect %}

@@ -13,8 +13,12 @@ use Doctrine\ORM\Mapping as ORM;
 class CaseStudyFieldDefinitionRepository extends EntityRepository
 {
 
-    public function getForProject(Project $project) {
-        return $this->findBy(array('project'=>$project),array('sort'=>'ASC'));
+    public function getForProject(Project $project, $includeCaseStudyUsersOnlyFields = true) {
+        $where = array('project' => $project);
+        if (!$includeCaseStudyUsersOnlyFields) {
+            $where['isCaseStudyUsersOnly'] = false;
+        }
+        return $this->findBy( $where, array('sort'=>'ASC') );
     }
 
 

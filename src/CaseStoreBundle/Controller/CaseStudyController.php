@@ -65,8 +65,8 @@ class CaseStudyController extends Controller
         $documents =  $doctrine->getRepository('CaseStoreBundle:CaseStudyDocument')->findBy(array('caseStudy'=>$this->caseStudy));
         $locations =  $doctrine->getRepository('CaseStoreBundle:CaseStudyLocation')->findBy(array('caseStudy'=>$this->caseStudy,'removedAt'=>null));
         $outputs =  $doctrine->getRepository('CaseStoreBundle:Output')->findByCaseStudy($this->caseStudy);
-        $caseStudyFieldDefinitions = $doctrine->getRepository('CaseStoreBundle:CaseStudyFieldDefinition')->getForProject($this->project);
-
+        $isUserHaveCaseStudy = $doctrine->getRepository('CaseStoreBundle:CaseStudyHasUser')->isCaseStudyHaveUser($this->caseStudy, $this->getUser());
+        $caseStudyFieldDefinitions = $doctrine->getRepository('CaseStoreBundle:CaseStudyFieldDefinition')->getForProject($this->project, $isUserHaveCaseStudy);
 
         $fieldValues = array();
         foreach($caseStudyFieldDefinitions as $caseStudyFieldDefinition) {
