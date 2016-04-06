@@ -39,6 +39,12 @@ class CaseStudyFieldDefinitionNewType extends AbstractType {
             ),
             'required' => true,
         ));
+
+        $builder->add('isCaseStudyUsersOnly', 'checkbox', array(
+            'required' => false,
+            'label'=>'Is for Involved Staff Only?'
+        ));
+
     }
 
     public function getName() {
