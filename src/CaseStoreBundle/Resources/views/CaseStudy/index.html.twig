@@ -15,7 +15,10 @@
     <h1>Case Study</h1>
 
     {%  for fieldDefinition in fieldDefinitions %}
-        <div class="caseStudyDataLabel">{{  fieldDefinition.title }}</div>
+        <div class="caseStudyDataLabel">
+            {{  fieldDefinition.title }}
+            {%  if fieldDefinition.isCaseStudyUsersOnly %}<div class="glyphicon glyphicon-eye-close" title="Only Staff Involved Can See This"></div>{%  endif %}
+        </div>
         {%  if fieldValues[fieldDefinition.publicId] is defined and fieldValues[fieldDefinition.publicId] %}
             {% if fieldDefinition.isTypeString %}
                 <div>{{ fieldValues[fieldDefinition.publicId].value  }}</div>
