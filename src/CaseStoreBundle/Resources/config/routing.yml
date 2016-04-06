@@ -20,6 +20,11 @@ case_store_project_map:
     path:     /project/{projectId}/map
     defaults: { _controller: CaseStoreBundle:Project:map }
 
+case_store_project_map_data_json:
+    path:     /project/{projectId}/mapData.json
+    defaults: { _controller: CaseStoreBundle:Project:mapDataJSON }
+
+
 case_store_project_my_case_studies:
     path:     /project/{projectId}/mycasestudies
     defaults: { _controller: CaseStoreBundle:Project:myCaseStudies }

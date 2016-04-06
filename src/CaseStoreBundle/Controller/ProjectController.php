@@ -6,6 +6,7 @@ use CaseStoreBundle\Entity\Project;
 use CaseStoreBundle\Form\Type\ProjectNewType;
 use CaseStoreBundle\Security\ProjectVoter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
@@ -57,12 +58,33 @@ class ProjectController extends Controller
 
         $doctrine = $this->getDoctrine()->getManager();
 
-        $locations =  $doctrine->getRepository('CaseStoreBundle:CaseStudyLocation')->getInProject($this->project);
-
         return $this->render('CaseStoreBundle:Project:map.html.twig', array(
             'project'=>$this->project,
-            'locations'=>$locations,
         ));
+    }
+
+    public function mapDataJSONAction($projectId)
+    {
+        // build
+        $this->build($projectId);
+
+        //data
+        $doctrine = $this->getDoctrine()->getManager();
+
+        $data = array();
+        foreach($doctrine->getRepository('CaseStoreBundle:CaseStudyLocation')->getInProject($this->project) as $location) {
+            $data[] = array(
+                'lat' => $location->getLat(),
+                'lng' => $location->getLng(),
+                'title' => $location->getCaseStudy()->getTitle(),
+                'url' => $this->generateUrl('case_store_case_study', array('projectId'=>$this->project->getPublicId(), 'caseStudyId'=>$location->getCaseStudy()->getPublicId())),
+            );
+        }
+
+        $response = new Response(json_encode(array('data'=>$data)));
+        $response->headers->set('Content-Type', 'application/json');
+        return $response;
+
     }
 
 
