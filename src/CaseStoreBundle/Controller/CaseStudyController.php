@@ -60,12 +60,12 @@ class CaseStudyController extends Controller
         //data
 
         $doctrine = $this->getDoctrine()->getManager();
+        $isUserHaveCaseStudy = $doctrine->getRepository('CaseStoreBundle:CaseStudyHasUser')->isCaseStudyHaveUser($this->caseStudy, $this->getUser());
         $users =  $doctrine->getRepository('CaseStoreBundle:User')->findByCaseStudy($this->caseStudy);
         $comments =  $doctrine->getRepository('CaseStoreBundle:CaseStudyComment')->findBy(array('caseStudy'=>$this->caseStudy));
-        $documents =  $doctrine->getRepository('CaseStoreBundle:CaseStudyDocument')->findBy(array('caseStudy'=>$this->caseStudy));
+        $documents =  $doctrine->getRepository('CaseStoreBundle:CaseStudyDocument')->getForCaseStudy($this->caseStudy, $isUserHaveCaseStudy);
         $locations =  $doctrine->getRepository('CaseStoreBundle:CaseStudyLocation')->findBy(array('caseStudy'=>$this->caseStudy,'removedAt'=>null));
         $outputs =  $doctrine->getRepository('CaseStoreBundle:Output')->findByCaseStudy($this->caseStudy);
-        $isUserHaveCaseStudy = $doctrine->getRepository('CaseStoreBundle:CaseStudyHasUser')->isCaseStudyHaveUser($this->caseStudy, $this->getUser());
         $caseStudyFieldDefinitions = $doctrine->getRepository('CaseStoreBundle:CaseStudyFieldDefinition')->getForProject($this->project, $isUserHaveCaseStudy);
 
         $fieldValues = array();

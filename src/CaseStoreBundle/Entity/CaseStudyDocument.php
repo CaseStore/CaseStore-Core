@@ -74,6 +74,13 @@ class CaseStudyDocument
      */
     private $addedAt;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="is_case_study_users_only", type="boolean", nullable=false, options={"default" = 0})
+     */
+    private $isCaseStudyUsersOnly = false;
+
 
     public function getAbsolutePath()
     {
@@ -298,6 +305,22 @@ class CaseStudyDocument
     public function setPublicId($publicId)
     {
         $this->publicId = $publicId;
+    }
+
+    /**
+     * @return string
+     */
+    public function getIsCaseStudyUsersOnly()
+    {
+        return $this->isCaseStudyUsersOnly;
+    }
+
+    /**
+     * @param string $isCaseStudyUsersOnly
+     */
+    public function setIsCaseStudyUsersOnly($isCaseStudyUsersOnly)
+    {
+        $this->isCaseStudyUsersOnly = $isCaseStudyUsersOnly;
     }
 
 

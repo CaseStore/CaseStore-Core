@@ -30,4 +30,16 @@ class CaseStudyDocumentRepository extends EntityRepository
         }
     }
 
+    public function getForCaseStudy(CaseStudy $caseStudy, $isUserHaveCaseStudy = false) {
+        return $this->getEntityManager()
+            ->createQuery(
+                ' SELECT d FROM CaseStoreBundle:CaseStudyDocument d'.
+                ' WHERE d.caseStudy = :caseStudy' .
+                ($isUserHaveCaseStudy ? '' : ' AND d.isCaseStudyUsersOnly = false')
+            )
+            ->setParameter('caseStudy', $caseStudy)
+            ->getResult();
+    }
+
 }
+

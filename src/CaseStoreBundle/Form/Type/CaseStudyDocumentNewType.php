@@ -28,6 +28,12 @@ class CaseStudyDocumentNewType extends AbstractType {
             'label'=>'Document'
         ));
 
+        $builder->add('isCaseStudyUsersOnly', 'checkbox', array(
+            'required' => false,
+            'label'=>'Is for Involved Staff Only?'
+        ));
+
+
     }
 
     public function getName() {
