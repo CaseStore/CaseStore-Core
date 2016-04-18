@@ -34,3 +34,12 @@
 
 {%  endblock %}
 
+
+
+{% block javascript %}
+    {% javascripts
+    '@CaseStoreBundle/Resources/public/js/newCaseStudyFieldOptionDefinitionSlug.js' %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}
+

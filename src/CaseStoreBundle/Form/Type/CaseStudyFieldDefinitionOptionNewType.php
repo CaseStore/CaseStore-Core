@@ -32,7 +32,7 @@ class CaseStudyFieldDefinitionOptionNewType extends AbstractType {
     }
 
     public function getName() {
-        return 'tree';
+        return 'casestudyfieldoption';
     }
 
     public function getDefaultOptions(array $options) {
