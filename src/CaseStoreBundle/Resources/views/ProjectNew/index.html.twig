@@ -28,3 +28,11 @@
 
 
 {%  endblock %}
+
+{% block javascript %}
+    {% javascripts
+    '@CaseStoreBundle/Resources/public/js/newProjectSlug.js' %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}
+
