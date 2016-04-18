@@ -40,7 +40,7 @@ class OutputFieldDefinitionNewType extends AbstractType {
     }
 
     public function getName() {
-        return 'tree';
+        return 'outputfield';
     }
 
     public function getDefaultOptions(array $options) {

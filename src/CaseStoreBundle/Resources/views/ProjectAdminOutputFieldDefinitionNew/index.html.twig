@@ -36,3 +36,12 @@
 
 {%  endblock %}
 
+
+
+{% block javascript %}
+    {% javascripts
+    '@CaseStoreBundle/Resources/public/js/newOutputFieldDefinitionSlug.js' %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}
+
