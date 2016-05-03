@@ -6,7 +6,10 @@ Run from root git folder:
 
 To Re-Run:
 
-(Run cleanup and then run above again. )
+    docker rm -f casestoretests
+    docker rmi casestoretests
+    docker build -f docker/container/tests/Dockerfile -t casestoretests .
+    docker run --name casestoretests --link casestoretestsmysql:mysql casestoretests
 
 And Clean Up:
 
