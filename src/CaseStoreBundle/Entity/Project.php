@@ -51,6 +51,14 @@ class Project
     private $createdAt;
 
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="is_system_default", type="boolean", nullable=false, options={"default" = 0})
+     */
+    private $isSystemDefault = false;
+
+
     public function getId()
     {
         return $this->id;
@@ -108,6 +116,24 @@ class Project
     {
         $this->createdAt = $createdAt;
     }
+
+    /**
+     * @return string
+     */
+    public function getIsSystemDefault()
+    {
+        return $this->isSystemDefault;
+    }
+
+    /**
+     * @param string $isSystemDefault
+     */
+    public function setIsSystemDefault($isSystemDefault)
+    {
+        $this->isSystemDefault = $isSystemDefault;
+    }
+
+
 
     /**
      * @ORM\PrePersist()

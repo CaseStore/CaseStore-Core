@@ -4,6 +4,9 @@ case_store_homepage:
     path:     /
     defaults: { _controller: CaseStoreBundle:Default:index }
 
+case_store_homepage_projects:
+    path:     /project
+    defaults: { _controller: CaseStoreBundle:Default:project }
 
 case_store_newproject:
     path:     /newproject
