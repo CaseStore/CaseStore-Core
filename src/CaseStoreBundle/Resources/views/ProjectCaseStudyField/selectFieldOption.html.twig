@@ -16,18 +16,29 @@
 
 
     {%  if  caseStudies %}
-        <ul>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Title</th>
+                <th>Description</th>
+                <th>&nbsp;</th>
+            </tr>
+            </thead>
+            <tbody>
             {%  for caseStudy in caseStudies %}
-                <li>
-                    <div>
+                <tr>
+                    <td>
                         <a href="{{ path('case_store_case_study', { 'projectId':project.publicId,'caseStudyId':caseStudy.publicId }) }}">{{  caseStudy.titleOrPlaceHolder }}</a>
-                    </div>
-                    <div>
+                    </td>
+                    <td>
                         {{  caseStudy.description | nl2br }}
-                    </div>
-                </li>
+                    </td>
+                    <td>
+                        <a href="{{ path('case_store_case_study', { 'projectId':project.publicId,'caseStudyId':caseStudy.publicId }) }}" class="btn btn-default">View</a>
+                    </td>
+                </tbody>
             {%  endfor %}
-        </ul>
+        </table>
     {% else %}
         <p>There are no case studies for Option {{  option.title }}</p>
     {% endif %}

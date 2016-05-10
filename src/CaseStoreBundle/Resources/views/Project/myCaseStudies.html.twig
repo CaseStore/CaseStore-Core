@@ -14,18 +14,30 @@
     </ol>
 
     {%  if  caseStudies %}
-        <ul>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Title</th>
+                <th>Description</th>
+                <th>&nbsp;</th>
+            </tr>
+            </thead>
+            <tbody>
             {%  for caseStudy in caseStudies %}
-                <li>
-                    <div>
-                        <a href="{{ path('case_store_case_study', { 'projectId':project.publicId,'caseStudyId':caseStudy.publicId }) }}">{{  caseStudy.titleOrPlaceHolder }}</a>
-                    </div>
-                    <div>
-                        {{  caseStudy.description | nl2br }}
-                    </div>
-                </li>
-            {%  endfor %}
-        </ul>
+            <tr>
+                <td>
+                    <a href="{{ path('case_store_case_study', { 'projectId':project.publicId,'caseStudyId':caseStudy.publicId }) }}">{{  caseStudy.titleOrPlaceHolder }}</a>
+                </td>
+                <td>
+                    {{  caseStudy.description | nl2br }}
+                </td>
+                <td>
+                    <a href="{{ path('case_store_case_study', { 'projectId':project.publicId,'caseStudyId':caseStudy.publicId }) }}" class="btn btn-default">View</a>
+                </td>
+                </td>
+                {%  endfor %}
+            </tbody>
+        </table>
     {% else %}
         <p>You have no Case Studies in Project {{  project.title }}</p>
     {% endif %}

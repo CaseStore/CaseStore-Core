@@ -13,17 +13,33 @@
         <li class="active">Case Studies</li>
     </ol>
 
-    <ul>
-        {%  for caseStudy in caseStudies %}
-            <li>
-                <div>
-                    <a href="{{ path('case_store_case_study', { 'projectId':project.publicId,'caseStudyId':caseStudy.publicId }) }}">{{  caseStudy.titleOrPlaceHolder }}</a>
-                </div>
-                <div>
-                    {{  caseStudy.description | nl2br }}
-                </div>
-            </li>
-        {%  endfor %}
-    </ul>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Description</th>
+                <th>&nbsp;</th>
+            </tr>
+        </thead>
+        <tbody>
+            {%  for caseStudy in caseStudies %}
+                <tr>
+                    <td>
+                        <a href="{{ path('case_store_case_study', { 'projectId':project.publicId,'caseStudyId':caseStudy.publicId }) }}">{{  caseStudy.titleOrPlaceHolder }}</a>
+                    </td>
+                    <td>
+                        {{  caseStudy.description | nl2br }}
+                    </td>
+                    <td>
+                        <a href="{{ path('case_store_case_study', { 'projectId':project.publicId,'caseStudyId':caseStudy.publicId }) }}" class="btn btn-default">View</a>
+                    </td>
+                </td>
+            {%  else %}
+                <tr>
+                    <td colspan="3">No Case Studies</td>
+                </tr>
+            {%  endfor %}
+        </tbody>
+    </table>
 
 {%  endblock %}
