@@ -19,6 +19,7 @@
 
 
 
+    <h2>Case Studies</h2>
 
     <ul class="list-group">
         {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
@@ -27,18 +28,30 @@
         <li class="list-group-item"><a href="{{  path('case_store_project_case_studies', { 'projectId':project.publicId }) }}" class="btn btn-default">Case Studies</a></li>
         {% for fieldDefinition in fieldDefinitions %}
             {%  if fieldDefinition.isTypeSelect %}
-                <li class="list-group-item"><a href="{{  path('case_store_project_case_study_select_field', { 'projectId':project.publicId,'fieldId':fieldDefinition.publicId }) }}" class="btn btn-default">Field {{  fieldDefinition.title }}</a></li>
+                <li class="list-group-item"><a href="{{  path('case_store_project_case_study_select_field', { 'projectId':project.publicId,'fieldId':fieldDefinition.publicId }) }}" class="btn btn-default">Browse by {{  fieldDefinition.title }}</a></li>
             {% endif %}
         {%  endfor %}
         <li class="list-group-item"><a href="{{  path('case_store_project_map', { 'projectId':project.publicId }) }}" class="btn btn-default">Map</a></li>
-        <li class="list-group-item"><a href="{{  path('case_store_project_outputs', { 'projectId':project.publicId }) }}" class="btn btn-default">Outputs</a></li>
         {% if newCaseStudyAllowed %}
             <li class="list-group-item"><a href="{{  path('case_store_new_case_study', { 'projectId':project.publicId }) }}" class="btn btn-warning">New Case Study</a></li>
         {%  endif %}
-        {%  if isAdminAccessAllowed %}
-            <li class="list-group-item"><a href="{{  path('case_store_project_admin', { 'projectId':project.publicId }) }}" class="btn btn-default">Project Admin</a></li>
-        {%  endif %}
     </ul>
+
+    <h2>Outputs</h2>
+
+    <ul class="list-group">
+        <li class="list-group-item"><a href="{{  path('case_store_project_outputs', { 'projectId':project.publicId }) }}" class="btn btn-default">Outputs</a></li>
+    </ul>
+
+    {%  if isAdminAccessAllowed %}
+
+        <h2>Admin</h2>
+
+        <ul class="list-group">
+            <li class="list-group-item"><a href="{{  path('case_store_project_admin', { 'projectId':project.publicId }) }}" class="btn btn-default">Project Admin</a></li>
+        </ul>
+
+    {%  endif %}
 
 {%  endblock %}
 
