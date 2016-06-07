@@ -3,6 +3,7 @@
 
 namespace CaseStoreBundle\Repository\QueryBuilder;
 
+use CaseStoreBundle\Entity\Output;
 use CaseStoreBundle\Entity\Project;
 use CaseStoreBundle\Entity\User;
 
@@ -43,6 +44,27 @@ class CaseStudyQueryBuilder {
         $this->userInProject = $userInProject;
     }
 
+    /** @var Output */
+    protected $output;
+
+    /**
+     * @return Output
+     */
+    public function getOutput()
+    {
+        return $this->output;
+    }
+
+    /**
+     * @param Output $output
+     */
+    public function setOutput($output)
+    {
+        $this->output = $output;
+    }
+
+
+
     public function getQuery() {
 
         $joins = array();
@@ -51,8 +73,14 @@ class CaseStudyQueryBuilder {
 
         if ($this->userInProject) {
             $joins[] = " JOIN cs.hasUsers cshu ";
-            $where[] = " cshu.user = :user AND cshu.removedAt IS NULL  ";
+            $where[] = " cshu.user = :user AND cshu.removedAt IS NULL ";
             $params['user'] = $this->userInProject;
+        }
+
+        if ($this->output) {
+            $joins[] = " JOIN cs.hasOutputs csho ";
+            $where[] = " csho.output = :output AND csho.removedAt IS NULL ";
+            $params['output'] = $this->output;
         }
 
         $query =  $s =  $this->em

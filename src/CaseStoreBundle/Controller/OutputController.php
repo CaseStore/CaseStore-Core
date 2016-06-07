@@ -62,7 +62,11 @@ class OutputController extends Controller
 
         $doctrine = $this->getDoctrine()->getManager();
         $outputFieldDefinitions = $doctrine->getRepository('CaseStoreBundle:OutputFieldDefinition')->getForProject($this->project);
-        $caseStudies =  $doctrine->getRepository('CaseStoreBundle:CaseStudy')->findByOutput($this->output);
+
+        $caseStudiesQueryBuilder = $doctrine->getRepository('CaseStoreBundle:CaseStudy')->getQueryBuilder($this->project);
+        $caseStudiesQueryBuilder->setOutput($this->output);
+        $caseStudies = $caseStudiesQueryBuilder->getQuery()->getResult();
+
         $documents =  $doctrine->getRepository('CaseStoreBundle:OutputDocument')->findBy(array('output'=>$this->output));
 
 

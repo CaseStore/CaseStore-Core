@@ -8,7 +8,9 @@ use CaseStoreBundle\Entity\CaseStudy;
 use CaseStoreBundle\Entity\CaseStudyFieldDefinition;
 use CaseStoreBundle\Entity\CaseStudyFieldValueString;
 use CaseStoreBundle\Entity\CaseStudyFieldValueText;
+use CaseStoreBundle\Entity\CaseStudyHasOutput;
 use CaseStoreBundle\Entity\CaseStudyHasUser;
+use CaseStoreBundle\Entity\Output;
 use CaseStoreBundle\Entity\Project;
 use CaseStoreBundle\Entity\User;
 use CaseStoreBundle\Tests\BaseTestWithDataBase;
@@ -117,6 +119,68 @@ class CaseStudyQueryBuilderTest extends BaseTestWithDataBase {
 
         $caseStudiesQueryBuilder = $repo->getQueryBuilder($project);
         $caseStudiesQueryBuilder->setUserInProject($userOther);
+        $caseStudies = $caseStudiesQueryBuilder->getQuery()->getResult();
+
+        $this->assertEquals(0, count($caseStudies));
+
+    }
+
+
+    public function testOutput() {
+
+
+        // Build Data
+        $user = new User();
+        $user->setEmail("test@example.com");
+        $user->setUsername("test");
+        $user->setPassword("ouhosu");
+        $this->em->persist($user);
+
+        $project = new Project();
+        $project->setTitle('Test');
+        $project->setPublicId('test');
+        $project->setOwner($user);
+        $this->em->persist($project);
+
+        $caseStudy = new CaseStudy();
+        $caseStudy->setPublicId('test');
+        $caseStudy->setProject($project);
+        $this->em->persist($caseStudy);
+
+        $output = new Output();
+        $output->setProject($project);
+        $output->setPublicId('output');
+        $this->em->persist($output);
+
+        $caseStudyHasOutput = new CaseStudyHasOutput();
+        $caseStudyHasOutput->setCaseStudy($caseStudy);
+        $caseStudyHasOutput->setOutput($output);
+        $caseStudyHasOutput->setAddedBy($user);
+        $this->em->persist($caseStudyHasOutput);
+
+        $outputOther = new Output();
+        $outputOther->setProject($project);
+        $outputOther->setPublicId('outputOther');
+        $this->em->persist($outputOther);
+
+        $this->em->flush();
+
+        // Test Find!
+
+        $repo = $this->em->getRepository('CaseStoreBundle:CaseStudy');
+
+        $caseStudiesQueryBuilder = $repo->getQueryBuilder($project);
+        $caseStudiesQueryBuilder->setOutput($output);
+        $caseStudies = $caseStudiesQueryBuilder->getQuery()->getResult();
+
+        $this->assertEquals(1, count($caseStudies));
+
+        // Test Not Found!
+
+        $repo = $this->em->getRepository('CaseStoreBundle:CaseStudy');
+
+        $caseStudiesQueryBuilder = $repo->getQueryBuilder($project);
+        $caseStudiesQueryBuilder->setOutput($outputOther);
         $caseStudies = $caseStudiesQueryBuilder->getQuery()->getResult();
 
         $this->assertEquals(0, count($caseStudies));
