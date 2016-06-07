@@ -6,7 +6,7 @@ use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="CaseStoreBundle\Entity\UserRepository")
+ * @ORM\Entity(repositoryClass="CaseStoreBundle\Repository\UserRepository")
  * @ORM\Table(name="fos_user")
  *  @license 3-clause BSD
  *  @link https://github.com/CaseStore/CaseStore-Core

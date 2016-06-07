@@ -1,7 +1,8 @@
 <?php
 
-namespace CaseStoreBundle\Entity;
+namespace CaseStoreBundle\Repository;
 
+use CaseStoreBundle\Entity\Project;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Mapping as ORM;
 

@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 
 /**
- * @ORM\Entity(repositoryClass="CaseStoreBundle\Entity\CaseStudyDocumentRepository")
+ * @ORM\Entity(repositoryClass="CaseStoreBundle\Repository\CaseStudyDocumentRepository")
  * @ORM\Table(name="case_study_document", uniqueConstraints={@ORM\UniqueConstraint(name="public_id", columns={"case_study_id", "public_id"})})
  * @ORM\HasLifecycleCallbacks
  *  @license 3-clause BSD

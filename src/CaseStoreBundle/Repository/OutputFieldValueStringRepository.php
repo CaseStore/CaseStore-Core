@@ -1,8 +1,10 @@
 <?php
 
-namespace CaseStoreBundle\Entity;
+namespace CaseStoreBundle\Repository;
 
 
+use CaseStoreBundle\Entity\Output;
+use CaseStoreBundle\Entity\OutputFieldDefinition;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -30,3 +32,4 @@ class OutputFieldValueStringRepository extends EntityRepository
     }
 
 }
+

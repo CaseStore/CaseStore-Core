@@ -7,7 +7,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Table(name="case_study_location", uniqueConstraints={@ORM\UniqueConstraint(name="public_id", columns={"case_study_id", "public_id"})})
- * @ORM\Entity(repositoryClass="CaseStoreBundle\Entity\CaseStudyLocationRepository" )
+ * @ORM\Entity(repositoryClass="CaseStoreBundle\Repository\CaseStudyLocationRepository" )
  * @ORM\HasLifecycleCallbacks
  *  @license 3-clause BSD
  *  @link https://github.com/CaseStore/CaseStore-Core

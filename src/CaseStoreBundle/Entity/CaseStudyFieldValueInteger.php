@@ -7,7 +7,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Table(name="case_study_field_value_integer")
- * @ORM\Entity(repositoryClass="CaseStoreBundle\Entity\CaseStudyFieldValueIntegerRepository")
+ * @ORM\Entity(repositoryClass="CaseStoreBundle\Repository\CaseStudyFieldValueIntegerRepository")
  * @ORM\HasLifecycleCallbacks
  *  @license 3-clause BSD
  *  @link https://github.com/CaseStore/CaseStore-Core
