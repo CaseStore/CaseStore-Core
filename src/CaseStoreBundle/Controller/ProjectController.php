@@ -114,7 +114,9 @@ class ProjectController extends Controller
 
         //data
         $doctrine = $this->getDoctrine()->getManager();
-        $caseStudies = $doctrine->getRepository('CaseStoreBundle:CaseStudy')->getForUserInProject($this->getUser(), $this->project);
+        $caseStudiesQueryBuilder = $doctrine->getRepository('CaseStoreBundle:CaseStudy')->getQueryBuilder($this->project);
+        $caseStudiesQueryBuilder->setUserInProject($this->getUser());
+        $caseStudies = $caseStudiesQueryBuilder->getQuery()->getResult();
 
         return $this->render('CaseStoreBundle:Project:myCaseStudies.html.twig', array(
             'project'=>$this->project,

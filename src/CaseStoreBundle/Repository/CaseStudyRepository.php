@@ -1,8 +1,14 @@
 <?php
 
-namespace CaseStoreBundle\Entity;
+namespace CaseStoreBundle\Repository;
 
 
+use CaseStoreBundle\Entity\CaseStudy;
+use CaseStoreBundle\Entity\CaseStudyFieldDefinitionOption;
+use CaseStoreBundle\Entity\Output;
+use CaseStoreBundle\Entity\Project;
+use CaseStoreBundle\Entity\User;
+use CaseStoreBundle\Repository\QueryBuilder\CaseStudyQueryBuilder;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -69,19 +75,6 @@ class CaseStudyRepository extends EntityRepository
 
     }
 
-    public function getForUserInProject(User $user, Project $project) {
-
-        return  $this->getEntityManager()
-            ->createQuery(
-                ' SELECT cs FROM CaseStoreBundle:CaseStudy cs '.
-                ' JOIN cs.hasUsers cshu '.
-                ' WHERE cs.project = :project AND cshu.user = :user AND cshu.removedAt IS NULL '
-            )
-            ->setParameter('project', $project)
-            ->setParameter('user', $user)
-            ->getResult();
-    }
-
     public function findBySelectOption(CaseStudyFieldDefinitionOption $caseStudyFieldDefinitionOption) {
 
         return  $this->getEntityManager()
@@ -104,6 +97,12 @@ class CaseStudyRepository extends EntityRepository
             )
             ->setParameter('output', $output)
             ->getResult();
+    }
+
+
+    public function getQueryBuilder(Project $project)
+    {
+        return new CaseStudyQueryBuilder($this->getEntityManager(), $project);
     }
 
 }
