@@ -20,6 +20,8 @@ abstract class BaseTestWithDataBase extends WebTestCase
      */
     protected $em;
 
+    protected $container;
+
     protected $application;
 
     /**
@@ -29,7 +31,9 @@ abstract class BaseTestWithDataBase extends WebTestCase
     {
         static::$kernel = static::createKernel();
         static::$kernel->boot();
-        $this->em = static::$kernel->getContainer()
+
+        $this->container = static::$kernel->getContainer();
+        $this->em = $this->container
             ->get('doctrine')
             ->getManager();
 
