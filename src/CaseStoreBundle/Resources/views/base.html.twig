@@ -34,18 +34,21 @@
 
             <ul class="nav navbar-nav">
                 <li><a href="{{ path('case_store_homepage_projects') }}">Projects</a></li>
+
+                {% block navigation %}
+                {% endblock %}
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
                 {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                     <li><a href="{{ path('case_store_you') }}">{{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }}</a></li>
                     <li><a href="{{ path('fos_user_security_logout') }}">
                         {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
                     </a></li>
                 {% else %}
-                    <li><a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a></li>
-                    <li><a href="{{ path('fos_user_registration_register') }}">{{ 'layout.register'|trans({}, 'FOSUserBundle') }}</a></li>
+                    <li class="pull-right"><a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a></li>
+                    <li class="pull-right"><a href="{{ path('fos_user_registration_register') }}">{{ 'layout.register'|trans({}, 'FOSUserBundle') }}</a></li>
                 {%  endif %}
-
-                {% block navigation %}
-                {% endblock %}
             </ul>
 
         </div><!--/.nav-collapse -->
