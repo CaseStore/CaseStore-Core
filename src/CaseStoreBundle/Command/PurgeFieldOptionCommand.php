@@ -74,7 +74,7 @@ class PurgeFieldOptionCommand extends ContainerAwareCommand
         ######################### Work!
         $doctrine->getEntityManager()->remove($caseStudyFieldDefinitionOption);
 
-        $caseStudyFieldValueSelectRepository = $doctrine->getRepository('CaseStoreBundle:CaseStudyFieldValueSelect');
+        $caseStudyFieldValueSelectRepository = $doctrine->getRepository('CaseStoreCaseStudyFieldTypeSelectBundle:CaseStudyFieldValueSelect');
         foreach($caseStudyFieldValueSelectRepository->findBy(array('option'=>$caseStudyFieldDefinitionOption)) as $value) {
             $doctrine->getEntityManager()->remove($value);
         }

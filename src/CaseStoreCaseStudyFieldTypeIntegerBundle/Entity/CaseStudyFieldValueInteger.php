@@ -1,18 +1,18 @@
 <?php
 
-namespace CaseStoreBundle\Entity;
+namespace CaseStoreCaseStudyFieldTypeIntegerBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Table(name="output_field_value_text")
- * @ORM\Entity(repositoryClass="CaseStoreBundle\Repository\OutputFieldValueTextRepository")
+ * @ORM\Table(name="case_study_field_value_integer")
+ * @ORM\Entity(repositoryClass="CaseStoreCaseStudyFieldTypeIntegerBundle\Repository\CaseStudyFieldValueIntegerRepository")
  * @ORM\HasLifecycleCallbacks
  *  @license 3-clause BSD
  *  @link https://github.com/CaseStore/CaseStore-Core
  */
-class OutputFieldValueText
+class CaseStudyFieldValueInteger
 {
 
     /**
@@ -25,21 +25,21 @@ class OutputFieldValueText
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="CaseStoreBundle\Entity\Output")
-     * @ORM\JoinColumn(name="output_id", referencedColumnName="id", nullable=false)
+     * @ORM\ManyToOne(targetEntity="CaseStoreBundle\Entity\CaseStudy")
+     * @ORM\JoinColumn(name="case_study_id", referencedColumnName="id", nullable=false)
      */
-    private $output;
+    private $caseStudy;
 
     /**
-     * @ORM\ManyToOne(targetEntity="CaseStoreBundle\Entity\OutputFieldDefinition")
-     * @ORM\JoinColumn(name="output_field_definition_id", referencedColumnName="id", nullable=false)
+     * @ORM\ManyToOne(targetEntity="CaseStoreBundle\Entity\CaseStudyFieldDefinition")
+     * @ORM\JoinColumn(name="case_study_field_definition_id", referencedColumnName="id", nullable=false)
      */
     private $fieldDefinition;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="value", type="text", nullable=true)
+     * @ORM\Column(name="value", type="integer", nullable=true)
      */
     private $value;
 
@@ -73,17 +73,17 @@ class OutputFieldValueText
     /**
      * @return mixed
      */
-    public function getOutput()
+    public function getCaseStudy()
     {
-        return $this->output;
+        return $this->caseStudy;
     }
 
     /**
-     * @param mixed $output
+     * @param mixed $caseStudy
      */
-    public function setOutput($output)
+    public function setCaseStudy($caseStudy)
     {
-        $this->output = $output;
+        $this->caseStudy = $caseStudy;
     }
 
     /**

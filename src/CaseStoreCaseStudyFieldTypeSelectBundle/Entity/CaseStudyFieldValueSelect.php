@@ -1,18 +1,18 @@
 <?php
 
-namespace CaseStoreBundle\Entity;
+namespace CaseStoreCaseStudyFieldTypeSelectBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Table(name="case_study_field_value_string")
- * @ORM\Entity(repositoryClass="CaseStoreBundle\Repository\CaseStudyFieldValueStringRepository")
+ * @ORM\Table(name="case_study_field_value_select")
+ * @ORM\Entity(repositoryClass="CaseStoreCaseStudyFieldTypeSelectBundle\Repository\CaseStudyFieldValueSelectRepository")
  * @ORM\HasLifecycleCallbacks
  *  @license 3-clause BSD
  *  @link https://github.com/CaseStore/CaseStore-Core
  */
-class CaseStudyFieldValueString
+class CaseStudyFieldValueSelect
 {
 
     /**
@@ -25,7 +25,7 @@ class CaseStudyFieldValueString
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="CaseStoreBundle\Entity\CaseStudy")
+     * @ORM\ManyToOne(targetEntity="CaseStoreBundle\Entity\CaseStudy", inversedBy="fieldValueSelect")
      * @ORM\JoinColumn(name="case_study_id", referencedColumnName="id", nullable=false)
      */
     private $caseStudy;
@@ -37,11 +37,10 @@ class CaseStudyFieldValueString
     private $fieldDefinition;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="value", type="string", length=250, nullable=true)
+     * @ORM\ManyToOne(targetEntity="CaseStoreBundle\Entity\CaseStudyFieldDefinitionOption")
+     * @ORM\JoinColumn(name="case_study_field_definition_option_id", referencedColumnName="id", nullable=true)
      */
-    private $value;
+    private $option;
 
     /**
      * @ORM\ManyToOne(targetEntity="CaseStoreBundle\Entity\User")
@@ -53,6 +52,17 @@ class CaseStudyFieldValueString
      * @ORM\Column(name="added_at", type="datetime", nullable=false)
      */
     private $addedAt;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="CaseStoreBundle\Entity\User")
+     * @ORM\JoinColumn(name="removed_by_id", referencedColumnName="id", nullable=true)
+     */
+    private $removedBy;
+
+    /**
+     * @ORM\Column(name="removed_at", type="datetime", nullable=true)
+     */
+    private $removedAt;
 
     /**
      * @return int
@@ -103,19 +113,19 @@ class CaseStudyFieldValueString
     }
 
     /**
-     * @return string
+     * @return mixed
      */
-    public function getValue()
+    public function getOption()
     {
-        return $this->value;
+        return $this->option;
     }
 
     /**
-     * @param string $value
+     * @param mixed $option
      */
-    public function setValue($value)
+    public function setOption($option)
     {
-        $this->value = $value;
+        $this->option = $option;
     }
 
     /**
@@ -151,12 +161,44 @@ class CaseStudyFieldValueString
     }
 
 
-
+    
     /**
      * @ORM\PrePersist()
      */
     public function beforeFirstSave() {
         $this->addedAt = new \DateTime("", new \DateTimeZone("UTC"));
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRemovedBy()
+    {
+        return $this->removedBy;
+    }
+
+    /**
+     * @param mixed $removedBy
+     */
+    public function setRemovedBy($removedBy)
+    {
+        $this->removedBy = $removedBy;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRemovedAt()
+    {
+        return $this->removedAt;
+    }
+
+    /**
+     * @param mixed $removedAt
+     */
+    public function setRemovedAt($removedAt)
+    {
+        $this->removedAt = $removedAt;
     }
 
 

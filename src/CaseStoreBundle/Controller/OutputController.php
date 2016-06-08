@@ -5,7 +5,7 @@ namespace CaseStoreBundle\Controller;
 use CaseStoreBundle\Entity\CaseStudy;
 use CaseStoreBundle\Entity\CaseStudyComment;
 use CaseStoreBundle\Entity\CaseStudyDocument;
-use CaseStoreBundle\Entity\CaseStudyFieldValueString;
+use CaseStoreCaseStudyFieldTypeStringBundle\Entity\CaseStudyFieldValueString;
 use CaseStoreBundle\Entity\CaseStudyHasLocation;
 use CaseStoreBundle\Entity\CaseStudyLocation;
 use CaseStoreBundle\Entity\Output;
@@ -76,12 +76,12 @@ class OutputController extends Controller
             if ($outputFieldDefinition->isTypeString()) {
                 $fieldValues[$outputFieldDefinition->getPublicId()] =
                     $doctrine->
-                    getRepository('CaseStoreBundle:OutputFieldValueString')->
+                    getRepository('CaseStoreOutputFieldTypeStringBundle:OutputFieldValueString')->
                     getLatestValueFor($outputFieldDefinition, $this->output);
             } else if ($outputFieldDefinition->isTypeText()) {
                 $fieldValues[$outputFieldDefinition->getPublicId()] =
                     $doctrine->
-                    getRepository('CaseStoreBundle:OutputFieldValueText')->
+                    getRepository('CaseStoreOutputFieldTypeTextBundle:OutputFieldValueText')->
                     getLatestValueFor($outputFieldDefinition, $this->output);
             }
 

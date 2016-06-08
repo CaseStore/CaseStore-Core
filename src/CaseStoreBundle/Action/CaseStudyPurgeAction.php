@@ -29,10 +29,10 @@ class CaseStudyPurgeAction
 
         $doctrine->getEntityManager()->remove($caseStudy);
 
-        foreach(array('CaseStoreBundle:CaseStudyFieldValueSelect',
-                    'CaseStoreBundle:CaseStudyFieldValueInteger',
-                    'CaseStoreBundle:CaseStudyFieldValueString',
-                    'CaseStoreBundle:CaseStudyFieldValueText',
+        foreach(array('CaseStoreCaseStudyFieldTypeSelectBundle:CaseStudyFieldValueSelect',
+                    'CaseStoreCaseStudyFieldTypeIntegerBundle:CaseStudyFieldValueInteger',
+                    'CaseStoreCaseStudyFieldTypeStringBundle:CaseStudyFieldValueString',
+                    'CaseStoreCaseStudyFieldTypeTextBundle:CaseStudyFieldValueText',
                     'CaseStoreBundle:CaseStudyHasUser',
                     'CaseStoreBundle:CaseStudyHasOutput',
                     'CaseStoreBundle:CaseStudyLocation') as $repoString) {

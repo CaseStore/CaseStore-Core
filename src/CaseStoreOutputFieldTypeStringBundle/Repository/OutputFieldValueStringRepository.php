@@ -1,6 +1,6 @@
 <?php
 
-namespace CaseStoreBundle\Repository;
+namespace CaseStoreOutputFieldTypeStringBundle\Repository;
 
 
 use CaseStoreBundle\Entity\Output;
@@ -19,7 +19,7 @@ class OutputFieldValueStringRepository extends EntityRepository
 
         return $this->getEntityManager()
             ->createQuery(
-                ' SELECT fv FROM CaseStoreBundle:OutputFieldValueString fv'.
+                ' SELECT fv FROM CaseStoreOutputFieldTypeStringBundle:OutputFieldValueString fv'.
                 ' WHERE    fv.output = :output AND fv.fieldDefinition = :fieldDefinition '.
                 ' ORDER BY fv.addedAt DESC '.
                 ' '

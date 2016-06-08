@@ -1,13 +1,13 @@
 <?php
 
-namespace CaseStoreBundle\Entity;
+namespace CaseStoreOutputFieldTypeStringBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Table(name="output_field_value_string")
- * @ORM\Entity(repositoryClass="CaseStoreBundle\Repository\OutputFieldValueStringRepository")
+ * @ORM\Entity(repositoryClass="CaseStoreOutputFieldTypeStringBundle\Repository\OutputFieldValueStringRepository")
  * @ORM\HasLifecycleCallbacks
  *  @license 3-clause BSD
  *  @link https://github.com/CaseStore/CaseStore-Core

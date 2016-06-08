@@ -4,9 +4,9 @@ namespace CaseStoreBundle\Controller;
 
 use CaseStoreBundle\Entity\CaseStudyHasOutput;
 use CaseStoreBundle\Entity\Output;
-use CaseStoreBundle\Entity\OutputFieldValueString;
-use CaseStoreBundle\Entity\OutputFieldValueText;
 use CaseStoreBundle\Form\Type\OutputNewType;
+use CaseStoreOutputFieldTypeStringBundle\Entity\OutputFieldValueString;
+use CaseStoreOutputFieldTypeTextBundle\Entity\OutputFieldValueText;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 

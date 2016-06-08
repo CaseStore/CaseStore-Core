@@ -4,8 +4,8 @@ namespace CaseStoreBundle\Controller;
 
 
 use CaseStoreBundle\Entity\OutputDocument;
-use CaseStoreBundle\Entity\OutputFieldValueString;
-use CaseStoreBundle\Entity\OutputFieldValueText;
+use CaseStoreOutputFieldTypeStringBundle\Entity\OutputFieldValueString;
+use CaseStoreOutputFieldTypeTextBundle\Entity\OutputFieldValueText;
 use CaseStoreBundle\Form\Type\OutputDocumentNewType;
 use CaseStoreBundle\Form\Type\OutputFieldValueStringEditType;
 use CaseStoreBundle\Form\Type\OutputFieldValueTextEditType;
@@ -41,7 +41,7 @@ class OutputEditController extends OutputController
             $value->setOutput($this->output);
             $value->setAddedBy($this->getUser());
             $oldValue = $doctrine->
-                getRepository('CaseStoreBundle:OutputFieldValueString')->
+                getRepository('CaseStoreOutputFieldTypeStringBundle:OutputFieldValueString')->
                 getLatestValueFor($fieldDefinition, $this->output);
             $form = $this->createForm(new OutputFieldValueStringEditType($fieldDefinition, $oldValue), $value);
             if ($request->getMethod() == 'POST') {
@@ -62,7 +62,7 @@ class OutputEditController extends OutputController
             $value->setOutput($this->output);
             $value->setAddedBy($this->getUser());
             $oldValue = $doctrine->
-                getRepository('CaseStoreBundle:OutputFieldValueText')->
+                getRepository('CaseStoreOutputFieldTypeTextBundle:OutputFieldValueText')->
                 getLatestValueFor($fieldDefinition, $this->output);
             $form = $this->createForm(new OutputFieldValueTextEditType($fieldDefinition, $oldValue), $value);
             if ($request->getMethod() == 'POST') {

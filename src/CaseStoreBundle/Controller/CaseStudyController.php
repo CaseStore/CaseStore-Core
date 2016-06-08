@@ -4,14 +4,9 @@ namespace CaseStoreBundle\Controller;
 
 use CaseStoreBundle\Entity\CaseStudy;
 use CaseStoreBundle\Entity\CaseStudyComment;
-use CaseStoreBundle\Entity\CaseStudyDocument;
-use CaseStoreBundle\Entity\CaseStudyFieldValueString;
 use CaseStoreBundle\Entity\CaseStudyHasLocation;
-use CaseStoreBundle\Entity\CaseStudyLocation;
 use CaseStoreBundle\Entity\Project;
 use CaseStoreBundle\Form\Type\CaseStudyCommentNewType;
-use CaseStoreBundle\Form\Type\CaseStudyDocumentNewType;
-use CaseStoreBundle\Form\Type\ProjectNewType;
 use CaseStoreBundle\Security\CaseStudyVoter;
 use CaseStoreBundle\Security\ProjectVoter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -74,22 +69,22 @@ class CaseStudyController extends Controller
             if ($caseStudyFieldDefinition->isTypeString()) {
                 $fieldValues[$caseStudyFieldDefinition->getPublicId()] =
                     $doctrine->
-                    getRepository('CaseStoreBundle:CaseStudyFieldValueString')->
+                    getRepository('CaseStoreCaseStudyFieldTypeStringBundle:CaseStudyFieldValueString')->
                     getLatestValueFor($caseStudyFieldDefinition, $this->caseStudy);
             } else if ($caseStudyFieldDefinition->isTypeText()) {
                 $fieldValues[$caseStudyFieldDefinition->getPublicId()] =
                     $doctrine->
-                    getRepository('CaseStoreBundle:CaseStudyFieldValueText')->
+                    getRepository('CaseStoreCaseStudyFieldTypeTextBundle:CaseStudyFieldValueText')->
                     getLatestValueFor($caseStudyFieldDefinition, $this->caseStudy);
             } else if ($caseStudyFieldDefinition->isTypeSelect()) {
                 $fieldValues[$caseStudyFieldDefinition->getPublicId()] =
                     $doctrine->
-                    getRepository('CaseStoreBundle:CaseStudyFieldValueSelect')->
+                    getRepository('CaseStoreCaseStudyFieldTypeSelectBundle:CaseStudyFieldValueSelect')->
                     getLatestValuesFor($caseStudyFieldDefinition, $this->caseStudy);
             } else if ($caseStudyFieldDefinition->isTypeInteger()) {
                 $fieldValues[$caseStudyFieldDefinition->getPublicId()] =
                     $doctrine->
-                    getRepository('CaseStoreBundle:CaseStudyFieldValueInteger')->
+                    getRepository('CaseStoreCaseStudyFieldTypeIntegerBundle:CaseStudyFieldValueInteger')->
                     getLatestValueFor($caseStudyFieldDefinition, $this->caseStudy);
             }
 

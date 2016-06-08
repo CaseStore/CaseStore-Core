@@ -67,7 +67,7 @@ class CaseStudy
 
 
     /**
-     * @ORM\OneToMany(targetEntity="CaseStoreBundle\Entity\CaseStudyFieldValueSelect", mappedBy="caseStudy")
+     * @ORM\OneToMany(targetEntity="CaseStoreCaseStudyFieldTypeSelectBundle\Entity\CaseStudyFieldValueSelect", mappedBy="caseStudy")
      */
     private $fieldValueSelect;
 

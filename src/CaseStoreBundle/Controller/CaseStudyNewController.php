@@ -3,8 +3,8 @@
 namespace CaseStoreBundle\Controller;
 
 use CaseStoreBundle\Entity\CaseStudy;
-use CaseStoreBundle\Entity\CaseStudyFieldValueString;
-use CaseStoreBundle\Entity\CaseStudyFieldValueText;
+use CaseStoreCaseStudyFieldTypeStringBundle\Entity\CaseStudyFieldValueString;
+use CaseStoreCaseStudyFieldTypeTextBundle\Entity\CaseStudyFieldValueText;
 use CaseStoreBundle\Entity\CaseStudyHasUser;
 use CaseStoreBundle\Entity\Project;
 use CaseStoreBundle\Form\Type\CaseStudyNewType;

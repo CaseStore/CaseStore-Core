@@ -1,3 +1,27 @@
+case_store_output_field_type_string:
+    resource: "@CaseStoreOutputFieldTypeStringBundle/Resources/config/routing.yml"
+    prefix:   /
+
+case_store_output_field_type_text:
+    resource: "@CaseStoreOutputFieldTypeTextBundle/Resources/config/routing.yml"
+    prefix:   /
+
+case_store_case_study_field_type_text:
+    resource: "@CaseStoreCaseStudyFieldTypeTextBundle/Resources/config/routing.yml"
+    prefix:   /
+
+case_store_case_study_field_type_string:
+    resource: "@CaseStoreCaseStudyFieldTypeStringBundle/Resources/config/routing.yml"
+    prefix:   /
+
+case_store_case_study_field_type_select:
+    resource: "@CaseStoreCaseStudyFieldTypeSelectBundle/Resources/config/routing.yml"
+    prefix:   /
+
+case_store_case_study_field_type_integer:
+    resource: "@CaseStoreCaseStudyFieldTypeIntegerBundle/Resources/config/routing.yml"
+    prefix:   /
+
 case_store:
     resource: "@CaseStoreBundle/Resources/config/routing.yml"
     prefix:   /

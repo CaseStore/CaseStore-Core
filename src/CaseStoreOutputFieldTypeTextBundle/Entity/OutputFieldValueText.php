@@ -1,18 +1,18 @@
 <?php
 
-namespace CaseStoreBundle\Entity;
+namespace CaseStoreOutputFieldTypeTextBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Table(name="case_study_field_value_select")
- * @ORM\Entity(repositoryClass="CaseStoreBundle\Repository\CaseStudyFieldValueSelectRepository")
+ * @ORM\Table(name="output_field_value_text")
+ * @ORM\Entity(repositoryClass="CaseStoreOutputFieldTypeTextBundle\Repository\OutputFieldValueTextRepository")
  * @ORM\HasLifecycleCallbacks
  *  @license 3-clause BSD
  *  @link https://github.com/CaseStore/CaseStore-Core
  */
-class CaseStudyFieldValueSelect
+class OutputFieldValueText
 {
 
     /**
@@ -25,22 +25,23 @@ class CaseStudyFieldValueSelect
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="CaseStoreBundle\Entity\CaseStudy", inversedBy="fieldValueSelect")
-     * @ORM\JoinColumn(name="case_study_id", referencedColumnName="id", nullable=false)
+     * @ORM\ManyToOne(targetEntity="CaseStoreBundle\Entity\Output")
+     * @ORM\JoinColumn(name="output_id", referencedColumnName="id", nullable=false)
      */
-    private $caseStudy;
+    private $output;
 
     /**
-     * @ORM\ManyToOne(targetEntity="CaseStoreBundle\Entity\CaseStudyFieldDefinition")
-     * @ORM\JoinColumn(name="case_study_field_definition_id", referencedColumnName="id", nullable=false)
+     * @ORM\ManyToOne(targetEntity="CaseStoreBundle\Entity\OutputFieldDefinition")
+     * @ORM\JoinColumn(name="output_field_definition_id", referencedColumnName="id", nullable=false)
      */
     private $fieldDefinition;
 
     /**
-     * @ORM\ManyToOne(targetEntity="CaseStoreBundle\Entity\CaseStudyFieldDefinitionOption")
-     * @ORM\JoinColumn(name="case_study_field_definition_option_id", referencedColumnName="id", nullable=true)
+     * @var string
+     *
+     * @ORM\Column(name="value", type="text", nullable=true)
      */
-    private $option;
+    private $value;
 
     /**
      * @ORM\ManyToOne(targetEntity="CaseStoreBundle\Entity\User")
@@ -52,17 +53,6 @@ class CaseStudyFieldValueSelect
      * @ORM\Column(name="added_at", type="datetime", nullable=false)
      */
     private $addedAt;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="CaseStoreBundle\Entity\User")
-     * @ORM\JoinColumn(name="removed_by_id", referencedColumnName="id", nullable=true)
-     */
-    private $removedBy;
-
-    /**
-     * @ORM\Column(name="removed_at", type="datetime", nullable=true)
-     */
-    private $removedAt;
 
     /**
      * @return int
@@ -83,17 +73,17 @@ class CaseStudyFieldValueSelect
     /**
      * @return mixed
      */
-    public function getCaseStudy()
+    public function getOutput()
     {
-        return $this->caseStudy;
+        return $this->output;
     }
 
     /**
-     * @param mixed $caseStudy
+     * @param mixed $output
      */
-    public function setCaseStudy($caseStudy)
+    public function setOutput($output)
     {
-        $this->caseStudy = $caseStudy;
+        $this->output = $output;
     }
 
     /**
@@ -113,19 +103,19 @@ class CaseStudyFieldValueSelect
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getOption()
+    public function getValue()
     {
-        return $this->option;
+        return $this->value;
     }
 
     /**
-     * @param mixed $option
+     * @param string $value
      */
-    public function setOption($option)
+    public function setValue($value)
     {
-        $this->option = $option;
+        $this->value = $value;
     }
 
     /**
@@ -167,38 +157,6 @@ class CaseStudyFieldValueSelect
      */
     public function beforeFirstSave() {
         $this->addedAt = new \DateTime("", new \DateTimeZone("UTC"));
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getRemovedBy()
-    {
-        return $this->removedBy;
-    }
-
-    /**
-     * @param mixed $removedBy
-     */
-    public function setRemovedBy($removedBy)
-    {
-        $this->removedBy = $removedBy;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getRemovedAt()
-    {
-        return $this->removedAt;
-    }
-
-    /**
-     * @param mixed $removedAt
-     */
-    public function setRemovedAt($removedAt)
-    {
-        $this->removedAt = $removedAt;
     }
 
 

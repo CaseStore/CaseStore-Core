@@ -5,10 +5,10 @@ namespace CaseStoreBundle\Controller;
 use CaseStoreBundle\Entity\CaseStudy;
 use CaseStoreBundle\Entity\CaseStudyComment;
 use CaseStoreBundle\Entity\CaseStudyDocument;
-use CaseStoreBundle\Entity\CaseStudyFieldValueInteger;
-use CaseStoreBundle\Entity\CaseStudyFieldValueSelect;
-use CaseStoreBundle\Entity\CaseStudyFieldValueString;
-use CaseStoreBundle\Entity\CaseStudyFieldValueText;
+use CaseStoreCaseStudyFieldTypeIntegerBundle\Entity\CaseStudyFieldValueInteger;
+use CaseStoreCaseStudyFieldTypeSelectBundle\Entity\CaseStudyFieldValueSelect;
+use CaseStoreCaseStudyFieldTypeStringBundle\Entity\CaseStudyFieldValueString;
+use CaseStoreCaseStudyFieldTypeTextBundle\Entity\CaseStudyFieldValueText;
 use CaseStoreBundle\Entity\CaseStudyHasLocation;
 use CaseStoreBundle\Entity\CaseStudyLocation;
 use CaseStoreBundle\Entity\Project;
@@ -172,14 +172,13 @@ class CaseStudyEditController extends CaseStudyController
         }
 
         //data
-        // TODO form must show current value!
         if ($fieldDefinition->isTypeString()) {
             $value = new CaseStudyFieldValueString();
             $value->setFieldDefinition($fieldDefinition);
             $value->setCaseStudy($this->caseStudy);
             $value->setAddedBy($this->getUser());
             $oldValue = $doctrine->
-                getRepository('CaseStoreBundle:CaseStudyFieldValueString')->
+                getRepository('CaseStoreCaseStudyFieldTypeStringBundle:CaseStudyFieldValueString')->
                 getLatestValueFor($fieldDefinition, $this->caseStudy);
             $form = $this->createForm(new CaseStudyFieldValueStringEditType($fieldDefinition, $oldValue), $value);
             if ($request->getMethod() == 'POST') {
@@ -200,7 +199,7 @@ class CaseStudyEditController extends CaseStudyController
             $value->setCaseStudy($this->caseStudy);
             $value->setAddedBy($this->getUser());
             $oldValue = $doctrine->
-                getRepository('CaseStoreBundle:CaseStudyFieldValueText')->
+                getRepository('CaseStoreCaseStudyFieldTypeTextBundle:CaseStudyFieldValueText')->
                 getLatestValueFor($fieldDefinition, $this->caseStudy);
             $form = $this->createForm(new CaseStudyFieldValueTextEditType($fieldDefinition, $oldValue), $value);
             if ($request->getMethod() == 'POST') {
@@ -221,7 +220,7 @@ class CaseStudyEditController extends CaseStudyController
             $value->setCaseStudy($this->caseStudy);
             $value->setAddedBy($this->getUser());
             $oldValue = $doctrine->
-                getRepository('CaseStoreBundle:CaseStudyFieldValueInteger')->
+                getRepository('CaseStoreCaseStudyFieldTypeIntegerBundle:CaseStudyFieldValueInteger')->
                 getLatestValueFor($fieldDefinition, $this->caseStudy);
             $form = $this->createForm(new CaseStudyFieldValueIntegerEditType($fieldDefinition, $oldValue), $value);
             if ($request->getMethod() == 'POST') {
@@ -240,7 +239,7 @@ class CaseStudyEditController extends CaseStudyController
             $caseStudyFieldDefinitionOptionRepo = $doctrine->getRepository('CaseStoreBundle:CaseStudyFieldDefinitionOption');
             $choices = $caseStudyFieldDefinitionOptionRepo->findBy(array('fieldDefinition'=>$fieldDefinition));
             $oldValues = $doctrine->
-                getRepository('CaseStoreBundle:CaseStudyFieldValueSelect')->
+                getRepository('CaseStoreCaseStudyFieldTypeSelectBundle:CaseStudyFieldValueSelect')->
                 getLatestValuesFor($fieldDefinition, $this->caseStudy);
             $form = $this->createForm(new CaseStudyFieldValueSelectEditType($fieldDefinition, $choices, $oldValues));
             if ($request->getMethod() == 'POST') {
@@ -249,11 +248,11 @@ class CaseStudyEditController extends CaseStudyController
                     foreach($choices as $choice) {
                         if (in_array($choice->getPublicId(), $form->get('value')->getData())) {
                             $doctrine->
-                                getRepository('CaseStoreBundle:CaseStudyFieldValueSelect')->
+                                getRepository('CaseStoreCaseStudyFieldTypeSelectBundle:CaseStudyFieldValueSelect')->
                                 addOptionToCaseStudyField($choice, $this->caseStudy, $this->getUser());
                         } else {
                             $doctrine->
-                                getRepository('CaseStoreBundle:CaseStudyFieldValueSelect')->
+                                getRepository('CaseStoreCaseStudyFieldTypeSelectBundle:CaseStudyFieldValueSelect')->
                                 removeOptionFromCaseStudyField($choice, $this->caseStudy, $this->getUser());
                         }
                     }

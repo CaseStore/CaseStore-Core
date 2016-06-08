@@ -1,10 +1,12 @@
 <?php
 
-namespace CaseStoreBundle\Repository;
+namespace CaseStoreCaseStudyFieldTypeSelectBundle\Repository;
 
 use CaseStoreBundle\Entity\CaseStudy;
 use CaseStoreBundle\Entity\CaseStudyFieldDefinition;
+use CaseStoreBundle\Entity\CaseStudyFieldDefinitionOption;
 use CaseStoreBundle\Entity\User;
+use CaseStoreCaseStudyFieldTypeSelectBundle\Entity\CaseStudyFieldValueSelect;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -21,7 +23,7 @@ class CaseStudyFieldValueSelectRepository extends EntityRepository
 
         return $this->getEntityManager()
             ->createQuery(
-                ' SELECT fv FROM CaseStoreBundle:CaseStudyFieldValueSelect fv'.
+                ' SELECT fv FROM CaseStoreCaseStudyFieldTypeSelectBundle:CaseStudyFieldValueSelect fv'.
                 ' WHERE    fv.caseStudy = :caseStudy AND fv.fieldDefinition = :fieldDefinition AND fv.removedAt IS NULL  '.
                 ' ORDER BY fv.addedAt DESC '.
                 ' '
@@ -36,7 +38,7 @@ class CaseStudyFieldValueSelectRepository extends EntityRepository
 
         $existingValues = $this->getEntityManager()
             ->createQuery(
-                ' SELECT fv FROM CaseStoreBundle:CaseStudyFieldValueSelect fv'.
+                ' SELECT fv FROM CaseStoreCaseStudyFieldTypeSelectBundle:CaseStudyFieldValueSelect fv'.
                 ' WHERE    fv.caseStudy = :caseStudy AND fv.option = :option AND fv.removedAt IS NULL  '
             )
             ->setParameter('caseStudy', $caseStudy)
@@ -60,7 +62,7 @@ class CaseStudyFieldValueSelectRepository extends EntityRepository
 
         $existingValues = $this->getEntityManager()
             ->createQuery(
-                ' SELECT fv FROM CaseStoreBundle:CaseStudyFieldValueSelect fv'.
+                ' SELECT fv FROM CaseStoreCaseStudyFieldTypeSelectBundle:CaseStudyFieldValueSelect fv'.
                 ' WHERE    fv.caseStudy = :caseStudy AND fv.option = :option AND fv.removedAt IS NULL  '
             )
             ->setParameter('caseStudy', $caseStudy)

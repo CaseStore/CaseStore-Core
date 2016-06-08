@@ -54,7 +54,7 @@ class CaseStudyRepository extends EntityRepository
                 $titleFound = true;
 
                 $value = $this->getEntityManager()->
-                    getRepository('CaseStoreBundle:CaseStudyFieldValueString')->
+                    getRepository('CaseStoreCaseStudyFieldTypeStringBundle:CaseStudyFieldValueString')->
                     getLatestValueFor($caseStudyFieldDefinition, $caseStudy);
                 $caseStudy->setTitle($value ? $value->getValue() : null);
 
@@ -63,7 +63,7 @@ class CaseStudyRepository extends EntityRepository
                 $descriptionFound = true;
 
                 $value = $this->getEntityManager()->
-                    getRepository('CaseStoreBundle:CaseStudyFieldValueText')->
+                    getRepository('CaseStoreCaseStudyFieldTypeTextBundle:CaseStudyFieldValueText')->
                     getLatestValueFor($caseStudyFieldDefinition, $caseStudy);
                 $caseStudy->setDescription($value ? $value->getValue() : null);
 

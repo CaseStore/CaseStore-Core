@@ -1,25 +1,25 @@
 <?php
 
-namespace CaseStoreBundle\Repository;
+namespace CaseStoreCaseStudyFieldTypeStringBundle\Repository;
+
 
 use CaseStoreBundle\Entity\CaseStudy;
 use CaseStoreBundle\Entity\CaseStudyFieldDefinition;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-
 /**
  *  @license 3-clause BSD
  *  @link https://github.com/CaseStore/CaseStore-Core
  */
-class CaseStudyFieldValueTextRepository extends EntityRepository
+class CaseStudyFieldValueStringRepository extends EntityRepository
 {
 
     public function getLatestValueFor(CaseStudyFieldDefinition $caseStudyFieldDefinition, CaseStudy $caseStudy) {
 
         return $this->getEntityManager()
             ->createQuery(
-                ' SELECT fv FROM CaseStoreBundle:CaseStudyFieldValueText fv'.
+                ' SELECT fv FROM CaseStoreCaseStudyFieldTypeStringBundle:CaseStudyFieldValueString fv'.
                 ' WHERE    fv.caseStudy = :caseStudy AND fv.fieldDefinition = :fieldDefinition '.
                 ' ORDER BY fv.addedAt DESC '.
                 ' '
@@ -30,7 +30,5 @@ class CaseStudyFieldValueTextRepository extends EntityRepository
             ->getOneOrNullResult();
 
     }
-
-
 
 }

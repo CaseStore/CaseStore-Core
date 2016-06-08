@@ -47,7 +47,7 @@ class OutputRepository extends EntityRepository
                 $titleFound = true;
 
                 $value = $this->getEntityManager()->
-                    getRepository('CaseStoreBundle:OutputFieldValueString')->
+                    getRepository('CaseStoreOutputFieldTypeStringBundle:OutputFieldValueString')->
                     getLatestValueFor($outputFieldDefinition, $output);
                 $output->setTitle($value ? $value->getValue() : null);
 
@@ -56,7 +56,7 @@ class OutputRepository extends EntityRepository
                 $descriptionFound = true;
 
                 $value = $this->getEntityManager()->
-                    getRepository('CaseStoreBundle:OutputFieldValueText')->
+                    getRepository('CaseStoreOutputFieldTypeTextBundle:OutputFieldValueText')->
                     getLatestValueFor($outputFieldDefinition, $output);
                 $output->setDescription($value ? $value->getValue() : null);
 

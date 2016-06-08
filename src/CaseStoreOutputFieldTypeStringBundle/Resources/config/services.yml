@@ -1,0 +1,4 @@
+services:
+#    case_store_output_field_type_string.example:
+#        class: CaseStoreOutputFieldTypeStringBundle\Example
+#        arguments: ["@service_id", "plain_value", %parameter%]

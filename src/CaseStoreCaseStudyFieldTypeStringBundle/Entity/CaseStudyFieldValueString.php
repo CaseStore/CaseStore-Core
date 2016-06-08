@@ -1,18 +1,18 @@
 <?php
 
-namespace CaseStoreBundle\Entity;
+namespace CaseStoreCaseStudyFieldTypeStringBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Table(name="case_study_field_value_text")
- * @ORM\Entity(repositoryClass="CaseStoreBundle\Repository\CaseStudyFieldValueTextRepository")
+ * @ORM\Table(name="case_study_field_value_string")
+ * @ORM\Entity(repositoryClass="CaseStoreCaseStudyFieldTypeStringBundle\Repository\CaseStudyFieldValueStringRepository")
  * @ORM\HasLifecycleCallbacks
  *  @license 3-clause BSD
  *  @link https://github.com/CaseStore/CaseStore-Core
  */
-class CaseStudyFieldValueText
+class CaseStudyFieldValueString
 {
 
     /**
@@ -39,7 +39,7 @@ class CaseStudyFieldValueText
     /**
      * @var string
      *
-     * @ORM\Column(name="value", type="text", nullable=true)
+     * @ORM\Column(name="value", type="string", length=250, nullable=true)
      */
     private $value;
 
@@ -151,7 +151,7 @@ class CaseStudyFieldValueText
     }
 
 
-    
+
     /**
      * @ORM\PrePersist()
      */

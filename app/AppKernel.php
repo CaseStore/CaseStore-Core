@@ -19,6 +19,12 @@ class AppKernel extends Kernel
             new FOS\UserBundle\FOSUserBundle(),
             new CaseStoreBundle\CaseStoreBundle(),
             new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
+            new CaseStoreCaseStudyFieldTypeIntegerBundle\CaseStoreCaseStudyFieldTypeIntegerBundle(),
+            new CaseStoreCaseStudyFieldTypeSelectBundle\CaseStoreCaseStudyFieldTypeSelectBundle(),
+            new CaseStoreCaseStudyFieldTypeStringBundle\CaseStoreCaseStudyFieldTypeStringBundle(),
+            new CaseStoreCaseStudyFieldTypeTextBundle\CaseStoreCaseStudyFieldTypeTextBundle(),
+            new CaseStoreOutputFieldTypeTextBundle\CaseStoreOutputFieldTypeTextBundle(),
+            new CaseStoreOutputFieldTypeStringBundle\CaseStoreOutputFieldTypeStringBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'), true)) {
