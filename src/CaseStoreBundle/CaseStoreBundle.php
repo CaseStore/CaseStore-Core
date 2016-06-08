@@ -3,6 +3,7 @@
 namespace CaseStoreBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 
 /**
@@ -24,6 +25,13 @@ class CaseStoreBundle extends Bundle
             $string .= $characters[mt_rand(0, strlen($characters)-1)];
         }
         return $string;
+    }
+
+
+    public function build(ContainerBuilder $container)
+    {
+        parent::build($container);
+        $container->addCompilerPass(new CaseStudyFieldTypeFinderCompilerPass());
     }
 
 }

@@ -1,4 +1,6 @@
 services:
-#    case_store_case_study_field_type_text.example:
-#        class: CaseStoreCaseStudyFieldTypeTextBundle\Example
-#        arguments: ["@service_id", "plain_value", %parameter%]
+    case_store_case_study_field_type_text.type:
+        class: CaseStoreCaseStudyFieldTypeTextBundle\Service\CaseStoreFieldTypeTextService
+        arguments: ["@service_container"]
+        tags:
+          -  { name: case_study_field_type.definition }

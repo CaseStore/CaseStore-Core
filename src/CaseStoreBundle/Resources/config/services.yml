@@ -1,8 +1,4 @@
 services:
-#    case_store.example:
-#        class: CaseStoreBundle\Example
-#        arguments: ["@service_id", "plain_value", %parameter%]
-
 
     app.project_voter:
         class: CaseStoreBundle\Security\ProjectVoter
@@ -31,3 +27,6 @@ services:
         tags:
             - { name: doctrine.event_listener, event: prePersist }
 
+    case_study_field_type_finder:
+        class: CaseStoreBundle\Service\CaseStudyFieldTypeFinderService
+        arguments: ["@service_container"]
