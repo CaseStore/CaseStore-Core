@@ -146,7 +146,7 @@ case_store_output_document_download:
     path:     /project/{projectId}/output/{outputId}/document/{documentId}
     defaults: { _controller: CaseStoreBundle:Output:documentDownload }
 
-################################################### Output
+################################################### Output - Edit
 
 case_store_output_edit_field:
     path:     /project/{projectId}/output/{outputId}/edit/field/{fieldDefinitionId}
@@ -155,6 +155,10 @@ case_store_output_edit_field:
 case_store_output_new_document:
     path:     /project/{projectId}/output/{outputId}/newdocument
     defaults: { _controller: CaseStoreBundle:OutputEdit:newDocument }
+
+case_store_output_link_existing_case_study:
+    path:     /project/{projectId}/output/{outputId}/linkexistingcasestudy
+    defaults: { _controller: CaseStoreBundle:OutputEdit:linkExistingCaseStudy }
 
 
 ################################################### User Account

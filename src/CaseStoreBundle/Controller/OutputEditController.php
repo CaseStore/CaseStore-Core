@@ -4,6 +4,7 @@ namespace CaseStoreBundle\Controller;
 
 
 use CaseStoreBundle\Entity\OutputDocument;
+use CaseStoreBundle\Form\Type\OutputLinkExistingCaseStudyType;
 use CaseStoreOutputFieldTypeStringBundle\Entity\OutputFieldValueString;
 use CaseStoreOutputFieldTypeTextBundle\Entity\OutputFieldValueText;
 use CaseStoreBundle\Form\Type\OutputDocumentNewType;
@@ -117,6 +118,40 @@ class OutputEditController extends OutputController
         }
 
         return $this->render('CaseStoreBundle:OutputEdit:newDocument.html.twig', array(
+            'project' => $this->project,
+            'output' => $this->output,
+            'form' => $form->createView(),
+        ));
+
+    }
+
+    public function linkExistingCaseStudyAction($projectId, $outputId)
+    {
+        $this->build($projectId, $outputId);
+
+
+        $doctrine = $this->getDoctrine()->getManager();
+
+
+        $form = $this->createForm(new OutputLinkExistingCaseStudyType());
+        $request = $this->getRequest();
+        if ($request->getMethod() == 'POST') {
+            $form->handleRequest($request);
+            if ($form->isValid()) {
+                $caseStudy = $doctrine->getRepository('CaseStoreBundle:CaseStudy')->findOneBy(array('project'=>$this->project, 'publicId'=>$form->get('public_id')->getData()));
+                if ($caseStudy) {
+                    $doctrine->getRepository('CaseStoreBundle:CaseStudyHasOutput')->addLink($caseStudy, $this->output, $this->getUser());
+                    return $this->redirect($this->generateUrl('case_store_output', array(
+                        'projectId'=>$this->project->getPublicId(),
+                        'outputId'=>$this->output->getPublicId(),
+                    )));
+                }
+            }
+        }
+
+
+
+        return $this->render('CaseStoreBundle:OutputEdit:linkExistingCaseStudy.html.twig', array(
             'project' => $this->project,
             'output' => $this->output,
             'form' => $form->createView(),
