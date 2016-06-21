@@ -50,6 +50,7 @@
                 <li>{{  user.username }} <a href="mailto:{{  user.email }}?subject=CaseStudy&body={{  app.request.getSchemeAndHttpHost() }}{{ path('case_store_case_study', { 'projectId':project.publicId, 'caseStudyId':caseStudy.publicId }) }}">Email them about this</a></li>
             {%  endfor %}
         </ul>
+        <div>(You must always talk to one of the involved staff before using or contacting a case study!)</div>
     {%  endif %}
 
     {%  if documents %}
