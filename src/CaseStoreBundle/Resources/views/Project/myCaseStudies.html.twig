@@ -25,18 +25,18 @@
             </tr>
             </thead>
             <tbody>
-            {%  for caseStudy in caseStudies %}
-            <tr>
-                <td>
-                    <a href="{{ path('case_store_case_study', { 'projectId':project.publicId,'caseStudyId':caseStudy.publicId }) }}">{{  caseStudy.titleOrPlaceHolder }}</a>
-                </td>
-                <td>
-                    {{  caseStudy.description | nl2br }}
-                </td>
-                <td>
-                    <a href="{{ path('case_store_case_study', { 'projectId':project.publicId,'caseStudyId':caseStudy.publicId }) }}" class="btn btn-default">View</a>
-                </td>
-                </td>
+                {%  for caseStudy in caseStudies %}
+                    <tr>
+                        <td>
+                            <a href="{{ path('case_store_case_study', { 'projectId':project.publicId,'caseStudyId':caseStudy.publicId }) }}">{{  caseStudy.titleOrPlaceHolder }}</a>
+                        </td>
+                        <td>
+                            {{  caseStudy.description | nl2br }}
+                        </td>
+                        <td>
+                            <a href="{{ path('case_store_case_study', { 'projectId':project.publicId,'caseStudyId':caseStudy.publicId }) }}" class="btn btn-default">View</a>
+                        </td>
+                    </tr>
                 {%  endfor %}
             </tbody>
         </table>
