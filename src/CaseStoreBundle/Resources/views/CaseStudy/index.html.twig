@@ -15,47 +15,59 @@
     <h1>Case Study</h1>
 
     {%  for fieldDefinition in fieldDefinitions %}
-        <div class="caseStudyDataLabel">
-            {{  fieldDefinition.title }}
-            {%  if fieldDefinition.isCaseStudyUsersOnly %}<div class="glyphicon glyphicon-eye-close" title="Only Staff Involved Can See This"></div>{%  endif %}
-            {%  if editAccessAllowed %}
-                <a href="{{ path('case_store_case_study_edit_field', { 'projectId':project.publicId, 'caseStudyId':caseStudy.publicId, 'fieldDefinitionId':fieldDefinition.publicId }) }}"><div class="glyphicon glyphicon-pencil"></div></a>
-            {%  endif %}
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">{{  fieldDefinition.title }}
+                    {%  if fieldDefinition.isCaseStudyUsersOnly %}<div class="glyphicon glyphicon-eye-close" title="Only Staff Involved Can See This"></div>{%  endif %}
+                    {%  if editAccessAllowed %}
+                        <a href="{{ path('case_store_case_study_edit_field', { 'projectId':project.publicId, 'caseStudyId':caseStudy.publicId, 'fieldDefinitionId':fieldDefinition.publicId }) }}"><span class="glyphicon glyphicon-pencil editicon" aria-hidden="true"></a>
+                    {%  endif %}
+                </h3>
+            </div>
+            <div class="panel-body">
+                {%  if fieldValues[fieldDefinition.publicId] is defined and fieldValues[fieldDefinition.publicId] %}
+                    {% if fieldDefinition.isTypeString %}
+                        <div>{{ fieldValues[fieldDefinition.publicId].value  }}</div>
+                    {% elseif fieldDefinition.isTypeInteger %}
+                        <div>{{ fieldValues[fieldDefinition.publicId].value  }}</div>
+                    {% elseif fieldDefinition.isTypeText %}
+                        <div>{{ fieldValues[fieldDefinition.publicId].value  | nl2br }}</div>
+                    {% elseif fieldDefinition.isTypeSelect %}
+                        {%  for value in fieldValues[fieldDefinition.publicId]  %}
+                            <div>{{ value.option.title }}</div>
+                        {% endfor %}
+                    {%  endif %}
+                {%  endif %}
+            </div>
         </div>
-        {%  if fieldValues[fieldDefinition.publicId] is defined and fieldValues[fieldDefinition.publicId] %}
-            {% if fieldDefinition.isTypeString %}
-                <div>{{ fieldValues[fieldDefinition.publicId].value  }}</div>
-            {% elseif fieldDefinition.isTypeInteger %}
-                <div>{{ fieldValues[fieldDefinition.publicId].value  }}</div>
-            {% elseif fieldDefinition.isTypeText %}
-                <div>{{ fieldValues[fieldDefinition.publicId].value  | nl2br }}</div>
-            {% elseif fieldDefinition.isTypeSelect %}
-                {%  for value in fieldValues[fieldDefinition.publicId]  %}
-                    <div>{{ value.option.title }}</div>
-                {% endfor %}
-            {%  endif %}
-        {%  endif %}
-        <div></div>
     {%  endfor %}
 
-    {%  if users %}
-        <div class="caseStudyDataLabel">
-            Staff Involved
+    <div class="panel panel-default">
+        <div class="panel-heading has-supportext">
+            <h3 class="panel-title">Staff Involved<br>
+                <span class="supporting-text">(You must always talk to one of the involved staff before using or contacting a case study!)</span>
+            </h3>
             {%  if editAccessAllowed %}
-                <a href="{{  path('case_store_case_study_edit_users', { 'projectId':project.publicId, 'caseStudyId':caseStudy.publicId }) }}"><div class="glyphicon glyphicon-pencil"></div></a>
+                <a href="{{  path('case_store_case_study_edit_users', { 'projectId':project.publicId, 'caseStudyId':caseStudy.publicId }) }}"><span class="glyphicon glyphicon-pencil editicon" aria-hidden="true"></a>
             {%  endif %}
         </div>
-        <ul>
-            {%  for user in users %}
-                <li>{{  user.username }} <a href="mailto:{{  user.email }}?subject=CaseStudy&body={{  app.request.getSchemeAndHttpHost() }}{{ path('case_store_case_study', { 'projectId':project.publicId, 'caseStudyId':caseStudy.publicId }) }}">Email them about this</a></li>
-            {%  endfor %}
-        </ul>
-        <div>(You must always talk to one of the involved staff before using or contacting a case study!)</div>
-    {%  endif %}
+        <div class="panel-body">
+            <ul>
+                {%  for user in users %}
+                    <li>{{  user.username }} <a href="mailto:{{  user.email }}?subject=CaseStudy&body={{  app.request.getSchemeAndHttpHost() }}{{ path('case_store_case_study', { 'projectId':project.publicId, 'caseStudyId':caseStudy.publicId }) }}">Email them about this</a></li>
+                {%  else %}
+                    None.
+                {%  endfor %}
+            </ul>
+        </div>
+    </div>
 
-    {%  if documents %}
-        <div class="caseStudyDataLabel">Documents</div>
-        <ul>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Documents<br>
+            </h3>
+        </div>
+        <div class="panel-body">
             {%  for document in documents %}
                 <li>
                     <div>
@@ -64,64 +76,91 @@
                     </div>
                     <div><a href="{{ path('case_store_case_study_document_download', { 'projectId':project.publicId, 'caseStudyId':caseStudy.publicId,'documentId':document.publicId  }) }}">Download {{ document.originalFileName }}</a></div>
                 </li>
+            {%  else %}
+                None.
             {%  endfor %}
-        </ul>
-    {%  endif %}
 
-    {%  if locations %}
-        <div class="caseStudyDataLabel">
-            Locations
             {%  if editAccessAllowed %}
-                <a href="{{  path('case_store_case_study_edit_locations', { 'projectId':project.publicId, 'caseStudyId':caseStudy.publicId }) }}"><div class="glyphicon glyphicon-pencil"></div></a>
+                <div class="pull-right">
+                    <a href="{{  path('case_store_case_study_new_document', { 'projectId':project.publicId, 'caseStudyId':caseStudy.publicId }) }}" class="btn btn-warning">New Document</a>
+                </div>
             {%  endif %}
         </div>
-        <div id="Map" style="width: 100%; height: 300px;"></div>
-    {%  endif %}
+    </div>
 
-    {%  if comments %}
-        <div class="caseStudyDataLabel">Comments</div>
-        <ul class="caseStudyCommentList">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Locations<br>
+                {%  if editAccessAllowed %}
+                    <a href="{{  path('case_store_case_study_edit_locations', { 'projectId':project.publicId, 'caseStudyId':caseStudy.publicId }) }}"><span class="glyphicon glyphicon-pencil editicon" aria-hidden="true"></a>
+                {%  endif %}
+            </h3>
+        </div>
+        <div class="panel-body">
+            {%  if locations %}
+                <div id="Map" style="width: 100%; height: 300px;"></div>
+            {% else %}
+                Not known.
+            {%  endif %}
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Comments<br>
+
+            </h3>
+        </div>
+        <div class="panel-body">
             {%  for comment in comments %}
                 <li class="caseStudyComment">
-                   <div class="caseStudyCommentBody">{{  comment.body | nl2br }}</div>
-                   <div class="caseStudyCommentDetails">Posted by {{  comment.addedBy.username }}</div>
+                    <div class="caseStudyCommentBody">{{  comment.body | nl2br }}</div>
+                    <div class="caseStudyCommentDetails">Posted by {{  comment.addedBy.username }}</div>
                 </li>
+            {%  else %}
+                None.
             {%  endfor %}
-        </ul>
-    {%  endif %}
+            {%  if newCommentAllowed %}
+                <div class="pull-right">
+                    <a href="{{  path('case_store_case_study_new_comment', { 'projectId':project.publicId, 'caseStudyId':caseStudy.publicId }) }}" class="btn btn-warning">Add comment</a>
+                </div>
+            {%  endif %}
+        </div>
+    </div>
 
-    {%  if outputs %}
-        <div class="caseStudyDataLabel">Outputs using this</div>
-        <ul class="caseStudyOutputList">
-            {%  for output in outputs %}
-                <li class="caseStudyOutput">
-                    <div>
-                        <a href="{{ path('case_store_output', { 'projectId':project.publicId,'outputId':output.publicId }) }}">{{  output.titleOrPlaceHolder }}</a>
-                    </div>
-                    <div>
-                        {{  output.description | nl2br }}
-                    </div>
-                </li>
-            {%  endfor %}
-        </ul>
-    {%  endif %}
 
-    <ul class="list-group">
-        {%  if newCommentAllowed %}
-            <li class="list-group-item"><a href="{{  path('case_store_case_study_new_comment', { 'projectId':project.publicId, 'caseStudyId':caseStudy.publicId }) }}" class="btn btn-warning">New Comment</a></li>
-        {%  endif %}
-        {%  if newOutputAllowed %}
-            <li class="list-group-item"><a href="{{  path('case_store_new_output', { 'projectId':project.publicId }) }}?caseStudy={{ caseStudy.publicId }}" class="btn btn-warning">New Output using this Case Study</a></li>
-        {%  endif %}
-        {%  if editAccessAllowed %}
-            {%  for fieldDefinition in fieldDefinitions %}
-                <li class="list-group-item"><a href="{{ path('case_store_case_study_edit_field', { 'projectId':project.publicId, 'caseStudyId':caseStudy.publicId, 'fieldDefinitionId':fieldDefinition.publicId }) }}" class="btn btn-warning">Edit {{ fieldDefinition.title  }}</a></li>
-            {%  endfor %}
-            <li class="list-group-item"><a href="{{  path('case_store_case_study_edit_users', { 'projectId':project.publicId, 'caseStudyId':caseStudy.publicId }) }}" class="btn btn-warning">Edit Staff Involved</a></li>
-            <li class="list-group-item"><a href="{{  path('case_store_case_study_edit_locations', { 'projectId':project.publicId, 'caseStudyId':caseStudy.publicId }) }}" class="btn btn-warning">Edit Locations</a></li>
-            <li class="list-group-item"><a href="{{  path('case_store_case_study_new_document', { 'projectId':project.publicId, 'caseStudyId':caseStudy.publicId }) }}" class="btn btn-warning">New Document</a></li>
-        {%  endif %}
-    </ul>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Outputs using this<br>
+
+            </h3>
+        </div>
+        <div class="panel-body">
+            {%  if outputs %}
+                <ul class="caseStudyOutputList">
+                    {%  for output in outputs %}
+                        <li class="caseStudyOutput">
+                            <div>
+                                <a href="{{ path('case_store_output', { 'projectId':project.publicId,'outputId':output.publicId }) }}">{{  output.titleOrPlaceHolder }}</a>
+                            </div>
+                            <div>
+                                {{  output.description | nl2br }}
+                            </div>
+                        </li>
+                    {%  endfor %}
+                </ul>
+            {%  else %}
+                None.
+            {%  endif %}
+
+            {%  if newOutputAllowed %}
+                <div class="pull-right">
+                    <a href="{{  path('case_store_new_output', { 'projectId':project.publicId }) }}?caseStudy={{ caseStudy.publicId }}" class="btn btn-warning">New Output using this Case Study</a>
+                </div>
+            {%  endif %}
+        </div>
+    </div>
+
 
 {%  endblock %}
 

@@ -10,7 +10,7 @@
     text-align: center;
 }
 
-.caseStudyDataLabel, .outputDataLabel {
+.outputDataLabel {
     font-weight: bold;
     font-size: 120%;
 }
@@ -26,4 +26,24 @@ ul.caseStudyCommentList li.caseStudyComment {
 
 ul.caseStudyCommentList li.caseStudyComment .caseStudyCommentDetails {
     font-style: italic;
+}
+
+
+.panel-heading .supporting-text{
+    color: #b1b0b1; /* supporting text colour code */
+}
+.panel-heading{
+    position: relative;
+}
+.panel-heading.has-supportext .editicon{/* if there is a supporting text in the panel title add the .has-supportext class to the panel-heading */
+    position: absolute;
+    right: 0px;
+    top: 16px;
+    padding: 15px;
+}
+.panel-heading .editicon {
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    padding: 12px;
 }
