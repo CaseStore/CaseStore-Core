@@ -36,6 +36,10 @@ case_store_project_case_studies:
     path:     /project/{projectId}/casestudies
     defaults: { _controller: CaseStoreBundle:Project:caseStudies }
 
+case_store_project_case_studies_search:
+    path:     /project/{projectId}/casestudiessearch
+    defaults: { _controller: CaseStoreBundle:Project:caseStudiesSearch }
+
 
 case_store_project_case_study_select_field:
     path:     /project/{projectId}/casestudyselectfield/{fieldId}

@@ -64,6 +64,14 @@ class CaseStudyQueryBuilder {
     }
 
 
+    protected $fieldSearches = array();
+
+    public function addFieldSearch(CaseStudyQueryBuilderFieldSearchInterface $fieldSearch = null) {
+        if (!is_null($fieldSearch)) {
+            $this->fieldSearches[] = $fieldSearch;
+        }
+    }
+
 
     public function getQuery() {
 
@@ -81,6 +89,14 @@ class CaseStudyQueryBuilder {
             $joins[] = " JOIN cs.hasOutputs csho ";
             $where[] = " csho.output = :output AND csho.removedAt IS NULL ";
             $params['output'] = $this->output;
+        }
+
+        foreach($this->fieldSearches as $fieldSearch) {
+            $joins = array_merge($joins, $fieldSearch->getQueryBuilderJoins());
+            $where = array_merge($where, $fieldSearch->getQueryBuilderWheres());
+            foreach($fieldSearch->getQueryBuilderParams() as $k => $v) {
+                $params[$k] = $v;
+            }
         }
 
         $query =  $s =  $this->em

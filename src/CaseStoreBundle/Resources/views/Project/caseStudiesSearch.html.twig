@@ -1,0 +1,61 @@
+{#
+# @license 3-clause BSD
+# @link https://github.com/CaseStore/CaseStore-Core
+#}
+
+{% extends 'CaseStoreBundle::base.html.twig' %}
+
+{% block main %}
+
+
+    <ol class="breadcrumb">
+        <li><a href="{{ path('case_store_project', { 'projectId':project.publicId }) }}">Project {{  project.title }}</a></li>
+        <li class="active">Case Studies Search</li>
+    </ol>
+
+    <div class="well">
+        <form action="#" method="get">
+            {% for fieldDefinition in fieldDefinitions %}
+                {% set type = fieldTypes[fieldDefinition.type] %}
+                {%  if type.hasSearchFilter %}
+                    <div>
+                        {{  fieldDefinition.title }}
+                        {%  include type.getSearchFilterTemplatePath with {'fieldType':type,  'fieldDefinition':fieldDefinition, 'fieldSearch':fieldSearches[fieldDefinition.publicId] } %}
+                    </div>
+                {%  endif %}
+            {% endfor %}
+            <input type="submit" value="Search">
+        </form>
+    </div>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Description</th>
+                <th>&nbsp;</th>
+            </tr>
+        </thead>
+        <tbody>
+            {%  for caseStudy in caseStudies %}
+                <tr>
+                    <td>
+                        <a href="{{ path('case_store_case_study', { 'projectId':project.publicId,'caseStudyId':caseStudy.publicId }) }}">{{  caseStudy.titleOrPlaceHolder }}</a>
+                    </td>
+                    <td>
+                        {{  caseStudy.description | nl2br }}
+                    </td>
+                    <td>
+                        <a href="{{ path('case_store_case_study', { 'projectId':project.publicId,'caseStudyId':caseStudy.publicId }) }}" class="btn btn-default">View</a>
+                    </td>
+                </td>
+            {%  else %}
+                <tr>
+                    <td colspan="3">No Case Studies</td>
+                </tr>
+            {%  endfor %}
+        </tbody>
+    </table>
+
+{%  endblock %}
+

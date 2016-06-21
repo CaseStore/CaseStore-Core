@@ -6,6 +6,7 @@ use CaseStoreBundle\Entity\Project;
 use CaseStoreBundle\Form\Type\ProjectNewType;
 use CaseStoreBundle\Security\ProjectVoter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -100,6 +101,38 @@ class ProjectController extends Controller
         return $this->render('CaseStoreBundle:Project:caseStudies.html.twig', array(
             'project'=>$this->project,
             'caseStudies'=>$caseStudies,
+        ));
+    }
+
+    public function caseStudiesSearchAction($projectId, Request $request)
+    {
+        // build
+        $this->build($projectId);
+        //data
+
+        $doctrine = $this->getDoctrine()->getManager();
+
+        $fieldTypes = $this->get('case_study_field_type_finder')->getFieldTypes();
+        $fieldDefinitions = $doctrine->getRepository('CaseStoreBundle:CaseStudyFieldDefinition')->getForProject($this->project, false);
+
+        $caseStudiesQueryBuilder = $doctrine->getRepository('CaseStoreBundle:CaseStudy')->getQueryBuilder($this->project);
+
+        $fieldSearches = array();
+        foreach($fieldDefinitions as $fieldDefinition) {
+            if ($fieldTypes[$fieldDefinition->getType()]->hasSearchFilter()) {
+                $fieldSearches[$fieldDefinition->getPublicId()] = $fieldTypes[$fieldDefinition->getType()]->getFieldSearchFromSearchFilter($fieldDefinition, $request);
+                $caseStudiesQueryBuilder->addFieldSearch($fieldSearches[$fieldDefinition->getPublicId()]);
+            }
+        }
+
+        $caseStudies = $caseStudiesQueryBuilder->getQuery()->getResult();
+
+        return $this->render('CaseStoreBundle:Project:caseStudiesSearch.html.twig', array(
+            'project'=>$this->project,
+            'caseStudies'=>$caseStudies,
+            'fieldDefinitions'=>$fieldDefinitions,
+            'fieldTypes'=>$fieldTypes,
+            'fieldSearches'=>$fieldSearches,
         ));
     }
 

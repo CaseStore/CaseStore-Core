@@ -41,6 +41,15 @@ class UpdateAllCachesCommand extends ContainerAwareCommand
             $outputRepository->updateCaches($output);
         }
 
+
+        $projectRepository = $doctrine->getRepository('CaseStoreBundle:Project');
+
+        foreach($projectRepository->findAll() as $project) {
+            foreach($doctrine->getRepository('CaseStoreBundle:CaseStudyFieldDefinition')->getForProject($project) as $fieldDefinition) {
+                $this->getContainer()->get('case_study_field_type_finder')->getFieldTypeById($fieldDefinition->getType())->updateCaches($fieldDefinition);
+            }
+        }
+
         $commandOutput->writeln('Done');
     }
 }

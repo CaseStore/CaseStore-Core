@@ -186,6 +186,7 @@ class CaseStudyEditController extends CaseStudyController
                 if ($form->isValid()) {
                     $doctrine->persist($value);
                     $doctrine->flush();
+                    $this->get('case_study_field_type_finder')->getFieldTypeById($fieldDefinition->getType())->updateCaches($fieldDefinition, $this->caseStudy);
                     $doctrine->getRepository('CaseStoreBundle:CaseStudy')->updateCaches($this->caseStudy);
                     return $this->redirect($this->generateUrl('case_store_case_study', array(
                         'projectId'=>$this->project->getPublicId(),
@@ -207,6 +208,7 @@ class CaseStudyEditController extends CaseStudyController
                 if ($form->isValid()) {
                     $doctrine->persist($value);
                     $doctrine->flush();
+                    $this->get('case_study_field_type_finder')->getFieldTypeById($fieldDefinition->getType())->updateCaches($fieldDefinition, $this->caseStudy);
                     $doctrine->getRepository('CaseStoreBundle:CaseStudy')->updateCaches($this->caseStudy);
                     return $this->redirect($this->generateUrl('case_store_case_study', array(
                         'projectId'=>$this->project->getPublicId(),
@@ -228,6 +230,7 @@ class CaseStudyEditController extends CaseStudyController
                 if ($form->isValid()) {
                     $doctrine->persist($value);
                     $doctrine->flush();
+                    $this->get('case_study_field_type_finder')->getFieldTypeById($fieldDefinition->getType())->updateCaches($fieldDefinition, $this->caseStudy);
                     $doctrine->getRepository('CaseStoreBundle:CaseStudy')->updateCaches($this->caseStudy);
                     return $this->redirect($this->generateUrl('case_store_case_study', array(
                         'projectId'=>$this->project->getPublicId(),
@@ -257,6 +260,7 @@ class CaseStudyEditController extends CaseStudyController
                         }
                     }
                     $doctrine->flush();
+                    $this->get('case_study_field_type_finder')->getFieldTypeById($fieldDefinition->getType())->updateCaches($fieldDefinition, $this->caseStudy);
                     $doctrine->getRepository('CaseStoreBundle:CaseStudy')->updateCaches($this->caseStudy);
                     return $this->redirect($this->generateUrl('case_store_case_study', array(
                         'projectId'=>$this->project->getPublicId(),
