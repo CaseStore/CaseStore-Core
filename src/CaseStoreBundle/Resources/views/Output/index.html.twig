@@ -15,53 +15,73 @@
     <h1>Output</h1>
 
     {%  for fieldDefinition in fieldDefinitions %}
-        <div class="outputDataLabel">{{  fieldDefinition.title }}</div>
-        {%  if fieldValues[fieldDefinition.publicId] is defined and fieldValues[fieldDefinition.publicId] %}
-            {% if fieldDefinition.isTypeString %}
-                <div>{{ fieldValues[fieldDefinition.publicId].value  }}</div>
-            {% elseif fieldDefinition.isTypeText %}
-                <div>{{ fieldValues[fieldDefinition.publicId].value  | nl2br }}</div>
-            {%  endif %}
-        {%  endif %}
-        <div></div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">{{  fieldDefinition.title }}
+                    {%  if editAccessAllowed %}
+                        <a href="{{ path('case_store_output_edit_field', { 'projectId':project.publicId, 'outputId':output.publicId, 'fieldDefinitionId':fieldDefinition.publicId }) }}"><span class="glyphicon glyphicon-pencil editicon" aria-hidden="true"></a>
+                    {%  endif %}
+                </h3>
+            </div>
+            <div class="panel-body">
+                {%  if fieldValues[fieldDefinition.publicId] is defined and fieldValues[fieldDefinition.publicId] %}
+                    {% if fieldDefinition.isTypeString %}
+                        <div>{{ fieldValues[fieldDefinition.publicId].value  }}</div>
+                    {% elseif fieldDefinition.isTypeText %}
+                        <div>{{ fieldValues[fieldDefinition.publicId].value  | nl2br }}</div>
+                    {%  endif %}
+                {%  endif %}
+            </div>
+        </div>
     {%  endfor %}
 
-    {%  if documents %}
-        <div class="outputDataLabel">Documents</div>
-        <ul>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Documents<br>
+            </h3>
+        </div>
+        <div class="panel-body">
             {%  for document in documents %}
                 <li>
-                    <div>{{  document.title }}</div>
+                    <div>
+                        {{  document.title }}
+                    </div>
                     <div><a href="{{ path('case_store_output_document_download', { 'projectId':project.publicId, 'outputId':output.publicId,'documentId':document.publicId  }) }}">Download {{ document.originalFileName }}</a></div>
                 </li>
+            {%  else %}
+                None.
             {%  endfor %}
-        </ul>
-    {%  endif %}
 
-    {%  if caseStudies %}
-        <div class="outputDataLabel">CaseStudies involved</div>
-        <ul>
-            {%  for caseStudy in caseStudies %}
-                <li>
-                    <div>
-                        <a href="{{ path('case_store_case_study', { 'projectId':project.publicId,'caseStudyId':caseStudy.publicId }) }}">{{  caseStudy.titleOrPlaceHolder }}</a>
-                    </div>
-                    <div>
-                        {{  caseStudy.description | nl2br }}
-                    </div>
-                </li>
-            {%  endfor %}
-        </ul>
-    {%  endif %}
+            {%  if editAccessAllowed %}
+                <div class="pull-right">
+                    <a href="{{  path('case_store_output_new_document', { 'projectId':project.publicId, 'outputId':output.publicId }) }}" class="btn btn-warning">New Document</a>
+                </div>
+            {%  endif %}
+        </div>
+    </div>
 
-    <ul class="list-group">
-        {%  if editAccessAllowed %}
-            {%  for fieldDefinition in fieldDefinitions %}
-                <li class="list-group-item"><a href="{{ path('case_store_output_edit_field', { 'projectId':project.publicId, 'outputId':output.publicId, 'fieldDefinitionId':fieldDefinition.publicId }) }}" class="btn btn-warning">Edit {{ fieldDefinition.title  }}</a></li>
-            {%  endfor %}
-            <li class="list-group-item"><a href="{{  path('case_store_output_new_document', { 'projectId':project.publicId, 'outputId':output.publicId }) }}" class="btn btn-warning">New Document</a></li>
-        {%  endif %}
-    </ul>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Case Studies<br>
+            </h3>
+        </div>
+        <div class="panel-body">
+            {%  if caseStudies %}
+                {%  for caseStudy in caseStudies %}
+                    <li>
+                        <div>
+                            <a href="{{ path('case_store_case_study', { 'projectId':project.publicId,'caseStudyId':caseStudy.publicId }) }}">{{  caseStudy.titleOrPlaceHolder }}</a>
+                        </div>
+                        <div>
+                            {{  caseStudy.description | nl2br }}
+                        </div>
+                    </li>
+                {%  endfor %}
+            {%  else %}
+                None.
+            {%  endif %}
+        </div>
+    </div>
 
     <div class="pull-right">
         Output ID: {{  output.publicId }}
