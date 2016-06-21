@@ -17,7 +17,8 @@ class CaseStoreBundle extends Bundle
 
     static function createKey($minLength = 10, $maxLength = 100)
     {
-        $characters = '0123456789abcdefghijklmnopqrstuvwxyz';
+        // This is set to make readable Ids.
+        $characters = '23456789abcdefghjkmnpqrstuvwxyz';
         $string ='';
         $length = mt_rand($minLength, $maxLength);
         for ($p = 0; $p < $length; $p++)

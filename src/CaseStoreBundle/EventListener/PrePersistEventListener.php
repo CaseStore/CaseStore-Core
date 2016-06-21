@@ -21,8 +21,7 @@ use Doctrine\ORM\Event\LifecycleEventArgs;
 class PrePersistEventListener  {
 
 
-    const MIN_LENGTH = 10;
-    const MIN_LENGTH_BIG = 100;
+    const MIN_LENGTH = 5;
     const MAX_LENGTH = 250;
     const LENGTH_STEP = 1;
 
