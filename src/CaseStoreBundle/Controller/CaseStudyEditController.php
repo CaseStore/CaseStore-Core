@@ -280,6 +280,24 @@ class CaseStudyEditController extends CaseStudyController
         ));
 
     }
+    public function linkOutputAction($projectId, $caseStudyId, Request $request)
+    {
+
+        $doctrine = $this->getDoctrine()->getManager();
+
+        // build
+        $this->build($projectId, $caseStudyId);
+
+
+
+
+
+        return $this->render('CaseStoreBundle:CaseStudyEdit:linkOutput.html.twig', array(
+            'project'=>$this->project,
+            'caseStudy'=>$this->caseStudy,
+        ));
+
+    }
 
 
 }

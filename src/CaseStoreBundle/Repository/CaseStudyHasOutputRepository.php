@@ -40,7 +40,7 @@ class CaseStudyHasOutputRepository extends EntityRepository
             $this->getEntityManager()->persist($new);
             $this->getEntityManager()->flush($new);
         }
-        
+
     }
 
 }

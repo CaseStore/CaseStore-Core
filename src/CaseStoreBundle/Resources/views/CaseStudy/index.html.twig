@@ -155,7 +155,7 @@
 
             {%  if newOutputAllowed %}
                 <div class="pull-right">
-                    <a href="{{  path('case_store_new_output', { 'projectId':project.publicId }) }}?caseStudy={{ caseStudy.publicId }}" class="btn btn-warning">New Output using this Case Study</a>
+                    <a href="{{  path('case_store_case_study_link_output', { 'projectId':project.publicId,'caseStudyId':caseStudy.publicId }) }}" class="btn btn-warning">Link to Output</a>
                 </div>
             {%  endif %}
         </div>

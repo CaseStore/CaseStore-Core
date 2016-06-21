@@ -136,6 +136,10 @@ case_store_case_study_new_document:
     path:     /project/{projectId}/casestudy/{caseStudyId}/newdocument
     defaults: { _controller: CaseStoreBundle:CaseStudyEdit:newDocument }
 
+case_store_case_study_link_output:
+    path:     /project/{projectId}/casestudy/{caseStudyId}/linkOutput
+    defaults: { _controller: CaseStoreBundle:CaseStudyEdit:linkOutput }
+
 ################################################### Output
 
 case_store_output:
@@ -156,9 +160,9 @@ case_store_output_new_document:
     path:     /project/{projectId}/output/{outputId}/newdocument
     defaults: { _controller: CaseStoreBundle:OutputEdit:newDocument }
 
-case_store_output_link_existing_case_study:
-    path:     /project/{projectId}/output/{outputId}/linkexistingcasestudy
-    defaults: { _controller: CaseStoreBundle:OutputEdit:linkExistingCaseStudy }
+case_store_output_link_case_study:
+    path:     /project/{projectId}/output/{outputId}/linkcasestudy
+    defaults: { _controller: CaseStoreBundle:OutputEdit:linkCaseStudy }
 
 
 ################################################### User Account

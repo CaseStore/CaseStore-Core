@@ -125,7 +125,7 @@ class OutputEditController extends OutputController
 
     }
 
-    public function linkExistingCaseStudyAction($projectId, $outputId)
+    public function linkCaseStudyAction($projectId, $outputId)
     {
         $this->build($projectId, $outputId);
 
@@ -151,7 +151,7 @@ class OutputEditController extends OutputController
 
 
 
-        return $this->render('CaseStoreBundle:OutputEdit:linkExistingCaseStudy.html.twig', array(
+        return $this->render('CaseStoreBundle:OutputEdit:linkCaseStudy.html.twig', array(
             'project' => $this->project,
             'output' => $this->output,
             'form' => $form->createView(),

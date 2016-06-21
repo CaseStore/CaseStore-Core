@@ -83,7 +83,7 @@
 
             {%  if editAccessAllowed %}
                 <div class="pull-right">
-                    <a href="{{  path('case_store_output_link_existing_case_study', { 'projectId':project.publicId, 'outputId':output.publicId }) }}" class="btn btn-warning">Link Existing Case Study</a>
+                    <a href="{{  path('case_store_output_link_case_study', { 'projectId':project.publicId, 'outputId':output.publicId }) }}" class="btn btn-warning">Link to Case Study</a>
                 </div>
             {%  endif %}
         </div>

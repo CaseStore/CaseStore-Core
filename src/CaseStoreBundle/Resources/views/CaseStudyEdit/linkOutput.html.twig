@@ -1,0 +1,19 @@
+{#
+# @license 3-clause BSD
+# @link https://github.com/CaseStore/CaseStore-Core
+#}
+
+{% extends 'CaseStoreBundle::base.html.twig' %}
+
+{% block main %}
+
+    <ol class="breadcrumb">
+        <li><a href="{{ path('case_store_project', { 'projectId':project.publicId }) }}">Project {{  project.title }}</a></li>
+        <li><a href="{{  path('case_store_case_study', { 'projectId':project.publicId, 'caseStudyId':caseStudy.publicId }) }}">Case Study</a></li>
+        <li class="active">Link Output</li>
+    </ol>
+
+    <a href="{{  path('case_store_new_output', { 'projectId':project.publicId }) }}?caseStudy={{ caseStudy.publicId }}" class="btn btn-warning">New Output using this Case Study</a>
+
+
+{%  endblock %}
