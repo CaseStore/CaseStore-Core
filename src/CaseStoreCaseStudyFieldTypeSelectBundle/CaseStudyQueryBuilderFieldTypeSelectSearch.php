@@ -45,22 +45,23 @@ class CaseStudyQueryBuilderFieldTypeSelectSearch implements CaseStudyQueryBuilde
     public function getQueryBuilderJoins()
     {
         return array(
-            ' JOIN cs.fieldValueSelectCache csfvsc ',
+            ' JOIN cs.fieldValueSelectCache csfvsc'.$this->fieldDefinition->getId().' ',
         );
     }
 
     public function getQueryBuilderWheres()
     {
         return array(
-            ' csfvsc.fieldDefinition = :csfvscFieldDef AND csfvsc.option = :csfvscValue '
+            ' csfvsc'.$this->fieldDefinition->getId().'.fieldDefinition = :csfvsc'.$this->fieldDefinition->getId().'FieldDef '.
+            'AND csfvsc'.$this->fieldDefinition->getId().'.option = :csfvsc'.$this->fieldDefinition->getId().'Value '
         );
     }
 
     public function getQueryBuilderParams()
     {
         return array(
-            'csfvscFieldDef' => $this->fieldDefinition,
-            'csfvscValue' =>  $this->value,
+            'csfvsc'.$this->fieldDefinition->getId().'FieldDef' => $this->fieldDefinition,
+            'csfvsc'.$this->fieldDefinition->getId().'Value' =>  $this->value,
         );
     }
 

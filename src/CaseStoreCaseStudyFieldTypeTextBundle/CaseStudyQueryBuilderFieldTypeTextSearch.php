@@ -41,22 +41,23 @@ class CaseStudyQueryBuilderFieldTypeTextSearch implements CaseStudyQueryBuilderF
     public function getQueryBuilderJoins()
     {
         return array(
-            ' JOIN cs.fieldValueTextCache csfvsc ',
+            ' JOIN cs.fieldValueTextCache csfvsc'.$this->fieldDefinition->getId().' ',
         );
     }
 
     public function getQueryBuilderWheres()
     {
         return array(
-            ' csfvsc.fieldDefinition = :csfvscFieldDef AND csfvsc.value LIKE :csfvscValue '
+            ' csfvsc'.$this->fieldDefinition->getId().'.fieldDefinition = :csfvsc'.$this->fieldDefinition->getId().'FieldDef '.
+            'AND csfvsc'.$this->fieldDefinition->getId().'.value LIKE :csfvsc'.$this->fieldDefinition->getId().'Value '
         );
     }
 
     public function getQueryBuilderParams()
     {
         return array(
-            'csfvscFieldDef' => $this->fieldDefinition,
-            'csfvscValue' => '%' . $this->value . '%',
+            'csfvsc'.$this->fieldDefinition->getId().'FieldDef' => $this->fieldDefinition,
+            'csfvsc'.$this->fieldDefinition->getId().'Value' => '%' . $this->value . '%',
         );
     }
 
