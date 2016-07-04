@@ -26,7 +26,7 @@ class CaseStoreFieldTypeIntegerService  implements CaseStudyFieldTypeServiceInte
         return false;
     }
 
-    public function getSearchFilterTemplatePath()
+    public function getSearchFilterTemplateInfo(CaseStudyFieldDefinition $fieldDefinition)
     {
     }
 

@@ -1,0 +1,6 @@
+<select  name="field{{  fieldDefinition.publicId }}">
+    <option value="">&nbsp;</option>
+    {%  for option in variables.options %}
+        <option value="{{ option.publicId }}" {%  if fieldSearch and fieldSearch.value and fieldSearch.value.id == option.id %}selected="selected"{%  endif %}>{{ option.title }}</option>
+    {%  endfor %}
+</select>

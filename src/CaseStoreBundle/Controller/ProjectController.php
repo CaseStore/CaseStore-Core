@@ -2,6 +2,7 @@
 
 namespace CaseStoreBundle\Controller;
 
+use CaseStoreBundle\CaseStudyFieldTypeSearchFilterTemplateInfoInterface;
 use CaseStoreBundle\Entity\Project;
 use CaseStoreBundle\Form\Type\ProjectNewType;
 use CaseStoreBundle\Security\ProjectVoter;
@@ -108,31 +109,43 @@ class ProjectController extends Controller
     {
         // build
         $this->build($projectId);
-        //data
+
+        // setup
 
         $doctrine = $this->getDoctrine()->getManager();
-
-        $fieldTypes = $this->get('case_study_field_type_finder')->getFieldTypes();
-        $fieldDefinitions = $doctrine->getRepository('CaseStoreBundle:CaseStudyFieldDefinition')->getForProject($this->project, false);
 
         $caseStudiesQueryBuilder = $doctrine->getRepository('CaseStoreBundle:CaseStudy')->getQueryBuilder($this->project);
 
         $fieldSearches = array();
-        foreach($fieldDefinitions as $fieldDefinition) {
-            if ($fieldTypes[$fieldDefinition->getType()]->hasSearchFilter()) {
-                $fieldSearches[$fieldDefinition->getPublicId()] = $fieldTypes[$fieldDefinition->getType()]->getFieldSearchFromSearchFilter($fieldDefinition, $request);
-                $caseStudiesQueryBuilder->addFieldSearch($fieldSearches[$fieldDefinition->getPublicId()]);
+
+        $fieldDefinitions = array();
+
+        // Loop over all fields
+
+        foreach($doctrine->getRepository('CaseStoreBundle:CaseStudyFieldDefinition')->getForProject($this->project, false) as $fd) {
+            $fieldType = $this->get('case_study_field_type_finder')->getFieldTypeById($fd->getType());
+            if ($fieldType->hasSearchFilter()) {
+                /** @var CaseStudyFieldTypeSearchFilterTemplateInfoInterface $info */
+                $info = $fieldType->getSearchFilterTemplateInfo($fd);
+                $fieldDefinitions[] = array(
+                    'template' => $info->getTemplatePath(),
+                    'variables' => $info->getTemplateVariables(),
+                    'definition' => $fd,
+                );
+                $fieldSearches[$fd->getPublicId()] = $fieldType->getFieldSearchFromSearchFilter($fd, $request);
+                $caseStudiesQueryBuilder->addFieldSearch($fieldSearches[$fd->getPublicId()]);
             }
-        }
+        };
+
+        // Get Results
 
         $caseStudies = $caseStudiesQueryBuilder->getQuery()->getResult();
 
         return $this->render('CaseStoreBundle:Project:caseStudiesSearch.html.twig', array(
             'project'=>$this->project,
-            'caseStudies'=>$caseStudies,
             'fieldDefinitions'=>$fieldDefinitions,
-            'fieldTypes'=>$fieldTypes,
             'fieldSearches'=>$fieldSearches,
+            'caseStudies'=>$caseStudies,
         ));
     }
 

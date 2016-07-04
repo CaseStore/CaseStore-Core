@@ -20,7 +20,8 @@ interface CaseStudyFieldTypeServiceInterface
     /** @return boolean */
     public function hasSearchFilter();
 
-    public function getSearchFilterTemplatePath();
+    /** @return CaseStudyFieldTypeSearchFilterTemplateInfoInterface */
+    public function getSearchFilterTemplateInfo(CaseStudyFieldDefinition $fieldDefinition);
 
     public function getFieldSearchFromSearchFilter(CaseStudyFieldDefinition $fieldDefinition, Request $request);
 

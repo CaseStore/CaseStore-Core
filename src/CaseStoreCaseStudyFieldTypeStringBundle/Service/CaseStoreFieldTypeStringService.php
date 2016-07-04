@@ -2,6 +2,7 @@
 
 namespace CaseStoreCaseStudyFieldTypeStringBundle\Service;
 
+use CaseStoreBundle\CaseStudyFieldTypeSearchFilterTemplateInfo;
 use CaseStoreBundle\CaseStudyFieldTypeServiceInterface;
 use CaseStoreBundle\Entity\CaseStudy;
 use CaseStoreBundle\Entity\CaseStudyFieldDefinition;
@@ -36,9 +37,9 @@ class CaseStoreFieldTypeStringService  implements CaseStudyFieldTypeServiceInter
     }
 
 
-    public function getSearchFilterTemplatePath()
+    public function getSearchFilterTemplateInfo(CaseStudyFieldDefinition $fieldDefinition)
     {
-        return 'CaseStoreCaseStudyFieldTypeStringBundle::caseStudyFieldTypeStringSearch.html.twig';
+        return  new CaseStudyFieldTypeSearchFilterTemplateInfo('CaseStoreCaseStudyFieldTypeStringBundle::caseStudyFieldTypeStringSearch.html.twig');
     }
 
     public function getFieldSearchFromSearchFilter(CaseStudyFieldDefinition $fieldDefinition, Request $request)

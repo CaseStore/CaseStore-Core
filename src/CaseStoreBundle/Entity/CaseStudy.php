@@ -81,16 +81,19 @@ class CaseStudy
     private $fieldValueText;
 
     /**
-    /**
      * @ORM\OneToMany(targetEntity="CaseStoreCaseStudyFieldTypeStringBundle\Entity\CaseStudyFieldValueStringCache", mappedBy="caseStudy")
      */
     private $fieldValueStringCache;
 
     /**
-    /**
      * @ORM\OneToMany(targetEntity="CaseStoreCaseStudyFieldTypeTextBundle\Entity\CaseStudyFieldValueTextCache", mappedBy="caseStudy")
      */
     private $fieldValueTextCache;
+
+    /**
+     * @ORM\OneToMany(targetEntity="CaseStoreCaseStudyFieldTypeSelectBundle\Entity\CaseStudyFieldValueSelectCache", mappedBy="caseStudy")
+     */
+    private $fieldValueSelectCache;
 
     /**
      * @ORM\OneToMany(targetEntity="CaseStoreBundle\Entity\CaseStudyHasOutput", mappedBy="caseStudy")

@@ -18,13 +18,10 @@
     <div class="well">
         <form action="#" method="get">
             {% for fieldDefinition in fieldDefinitions %}
-                {% set type = fieldTypes[fieldDefinition.type] %}
-                {%  if type.hasSearchFilter %}
-                    <div>
-                        {{  fieldDefinition.title }}
-                        {%  include type.getSearchFilterTemplatePath with {'fieldType':type,  'fieldDefinition':fieldDefinition, 'fieldSearch':fieldSearches[fieldDefinition.publicId] } %}
-                    </div>
-                {%  endif %}
+                <div>
+                    {{  fieldDefinition.definition.title }}
+                    {%  include fieldDefinition.template with { 'fieldDefinition':fieldDefinition.definition, 'fieldSearch':fieldSearches[fieldDefinition.definition.publicId], 'variables': fieldDefinition.variables } %}
+                </div>
             {% endfor %}
             <input type="submit" value="Search">
         </form>
