@@ -8,7 +8,7 @@ use CaseStoreBundle\Entity\CaseStudyFieldDefinition;
 use CaseStoreBundle\Entity\Project;
 use CaseStoreBundle\Entity\User;
 use CaseStoreBundle\Tests\BaseTestWithDataBase;
-use CaseStoreCaseStudyFieldTypeStringBundle\CaseStudyQueryBuilderFieldSearch;
+use CaseStoreCaseStudyFieldTypeStringBundle\CaseStudyQueryBuilderFieldTypeStringSearch;
 use CaseStoreCaseStudyFieldTypeStringBundle\Entity\CaseStudyFieldValueString;
 use CaseStoreCaseStudyFieldTypeStringBundle\Service\CaseStoreFieldTypeStringService;
 
@@ -74,7 +74,7 @@ class CaseStudyPurgeActionTest extends BaseTestWithDataBase
         $repo = $this->em->getRepository('CaseStoreBundle:CaseStudy');
 
         $queryBuilder = $repo->getQueryBuilder($project);
-        $queryBuilder->addFieldSearch(new CaseStudyQueryBuilderFieldSearch($caseStudyFieldDefinition, 'cat'));
+        $queryBuilder->addFieldSearch(new CaseStudyQueryBuilderFieldTypeStringSearch($caseStudyFieldDefinition, 'cat'));
 
         $caseStudies = $queryBuilder->getQuery()->getResult();
 
@@ -86,7 +86,7 @@ class CaseStudyPurgeActionTest extends BaseTestWithDataBase
         $repo = $this->em->getRepository('CaseStoreBundle:CaseStudy');
 
         $queryBuilder = $repo->getQueryBuilder($project);
-        $queryBuilder->addFieldSearch(new CaseStudyQueryBuilderFieldSearch($caseStudyFieldDefinition, 'dog'));
+        $queryBuilder->addFieldSearch(new CaseStudyQueryBuilderFieldTypeStringSearch($caseStudyFieldDefinition, 'dog'));
 
         $caseStudies = $queryBuilder->getQuery()->getResult();
 
@@ -103,7 +103,7 @@ class CaseStudyPurgeActionTest extends BaseTestWithDataBase
         $repo = $this->em->getRepository('CaseStoreBundle:CaseStudy');
 
         $queryBuilder = $repo->getQueryBuilder($project);
-        $queryBuilder->addFieldSearch(new CaseStudyQueryBuilderFieldSearch($caseStudyFieldDefinition, 'cat'));
+        $queryBuilder->addFieldSearch(new CaseStudyQueryBuilderFieldTypeStringSearch($caseStudyFieldDefinition, 'cat'));
 
         $caseStudies = $queryBuilder->getQuery()->getResult();
 
@@ -114,7 +114,7 @@ class CaseStudyPurgeActionTest extends BaseTestWithDataBase
         $repo = $this->em->getRepository('CaseStoreBundle:CaseStudy');
 
         $queryBuilder = $repo->getQueryBuilder($project);
-        $queryBuilder->addFieldSearch(new CaseStudyQueryBuilderFieldSearch($caseStudyFieldDefinition, 'dog'));
+        $queryBuilder->addFieldSearch(new CaseStudyQueryBuilderFieldTypeStringSearch($caseStudyFieldDefinition, 'dog'));
 
         $caseStudies = $queryBuilder->getQuery()->getResult();
 

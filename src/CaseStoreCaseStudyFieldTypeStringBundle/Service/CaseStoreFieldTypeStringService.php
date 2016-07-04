@@ -5,7 +5,7 @@ namespace CaseStoreCaseStudyFieldTypeStringBundle\Service;
 use CaseStoreBundle\CaseStudyFieldTypeServiceInterface;
 use CaseStoreBundle\Entity\CaseStudy;
 use CaseStoreBundle\Entity\CaseStudyFieldDefinition;
-use CaseStoreCaseStudyFieldTypeStringBundle\CaseStudyQueryBuilderFieldSearch;
+use CaseStoreCaseStudyFieldTypeStringBundle\CaseStudyQueryBuilderFieldTypeStringSearch;
 use CaseStoreCaseStudyFieldTypeStringBundle\Entity\CaseStudyFieldValueStringCache;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -45,7 +45,7 @@ class CaseStoreFieldTypeStringService  implements CaseStudyFieldTypeServiceInter
     {
         $data = trim($request->get('field'.$fieldDefinition->getPublicId()));
         if ($data) {
-            return new CaseStudyQueryBuilderFieldSearch($fieldDefinition, $data);
+            return new CaseStudyQueryBuilderFieldTypeStringSearch($fieldDefinition, $data);
         }
     }
 

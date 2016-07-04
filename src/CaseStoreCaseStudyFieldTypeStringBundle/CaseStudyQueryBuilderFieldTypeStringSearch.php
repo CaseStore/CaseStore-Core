@@ -10,7 +10,7 @@ use CaseStoreBundle\Repository\QueryBuilder\CaseStudyQueryBuilderFieldSearchInte
  *  @license 3-clause BSD
  *  @link https://github.com/CaseStore/CaseStore-Core
  */
-class CaseStudyQueryBuilderFieldSearch implements CaseStudyQueryBuilderFieldSearchInterface {
+class CaseStudyQueryBuilderFieldTypeStringSearch implements CaseStudyQueryBuilderFieldSearchInterface {
 
     /**
      * @var CaseStudyFieldDefinition
