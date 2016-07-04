@@ -76,10 +76,21 @@ class CaseStudy
     private $fieldValueString;
 
     /**
+     * @ORM\OneToMany(targetEntity="CaseStoreCaseStudyFieldTypeTextBundle\Entity\CaseStudyFieldValueText", mappedBy="caseStudy")
+     */
+    private $fieldValueText;
+
+    /**
     /**
      * @ORM\OneToMany(targetEntity="CaseStoreCaseStudyFieldTypeStringBundle\Entity\CaseStudyFieldValueStringCache", mappedBy="caseStudy")
      */
     private $fieldValueStringCache;
+
+    /**
+    /**
+     * @ORM\OneToMany(targetEntity="CaseStoreCaseStudyFieldTypeTextBundle\Entity\CaseStudyFieldValueTextCache", mappedBy="caseStudy")
+     */
+    private $fieldValueTextCache;
 
     /**
      * @ORM\OneToMany(targetEntity="CaseStoreBundle\Entity\CaseStudyHasOutput", mappedBy="caseStudy")
