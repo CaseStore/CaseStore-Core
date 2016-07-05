@@ -88,6 +88,10 @@ case_store_project_admin_case_study_field_definition_new_option:
     path:     /project/{projectId}/admin/casestudyfielddefinition/{caseStudyFieldDefinitionId}/newoption
     defaults: { _controller: CaseStoreBundle:ProjectAdminCaseStudyFieldDefinition:newOption }
 
+case_store_project_admin_case_study_field_definition_option:
+    path:     /project/{projectId}/admin/casestudyfielddefinition/{caseStudyFieldDefinitionId}/option/{optionId}
+    defaults: { _controller: CaseStoreBundle:ProjectAdminCaseStudyFieldDefinitionOption:index }
+
 
 case_store_project_admin_output_field_definitions:
     path:     /project/{projectId}/admin/outputfielddefinitions
