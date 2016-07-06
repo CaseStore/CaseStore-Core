@@ -16,7 +16,7 @@ class CaseStudyFieldDefinitionOptionRepository extends EntityRepository
 {
 
     public function getCurrentForFieldDefinition(CaseStudyFieldDefinition $caseStudyFieldDefinition) {
-        return $this->findBy(array('fieldDefinition'=>$caseStudyFieldDefinition), array('title'=>'ASC'));
+        return $this->findBy(array('fieldDefinition'=>$caseStudyFieldDefinition), array('sort'=>'ASC'));
     }
 
 
