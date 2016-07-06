@@ -150,8 +150,15 @@ class CaseStudyFieldValueText
         $this->addedAt = $addedAt;
     }
 
+    public function isDifferentFrom(CaseStudyFieldValueText $caseStudyFieldValueText = null) {
+        $ourValue = trim($this->value);
+        if ($ourValue && !$caseStudyFieldValueText) {
+            // there is no old value ... so definitely true!
+            return true;
+        }
+        return $ourValue != trim($caseStudyFieldValueText->getValue());
+    }
 
-    
     /**
      * @ORM\PrePersist()
      */

@@ -17,6 +17,12 @@
         <li class="active">Case Study</li>
     </ol>
 
+    {%  if editAccessAllowed %}
+        <form method="get" action="{{ path('case_store_case_study_edit', { 'projectId':project.publicId, 'caseStudyId':caseStudy.publicId }) }}" class="pull-right">
+            <input type="submit" class="btn btn-warning" value="Edit">
+        </form>
+    {%  endif %}
+
     <h1>Case Study</h1>
 
     {%  for fieldDefinition in fieldDefinitions %}

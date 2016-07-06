@@ -5,6 +5,7 @@ namespace CaseStoreBundle\Controller;
 use CaseStoreBundle\Entity\CaseStudy;
 use CaseStoreBundle\Entity\CaseStudyComment;
 use CaseStoreBundle\Entity\CaseStudyDocument;
+use CaseStoreBundle\Form\Type\CaseStudyEditType;
 use CaseStoreCaseStudyFieldTypeIntegerBundle\Entity\CaseStudyFieldValueInteger;
 use CaseStoreCaseStudyFieldTypeSelectBundle\Entity\CaseStudyFieldValueSelect;
 use CaseStoreCaseStudyFieldTypeStringBundle\Entity\CaseStudyFieldValueString;
@@ -157,6 +158,66 @@ class CaseStudyEditController extends CaseStudyController
         ));
     }
 
+    public function editAction($projectId, $caseStudyId, Request $request)
+    {
+
+        $doctrine = $this->getDoctrine()->getManager();
+
+        // build
+        $this->build($projectId, $caseStudyId);
+
+        $formObject = new CaseStudyEditType($this->container, $this->project, $this->caseStudy);
+        $form = $this->createForm($formObject);
+        if ($request->getMethod() == 'POST') {
+            $form->handleRequest($request);
+            if ($form->isValid()) {
+
+                foreach($formObject->getCaseStudyFieldDefinitions() as $caseStudyFieldDefinition) {
+
+                    if ($caseStudyFieldDefinition->isTypeString()) {
+
+                        $oldValue = $this->container->get('case_study_field_type_finder')->getFieldTypeById($caseStudyFieldDefinition->getType())->getLatestValue($caseStudyFieldDefinition, $this->caseStudy);
+
+                        $valueObject = new CaseStudyFieldValueString();
+                        $valueObject->setFieldDefinition($caseStudyFieldDefinition);
+                        $valueObject->setCaseStudy($this->caseStudy);
+                        $valueObject->setAddedBy($this->getUser());
+                        $valueObject->setValue($form->get('field_' . $caseStudyFieldDefinition->getPublicId())->getData());
+                        if ($valueObject->isDifferentFrom($oldValue)) {
+                            $doctrine->persist($valueObject);
+                        }
+
+                    } else if ($caseStudyFieldDefinition->isTypeText()) {
+
+                        $oldValue = $this->container->get('case_study_field_type_finder')->getFieldTypeById($caseStudyFieldDefinition->getType())->getLatestValue($caseStudyFieldDefinition, $this->caseStudy);
+
+                        $valueObject = new CaseStudyFieldValueText();
+                        $valueObject->setFieldDefinition($caseStudyFieldDefinition);
+                        $valueObject->setCaseStudy($this->caseStudy);
+                        $valueObject->setAddedBy($this->getUser());
+                        $valueObject->setValue($form->get('field_' . $caseStudyFieldDefinition->getPublicId())->getData());
+                        if ($valueObject->isDifferentFrom($oldValue)) {
+                            $doctrine->persist($valueObject);
+                        }
+
+                    }
+                }
+
+                $doctrine->flush();
+                $doctrine->getRepository('CaseStoreBundle:CaseStudy')->updateCaches($this->caseStudy);
+                return $this->redirect($this->generateUrl('case_store_case_study', array(
+                    'projectId'=>$this->project->getPublicId(),
+                    'caseStudyId'=>$this->caseStudy->getPublicId(),
+                )));
+            }
+        }
+        return $this->render('CaseStoreBundle:CaseStudyEdit:edit.html.twig', array(
+            'project'=>$this->project,
+            'caseStudy'=>$this->caseStudy,
+            'form' => $form->createView(),
+        ));
+
+    }
 
     public function editFieldAction($projectId, $caseStudyId, $fieldDefinitionId, Request $request)
     {

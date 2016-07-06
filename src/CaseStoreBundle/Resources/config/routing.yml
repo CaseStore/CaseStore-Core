@@ -124,6 +124,10 @@ case_store_case_study_new_comment:
 
 ################################################### Case Study  - Edit Case Study
 
+case_store_case_study_edit:
+    path:     /project/{projectId}/casestudy/{caseStudyId}/edit
+    defaults: { _controller: CaseStoreBundle:CaseStudyEdit:edit }
+
 case_store_case_study_edit_users:
     path:     /project/{projectId}/casestudy/{caseStudyId}/edit/users
     defaults: { _controller: CaseStoreBundle:CaseStudyEdit:editUsers }
