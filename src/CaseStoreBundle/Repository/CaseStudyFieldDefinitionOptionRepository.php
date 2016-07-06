@@ -20,5 +20,18 @@ class CaseStudyFieldDefinitionOptionRepository extends EntityRepository
     }
 
 
+
+    public function getNextSortValue(CaseStudyFieldDefinition $caseStudyFieldDefinition) {
+        $s =  $this->getEntityManager()
+            ->createQuery(
+                ' SELECT MAX(csfdo.sort) AS sort FROM CaseStoreBundle:CaseStudyFieldDefinitionOption csfdo '.
+                ' WHERE csfdo.fieldDefinition = :fieldDefinition '.
+                ' GROUP BY csfdo.fieldDefinition '
+            )
+            ->setParameter('fieldDefinition', $caseStudyFieldDefinition)
+            ->getResult();
+        return $s ? $s[0]['sort'] + 10 : 10;
+    }
+
 }
 

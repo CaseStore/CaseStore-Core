@@ -78,7 +78,7 @@ class ProjectAdminCaseStudyFieldDefinitionController extends Controller
         $doctrine = $this->getDoctrine()->getManager();
         $caseStudyFieldDefinitionOption  = new CaseStudyFieldDefinitionOption();
         $caseStudyFieldDefinitionOption->setFieldDefinition($this->caseStudyFieldDefinition);
-        $caseStudyFieldDefinitionOption->setSort(0);
+        $caseStudyFieldDefinitionOption->setSort($doctrine->getRepository('CaseStoreBundle:CaseStudyFieldDefinitionOption')->getNextSortValue($this->caseStudyFieldDefinition));
         $caseStudyFieldDefinitionOption->setAddedBy($this->getUser());
 
         $form = $this->createForm(new CaseStudyFieldDefinitionOptionNewType(), $caseStudyFieldDefinitionOption);
