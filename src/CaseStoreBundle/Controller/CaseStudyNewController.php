@@ -4,6 +4,7 @@ namespace CaseStoreBundle\Controller;
 
 use CaseStoreBundle\Entity\CaseStudy;
 use CaseStoreCaseStudyFieldTypeIntegerBundle\Entity\CaseStudyFieldValueInteger;
+use CaseStoreCaseStudyFieldTypeSelectBundle\Entity\CaseStudyFieldValueSelect;
 use CaseStoreCaseStudyFieldTypeStringBundle\Entity\CaseStudyFieldValueString;
 use CaseStoreCaseStudyFieldTypeTextBundle\Entity\CaseStudyFieldValueText;
 use CaseStoreBundle\Entity\CaseStudyHasUser;
@@ -69,6 +70,20 @@ class CaseStudyNewController extends ProjectController
                         $fieldValue->setAddedBy($this->getUser());
                         $fieldValue->setValue($form['field_'.$caseStudyFieldDefinition->getPublicId()]->getData());
                         $doctrine->persist($fieldValue);
+
+                    } else if ($caseStudyFieldDefinition->isTypeSelect()) {
+
+                        foreach($form['field_'.$caseStudyFieldDefinition->getPublicId()]->getData() as $option) {
+
+                            $fieldValue = new CaseStudyFieldValueSelect();
+                            $fieldValue->setFieldDefinition($caseStudyFieldDefinition);
+                            $fieldValue->setCaseStudy($casestudy);
+                            $fieldValue->setAddedBy($this->getUser());
+                            $fieldValue->setOption($option);
+                            $doctrine->persist($fieldValue);
+
+                        }
+
 
                     }
                 }

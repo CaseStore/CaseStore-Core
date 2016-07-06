@@ -58,6 +58,21 @@ class CaseStudyNewType extends AbstractType {
                     'label'=>$caseStudyFieldDefinition->getTitle(),
                 ));
 
+            } else if ($caseStudyFieldDefinition->isTypeSelect()) {
+
+                $choices = array();
+                foreach($this->doctrine->getRepository('CaseStoreBundle:CaseStudyFieldDefinitionOption')->getCurrentForFieldDefinition($caseStudyFieldDefinition) as $option) {
+                    $choices[$option->getTitle()] = $option;
+                }
+
+                $builder->add('field_'.$caseStudyFieldDefinition->getPublicId(), 'choice', array(
+                    'required' => false,
+                    'multiple' => true,
+                    'choices' => $choices,
+                    'choices_as_values' => true,
+                    'label'=>$caseStudyFieldDefinition->getTitle(),
+                ));
+
             }
         }
 
