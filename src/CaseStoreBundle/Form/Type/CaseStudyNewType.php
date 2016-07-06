@@ -51,6 +51,13 @@ class CaseStudyNewType extends AbstractType {
                     'label'=>$caseStudyFieldDefinition->getTitle(),
                 ));
 
+            } else if ($caseStudyFieldDefinition->isTypeInteger()) {
+
+                $builder->add('field_'.$caseStudyFieldDefinition->getPublicId(), 'integer', array(
+                    'required' => false,
+                    'label'=>$caseStudyFieldDefinition->getTitle(),
+                ));
+
             }
         }
 

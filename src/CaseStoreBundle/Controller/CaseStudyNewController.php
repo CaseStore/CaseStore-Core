@@ -3,6 +3,7 @@
 namespace CaseStoreBundle\Controller;
 
 use CaseStoreBundle\Entity\CaseStudy;
+use CaseStoreCaseStudyFieldTypeIntegerBundle\Entity\CaseStudyFieldValueInteger;
 use CaseStoreCaseStudyFieldTypeStringBundle\Entity\CaseStudyFieldValueString;
 use CaseStoreCaseStudyFieldTypeTextBundle\Entity\CaseStudyFieldValueText;
 use CaseStoreBundle\Entity\CaseStudyHasUser;
@@ -54,6 +55,15 @@ class CaseStudyNewController extends ProjectController
                     } else if ($caseStudyFieldDefinition->istypeText()) {
 
                         $fieldValue = new CaseStudyFieldValueText();
+                        $fieldValue->setFieldDefinition($caseStudyFieldDefinition);
+                        $fieldValue->setCaseStudy($casestudy);
+                        $fieldValue->setAddedBy($this->getUser());
+                        $fieldValue->setValue($form['field_'.$caseStudyFieldDefinition->getPublicId()]->getData());
+                        $doctrine->persist($fieldValue);
+
+                    } else if ($caseStudyFieldDefinition->isTypeInteger()) {
+
+                        $fieldValue = new CaseStudyFieldValueInteger();
                         $fieldValue->setFieldDefinition($caseStudyFieldDefinition);
                         $fieldValue->setCaseStudy($casestudy);
                         $fieldValue->setAddedBy($this->getUser());
