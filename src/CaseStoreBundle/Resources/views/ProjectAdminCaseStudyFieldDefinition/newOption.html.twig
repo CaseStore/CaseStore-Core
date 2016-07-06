@@ -16,7 +16,7 @@
         <li><a href="{{ path('case_store_project', { 'projectId':project.publicId }) }}">Project {{  project.title }}</a></li>
         <li><a href="{{ path('case_store_project_admin', { 'projectId':project.publicId }) }}">Project Admin</a></li>
         <li><a href="{{  path('case_store_project_admin_case_study_field_definitions', { 'projectId':project.publicId }) }}">Case Study Field Definitions</a></li>
-        <li>Case Study Field Definition TODO</li>
+        <li><a href="{{ path('case_store_project_admin_case_study_field_definition', { 'projectId':project.publicId,'caseStudyFieldDefinitionId':caseStudyFieldDefinition.publicId }) }}">Case Study Field Definition</a></li>
         <li class="active">New Option</li>
     </ol>
 
@@ -29,7 +29,7 @@
 
             {{ form_rest(form) }}
 
-            <input type="submit" value="Create New Option" />
+            <input type="submit" value="Create New Option" class="btn btn-warning" />
     
         </form>
 
