@@ -183,7 +183,7 @@
             {%  endfor %}
 
             $( document ).ready(function() {
-                mapObject = L.map('Map').setView([57.04199, -3.55957], 6);
+                mapObject = L.map('Map', { scrollWheelZoom: false }).setView([57.04199, -3.55957], 6);
 
                 var mapquestUrl = 'http://{s}.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png',
                         subDomains = ['otile1','otile2','otile3','otile4'],
