@@ -173,6 +173,15 @@ case_store_output_link_case_study:
     defaults: { _controller: CaseStoreBundle:OutputEdit:linkCaseStudy }
 
 
+
+################################################### DATA
+
+
+data_postcode:
+    pattern:  /data/postcode/{postcode}
+    defaults: { _controller: CaseStoreBundle:Data:postcode }
+    methods:  [GET]
+
 ################################################### User Account
 
 case_store_you:
