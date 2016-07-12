@@ -13,3 +13,4 @@
 /documents/*
 /outputdocuments/*
 .DS_Store
+/ordnancesurveydata/codepointopen/*.csv
