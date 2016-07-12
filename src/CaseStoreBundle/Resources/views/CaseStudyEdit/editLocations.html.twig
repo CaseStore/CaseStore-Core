@@ -37,11 +37,17 @@
         </form>
     </div>
 
+
+    {% include  'CaseStoreBundle:Common:mapSearchBar.html.twig' %}
+
 {%  endblock %}
 
 {% block javascript %}
+    {% javascripts '@CaseStoreBundle/Resources/public/js/mapLibraries.js' %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
     <script>
-        var mapObject;
+
         var mapData = [];
         var addMarker;
         {%  for location in locations %}
@@ -60,11 +66,8 @@
         });
 
         $( document ).ready(function() {
-            mapObject = L.map('Map').setView([57.04199, -3.55957], 6);
 
-            L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-                attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-            }).addTo(mapObject);
+            startMap('Map');
 
             for (idx in mapData) {
                 var marker = L.marker([ mapData[idx].lat, mapData[idx].lng]);
