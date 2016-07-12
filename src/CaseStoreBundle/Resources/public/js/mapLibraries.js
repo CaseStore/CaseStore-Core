@@ -15,8 +15,8 @@ function goToPostcode() {
         });
 }
 
-function startMap(divId) {
-    mapObject = L.map(divId).setView([57.04199, -3.55957], 6);
+function startMap(divId, options) {
+    mapObject = L.map(divId, options).setView([57.04199, -3.55957], 6);
 
     L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
