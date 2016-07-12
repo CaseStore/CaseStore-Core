@@ -1,11 +1,16 @@
 var mapObject;
 
 function goToPostcode() {
+    $('#PostCodeSearchLoading').show();
+    $('#PostCodeSearchMessage').hide();
     $.ajax({url: '/data/postcode/' + encodeURIComponent($('#PostCode').val()) })
         .done(function(data) {
 
+            $('#PostCodeSearchLoading').hide();
             if (data.result) {
                 mapObject.setView([data.lat, data.lng], 16);
+            } else {
+                $('#PostCodeSearchMessage').html('Can not find that postcode!').show();
             }
         });
 }
