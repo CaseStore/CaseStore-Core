@@ -29,9 +29,6 @@ ul.caseStudyCommentList li.caseStudyComment .caseStudyCommentDetails {
 }
 
 
-.panel-heading .supporting-text{
-    color: #b1b0b1; /* supporting text colour code */
-}
 .panel-heading{
     position: relative;
 }

@@ -55,9 +55,7 @@
 
     <div class="panel panel-default">
         <div class="panel-heading has-supportext">
-            <h3 class="panel-title">Staff Involved<br>
-                <span class="supporting-text">(You must always talk to one of the involved staff before using or contacting a case study!)</span>
-            </h3>
+            <h3 class="panel-title">Staff Involved</h3>
             {%  if editAccessAllowed %}
                 <a href="{{  path('case_store_case_study_edit_users', { 'projectId':project.publicId, 'caseStudyId':caseStudy.publicId }) }}"><span class="glyphicon glyphicon-pencil editicon" aria-hidden="true"></a>
             {%  endif %}
