@@ -27,6 +27,9 @@ interface CaseStudyFieldTypeServiceInterface
 
     public function getLatestValue(CaseStudyFieldDefinition $fieldDefinition, CaseStudy $caseStudy);
 
+    /** @return boolean */
+    public function hasAValue(CaseStudyFieldDefinition $fieldDefinition, CaseStudy $caseStudy);
+
     public function updateCaches(CaseStudyFieldDefinition $fieldDefinition, CaseStudy $caseStudy = null);
 
 }

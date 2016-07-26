@@ -127,4 +127,9 @@ class CaseStoreFieldTypeSelectService  implements CaseStudyFieldTypeServiceInter
 
     }
 
+    /** @return boolean */
+    public function hasAValue(CaseStudyFieldDefinition $fieldDefinition, CaseStudy $caseStudy)
+    {
+        // TODO: Implement hasAValue() method.
+    }
 }

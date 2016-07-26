@@ -87,4 +87,11 @@ class CaseStoreFieldTypeTextService implements CaseStudyFieldTypeServiceInterfac
         getLatestValueFor($fieldDefinition, $caseStudy);
     }
 
+    /** @return boolean */
+    public function hasAValue(CaseStudyFieldDefinition $fieldDefinition, CaseStudy $caseStudy)
+    {
+        $latestValue = $this->getLatestValue($fieldDefinition, $caseStudy);
+        return $latestValue && $latestValue->getValue();
+    }
+
 }

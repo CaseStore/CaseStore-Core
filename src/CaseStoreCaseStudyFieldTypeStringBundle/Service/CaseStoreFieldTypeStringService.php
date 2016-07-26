@@ -88,4 +88,9 @@ class CaseStoreFieldTypeStringService  implements CaseStudyFieldTypeServiceInter
             getLatestValueFor($fieldDefinition, $caseStudy);
     }
 
+    /** @return boolean */
+    public function hasAValue(CaseStudyFieldDefinition $fieldDefinition, CaseStudy $caseStudy)
+    {
+        // TODO: Implement hasAValue() method.
+    }
 }

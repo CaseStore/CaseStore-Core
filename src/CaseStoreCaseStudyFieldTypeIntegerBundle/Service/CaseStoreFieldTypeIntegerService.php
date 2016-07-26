@@ -42,4 +42,10 @@ class CaseStoreFieldTypeIntegerService  implements CaseStudyFieldTypeServiceInte
     {
         // TODO: Implement getLatestValue() method.
     }
+
+    /** @return boolean */
+    public function hasAValue(CaseStudyFieldDefinition $fieldDefinition, CaseStudy $caseStudy)
+    {
+        // TODO: Implement hasAValue() method.
+    }
 }
