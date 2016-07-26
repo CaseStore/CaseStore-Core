@@ -18,7 +18,7 @@ class Version20160726093112 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE case_study_field_definition CHANGE `default` default_value LONGTEXT DEFAULT NULL');
+        $this->addSql('ALTER TABLE case_study_field_definition ADD default_value LONGTEXT DEFAULT NULL');
     }
 
     /**
@@ -29,6 +29,6 @@ class Version20160726093112 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE case_study_field_definition CHANGE default_value `default` LONGTEXT DEFAULT NULL COLLATE utf8_unicode_ci');
+        $this->addSql('ALTER TABLE case_study_field_definition DROP default_value');
     }
 }
