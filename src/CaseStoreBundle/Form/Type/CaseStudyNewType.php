@@ -49,6 +49,7 @@ class CaseStudyNewType extends AbstractType {
                 $builder->add('field_'.$caseStudyFieldDefinition->getPublicId(), 'textarea', array(
                     'required' => false,
                     'label'=>$caseStudyFieldDefinition->getTitle(),
+                    'data'=>$caseStudyFieldDefinition->getDefaultValue(),
                 ));
 
             } else if ($caseStudyFieldDefinition->isTypeInteger()) {

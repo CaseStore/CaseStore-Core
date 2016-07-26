@@ -39,6 +39,12 @@
     </div>
 
 
+    {%  if caseStudyFieldDefinition.isTypeText %}
+        <div>
+            Default Value: {{  caseStudyFieldDefinition.defaultValue }}
+        </div>
+    {%  endif %}
+
     {%  if caseStudyFieldDefinition.isTypeSelect %}
 
 

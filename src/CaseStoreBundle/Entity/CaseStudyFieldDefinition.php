@@ -70,6 +70,15 @@ class CaseStudyFieldDefinition
      */
     private $addedAt;
 
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="default_value", type="text", nullable=true)
+     */
+    private $defaultValue;
+
+
     /**
      * @var string
      *
@@ -225,6 +234,21 @@ class CaseStudyFieldDefinition
         $this->isCaseStudyUsersOnly = $isCaseStudyUsersOnly;
     }
 
+    /**
+     * @return string
+     */
+    public function getDefaultValue()
+    {
+        return $this->defaultValue;
+    }
+
+    /**
+     * @param string $defaultValue
+     */
+    public function setDefaultValue($defaultValue)
+    {
+        $this->defaultValue = $defaultValue;
+    }
 
 
     public function isTypeText() {
