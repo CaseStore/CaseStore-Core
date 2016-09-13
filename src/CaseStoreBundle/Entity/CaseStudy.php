@@ -48,7 +48,7 @@ class CaseStudy
     /**
      * @var string
      *
-     * @ORM\Column(name="cached_description", type="string", length=250, nullable=true)
+     * @ORM\Column(name="cached_description", type="text", nullable=true)
      */
     private $description;
 
