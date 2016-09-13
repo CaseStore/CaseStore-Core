@@ -57,6 +57,12 @@
 
 <div class="container theme-showcase" role="main">
 
+    {% for flashMessage in app.session.flashbag.get('notice') %}
+        <div class="alert alert-info">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+
     {% block main %}{% endblock %}
 
 

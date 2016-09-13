@@ -101,6 +101,7 @@ class CaseStudyNewController extends ProjectController
                 // Update Caches now!
                 $doctrine->getRepository('CaseStoreBundle:CaseStudy')->updateCaches($casestudy);
 
+                $this->addFlash('notice','Your new Case Study has been created - thank you!');
 
                 return $this->redirect($this->generateUrl('case_store_case_study', array(
                     'projectId'=>$this->project->getPublicId(),
