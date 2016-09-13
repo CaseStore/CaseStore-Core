@@ -30,7 +30,7 @@
                         <a href="{{ path('case_store_case_study', { 'projectId':project.publicId,'caseStudyId':caseStudy.publicId }) }}">{{  caseStudy.titleOrPlaceHolder }}</a>
                     </td>
                     <td>
-                        {{  caseStudy.description | nl2br }}
+                        {{  caseStudy.description | truncate(1000) | nl2br }}
                     </td>
                     <td>
                         <a href="{{ path('case_store_case_study', { 'projectId':project.publicId,'caseStudyId':caseStudy.publicId }) }}" class="btn btn-default">View</a>
