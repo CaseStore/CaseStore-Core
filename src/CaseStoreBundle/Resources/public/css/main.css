@@ -44,3 +44,8 @@ ul.caseStudyCommentList li.caseStudyComment .caseStudyCommentDetails {
     top: 0px;
     padding: 12px;
 }
+
+
+textarea {
+    min-height: 200px;
+}
