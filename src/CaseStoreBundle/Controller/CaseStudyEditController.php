@@ -82,7 +82,7 @@ class CaseStudyEditController extends CaseStudyController
         $userRepo = $doctrine->getRepository('CaseStoreBundle:User');
 
         if ($request->getMethod() == 'POST') {
-            $user = $userRepo->findOneBy(array('username'=>$request->request->get('userName')));
+            $user = $userRepo->findOneBy(array('email'=>$request->request->get('email')));
             if ($user) {
                 if ($request->request->get('action') == 'add') {
                     $userRepo->addUserToCaseStudy($user, $this->caseStudy, $this->getUser());

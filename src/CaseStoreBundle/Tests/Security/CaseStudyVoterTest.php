@@ -25,7 +25,6 @@ class CaseStudyVoterTest extends BaseTestWithDataBase {
         // Build Data
         $user = new User();
         $user->setEmail("test@example.com");
-        $user->setUsername("test");
         $user->setPassword("ouhosu");
         $this->em->persist($user);
 
@@ -58,7 +57,6 @@ class CaseStudyVoterTest extends BaseTestWithDataBase {
         // Build Data
         $user = new User();
         $user->setEmail("test@example.com");
-        $user->setUsername("test");
         $user->setPassword("ouhosu");
         $this->em->persist($user);
 
@@ -91,13 +89,11 @@ class CaseStudyVoterTest extends BaseTestWithDataBase {
         // Build Data
         $user = new User();
         $user->setEmail("test@example.com");
-        $user->setUsername("test");
         $user->setPassword("ouhosu");
         $this->em->persist($user);
 
         $userRandom = new User();
         $userRandom->setEmail("test1@example.com");
-        $userRandom->setUsername("test1");
         $userRandom->setPassword("ouhosu");
         $this->em->persist($userRandom);
 
@@ -130,13 +126,11 @@ class CaseStudyVoterTest extends BaseTestWithDataBase {
         // Build Data
         $user = new User();
         $user->setEmail("test@example.com");
-        $user->setUsername("test");
         $user->setPassword("ouhosu");
         $this->em->persist($user);
 
         $userStaffInvolved = new User();
         $userStaffInvolved->setEmail("test1@example.com");
-        $userStaffInvolved->setUsername("test1");
         $userStaffInvolved->setPassword("ouhosu");
         $this->em->persist($userStaffInvolved);
 

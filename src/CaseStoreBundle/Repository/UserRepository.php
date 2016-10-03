@@ -22,7 +22,7 @@ class UserRepository extends EntityRepository {
                 ' SELECT u FROM CaseStoreBundle:User u'.
                 ' JOIN u.inCaseStudies cshu '.
                 ' WHERE    cshu.caseStudy = :caseStudy AND cshu.removedAt IS NULL '.
-                ' ORDER BY u.username ASC '.
+                ' ORDER BY u.email ASC '.
                 '  '
             )
             ->setParameter('caseStudy', $caseStudy)

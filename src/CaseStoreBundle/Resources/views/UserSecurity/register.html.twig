@@ -1,0 +1,23 @@
+{#
+# @license 3-clause BSD
+# @link https://github.com/CaseStore/CaseStore-Core
+#}
+
+{% extends 'CaseStoreBundle::base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block main %}
+
+
+
+    <form action="{{ path('case_store_register') }}" method="post">
+        {{ form_errors(form) }}
+
+        {{ form_rest(form) }}
+
+        <input type="submit" value="Register" />
+
+    </form>
+
+{%  endblock %}

@@ -135,8 +135,3 @@ assetic:
                 - '@CaseStoreBundle/Resources/public/images/marker-add-shadow.png'
             output: "images/marker-add-shadow.png"
 
-
-fos_user:
-    db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
-    firewall_name: main
-    user_class: CaseStoreBundle\Entity\User

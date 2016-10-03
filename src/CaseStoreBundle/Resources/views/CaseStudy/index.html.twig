@@ -124,7 +124,7 @@
             {%  for comment in comments %}
                 <li class="caseStudyComment">
                     <div class="caseStudyCommentBody">{{  comment.body | nl2br }}</div>
-                    <div class="caseStudyCommentDetails">Posted by {{  comment.addedBy.username }}</div>
+                    <div class="caseStudyCommentDetails">Posted by {{  comment.addedBy.email }}</div>
                 </li>
             {%  else %}
                 None.

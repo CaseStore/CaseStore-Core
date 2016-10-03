@@ -1,27 +1,34 @@
 security:
   encoders:
-    FOS\UserBundle\Model\UserInterface: bcrypt
+    CaseStoreBundle\Entity\User: bcrypt
 
   role_hierarchy:
     ROLE_ADMIN:       ROLE_USER
     ROLE_SUPER_ADMIN: ROLE_ADMIN
 
   providers:
-    fos_userbundle:
-      id: fos_user.user_provider.username_email
+       our_db_provider:
+            entity:
+                class: CaseStoreBundle:User
+                property: email
 
   firewalls:
     main:
       pattern: ^/
+      provider: our_db_provider
+      anonymous: ~
       form_login:
-        provider: fos_userbundle
-        csrf_provider: security.csrf.token_manager # Use form.csrf_provider instead for Symfony <2.4
+          login_path: case_store_login
+          check_path: case_store_login
+      logout:
+          path:   /logout
+          target: /
 
-      logout:       true
-      anonymous:    true
+
 
   access_control:
     - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
     - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
-    - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
-    - { path: ^/newproject, role: ROLE_USER }
+    - { path: ^/newproject, role: IS_AUTHENTICATED_FULLY }
+    - { path: ^/youraccount, role: IS_AUTHENTICATED_FULLY }
+

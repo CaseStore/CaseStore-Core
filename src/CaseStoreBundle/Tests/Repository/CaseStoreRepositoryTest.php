@@ -26,7 +26,6 @@ class NodeRepositoryTest extends BaseTestWithDataBase {
         // Build Data
         $user = new User();
         $user->setEmail("test@example.com");
-        $user->setUsername("test");
         $user->setPassword("ouhosu");
         $this->em->persist($user);
 

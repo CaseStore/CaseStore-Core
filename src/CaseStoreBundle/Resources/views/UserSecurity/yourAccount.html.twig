@@ -1,0 +1,16 @@
+{#
+# @license 3-clause BSD
+# @link https://github.com/CaseStore/CaseStore-Core
+#}
+
+{% extends 'CaseStoreBundle::base.html.twig' %}
+
+{% block title %}Your Account{% endblock %}
+
+{% block main %}
+
+    <p>
+        <a href="{{  path('case_store_your_account_change_password') }}">Change Password</a>
+    </p>
+
+{%  endblock %}

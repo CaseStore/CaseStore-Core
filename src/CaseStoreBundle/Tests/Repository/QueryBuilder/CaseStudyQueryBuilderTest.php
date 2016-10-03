@@ -29,7 +29,6 @@ class CaseStudyQueryBuilderTest extends BaseTestWithDataBase {
         // Build Data
         $user = new User();
         $user->setEmail("test@example.com");
-        $user->setUsername("test");
         $user->setPassword("ouhosu");
         $this->em->persist($user);
 
@@ -74,13 +73,11 @@ class CaseStudyQueryBuilderTest extends BaseTestWithDataBase {
         // Build Data
         $user = new User();
         $user->setEmail("test@example.com");
-        $user->setUsername("test");
         $user->setPassword("ouhosu");
         $this->em->persist($user);
 
         $userOther = new User();
         $userOther->setEmail("testOther@example.com");
-        $userOther->setUsername("testOther");
         $userOther->setPassword("ouhosu");
         $this->em->persist($userOther);
 
@@ -132,7 +129,6 @@ class CaseStudyQueryBuilderTest extends BaseTestWithDataBase {
         // Build Data
         $user = new User();
         $user->setEmail("test@example.com");
-        $user->setUsername("test");
         $user->setPassword("ouhosu");
         $this->em->persist($user);
 

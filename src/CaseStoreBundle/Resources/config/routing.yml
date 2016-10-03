@@ -1,3 +1,27 @@
+################################################### Users
+
+
+case_store_login:
+    path:     /login
+    defaults: { _controller: CaseStoreBundle:UserSecurity:login }
+
+case_store_register:
+    path:     /register
+    defaults: { _controller: CaseStoreBundle:UserSecurity:register }
+
+case_store_your_account:
+    path:     /youraccount
+    defaults: { _controller: CaseStoreBundle:UserSecurity:yourAccount }
+
+case_store_your_account_change_password:
+    path:     /youraccount/changepassword
+    defaults: { _controller: CaseStoreBundle:UserSecurity:changePassword }
+
+case_store_logout:
+    path:     /logout
+    defaults: { _controller: CaseStoreBundle:UserSecurity:logout }
+
+
 ################################################### Home
 
 case_store_homepage:

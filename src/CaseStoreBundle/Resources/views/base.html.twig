@@ -41,13 +41,11 @@
 
             <ul class="nav navbar-nav navbar-right">
                 {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                    <li><a href="{{ path('case_store_you') }}">{{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }}</a></li>
-                    <li><a href="{{ path('fos_user_security_logout') }}">
-                        {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
-                    </a></li>
+                    <li><a href="{{ path('case_store_your_account') }}">Your account {{  app.user.email }}</a></li>
+                    <li><a href="{{ path('case_store_logout') }}">Logout</a></li>
                 {% else %}
-                    <li class="pull-right"><a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a></li>
-                    <li class="pull-right"><a href="{{ path('fos_user_registration_register') }}">{{ 'layout.register'|trans({}, 'FOSUserBundle') }}</a></li>
+                    <li class="pull-right"><a href="{{ path('case_store_login') }}">Login</a></li>
+                    <li class="pull-right"><a href="{{ path('case_store_register') }}">Register</a></li>
                 {%  endif %}
             </ul>
 

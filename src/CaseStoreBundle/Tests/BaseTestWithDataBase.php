@@ -40,6 +40,10 @@ abstract class BaseTestWithDataBase extends WebTestCase
         $this->application = new Application(static::$kernel);
         $this->application->setAutoExit(false);
         $this->application->run(new StringInput('doctrine:schema:drop --force --quiet'));
+
+        $this->em->getConnection()->prepare('DROP TABLE IF EXISTS `user`')->execute();
+        $this->em->getConnection()->prepare('DROP TABLE IF EXISTS `fos_user`')->execute();
+
         $this->application->run(new StringInput('doctrine:migrations:version  --no-interaction --delete --all --quiet'));
         $this->application->run(new StringInput('doctrine:migrations:migrate --no-interaction --quiet'));
 

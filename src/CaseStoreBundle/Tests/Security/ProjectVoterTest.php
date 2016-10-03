@@ -24,7 +24,6 @@ class ProjectVoterTest extends BaseTestWithDataBase {
         // Build Data
         $user = new User();
         $user->setEmail("test@example.com");
-        $user->setUsername("test");
         $user->setPassword("ouhosu");
         $this->em->persist($user);
 
@@ -53,7 +52,6 @@ class ProjectVoterTest extends BaseTestWithDataBase {
         // Build Data
         $user = new User();
         $user->setEmail("test@example.com");
-        $user->setUsername("test");
         $user->setPassword("ouhosu");
         $this->em->persist($user);
 
@@ -81,7 +79,6 @@ class ProjectVoterTest extends BaseTestWithDataBase {
         // Build Data
         $user = new User();
         $user->setEmail("test@example.com");
-        $user->setUsername("test");
         $user->setPassword("ouhosu");
         $this->em->persist($user);
 
@@ -94,7 +91,6 @@ class ProjectVoterTest extends BaseTestWithDataBase {
 
         $userOther = new User();
         $userOther->setEmail("testOther@example.com");
-        $userOther->setUsername("testOther");
         $userOther->setPassword("ouhosu");
         $this->em->persist($userOther);
 
@@ -117,7 +113,6 @@ class ProjectVoterTest extends BaseTestWithDataBase {
         // Build Data
         $user = new User();
         $user->setEmail("test@example.com");
-        $user->setUsername("test");
         $user->setPassword("ouhosu");
         $this->em->persist($user);
 
@@ -146,7 +141,6 @@ class ProjectVoterTest extends BaseTestWithDataBase {
         // Build Data
         $user = new User();
         $user->setEmail("test@example.com");
-        $user->setUsername("test");
         $user->setPassword("ouhosu");
         $this->em->persist($user);
 
@@ -174,7 +168,6 @@ class ProjectVoterTest extends BaseTestWithDataBase {
         // Build Data
         $user = new User();
         $user->setEmail("test@example.com");
-        $user->setUsername("test");
         $user->setPassword("ouhosu");
         $this->em->persist($user);
 
@@ -187,7 +180,6 @@ class ProjectVoterTest extends BaseTestWithDataBase {
 
         $userOther = new User();
         $userOther->setEmail("testOther@example.com");
-        $userOther->setUsername("testOther");
         $userOther->setPassword("ouhosu");
         $this->em->persist($userOther);
 
