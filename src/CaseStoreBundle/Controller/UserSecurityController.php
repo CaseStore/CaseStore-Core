@@ -55,8 +55,11 @@ class UserSecurityController extends Controller
             $form->handleRequest($request);
             if ($form->isValid()) {
 
-
-                if ($form->get('password_1')->getData() != $form->get('password_2')->getData()) {
+                if (!filter_var($user->getEmail(), FILTER_VALIDATE_EMAIL)) {
+                    $form->addError(new FormError('That email address is not valid!'));
+                } else if (!$this->isRegisterEmailAddressAllowed($user->getEmail())) {
+                    $form->addError(new FormError('That email address is not allowed!'));
+                } else if ($form->get('password_1')->getData() != $form->get('password_2')->getData()) {
                     $form->addError(new FormError('Passwords Don\'t Match!'));
                 } else if (strlen($form->get('password_1')->getData()) < 3) {
                     $form->addError(new FormError('Please choose a longer password'));
@@ -80,6 +83,31 @@ class UserSecurityController extends Controller
         return $this->render('CaseStoreBundle:UserSecurity:register.html.twig', array(
             'form' => $form->createView(),
         ));
+
+    }
+
+    protected function isRegisterEmailAddressAllowed($email) {
+        $emailBits = explode("@", $email, 2);
+        $emailDomain = array_pop($emailBits);
+
+        ########### If allowed domains are set ......
+        if ($this->container->hasParameter('case_store_register_allowed_email_domains') && trim($this->container->getParameter('case_store_register_allowed_email_domains'))) {
+
+            foreach(explode(",",$this->container->getParameter('case_store_register_allowed_email_domains') ) as $allowedDomain) {
+
+                $allowedDomain = trim(strtolower($allowedDomain));
+                if ($allowedDomain && $allowedDomain == trim(strtolower($emailDomain))) {
+                    return true;
+                }
+
+            }
+
+            return false;
+
+        }
+
+        ################ default - is allowed.
+        return true;
 
     }
 
